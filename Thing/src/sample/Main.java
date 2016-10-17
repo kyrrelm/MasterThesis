@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import model.World;
 
 import java.util.Random;
 
@@ -34,7 +35,7 @@ public class Main extends Application {
                 tf.setPrefWidth(50);
                 tf.setAlignment(Pos.CENTER);
                 tf.setEditable(false);
-                tf.setText("(" + rand1 + ")");
+                tf.setText("(" + y + ")");
 
                 // Iterate the Index using the loops
                 root.setRowIndex(tf,y);
@@ -52,6 +53,7 @@ public class Main extends Application {
 
 
     public static void main(String[] args) {
-        launch(args);
+        //launch(args);
+        new World(0,0);
     }
 }
