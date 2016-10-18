@@ -1,7 +1,11 @@
 package model;
 
 
+import javafx.application.Platform;
+import javafx.concurrent.Task;
+
 import java.util.ArrayList;
+import java.util.concurrent.ThreadFactory;
 
 /**
  * Created by Kyrre on 17.10.2016.
@@ -13,7 +17,6 @@ public class World {
     private int sizeY = WORLD_SIZE;
     private Border border;
     private Cell[][] grid;
-    private int maxTime;
     private int time;
 
     public Cell getCell(int x, int y) {
@@ -22,16 +25,44 @@ public class World {
         return grid[x][y];
     }
 
-    public World(int maxTime, int time) {
-        this.maxTime = maxTime;
+    public World(int time) {
         this.time = time;
         this.grid = new Cell[sizeX][sizeY];
         this.border = new Border();
         agents = new ArrayList<>();
         generateWorld();
-        agents.add(new Agent((OpenCell) grid[(sizeX/2)-1][sizeX/2], Agent.Heading.NORTH, this));
+        generateAgents(1);
         System.out.println(this);
     }
+
+    public Task runSim(){
+        Task<Long> loop = new Task<Long>() {
+            @Override protected Long call() throws Exception {
+                long a=0;
+                long b=1;
+                for (long i = 0; i < time; i++){
+                    updateValue(a);
+                    tick();
+                }
+                return a;
+            }
+
+
+        };
+        Thread thread = new Thread(loop);
+        thread.setDaemon(true);
+        thread.start();
+
+        return loop;
+    }
+
+    private void tick(){
+        for (Agent a : agents) {
+            a.interact();
+        }
+        System.out.println(this);
+    }
+
 
 
     private void generateWorld() {
@@ -43,6 +74,10 @@ public class World {
                 }
             }
         }
+    }
+
+    private void generateAgents(int amount){
+        agents.add(new Agent((OpenCell) grid[(sizeX/2)-1][sizeX/2], Agent.Heading.NORTH, this));
     }
 
     @Override

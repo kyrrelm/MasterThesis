@@ -22,16 +22,39 @@ public class Agent {
 
     public Agent(OpenCell currentCell, Heading heading, World world) {
         this.currentCell = currentCell;
+        currentCell.placeAgent(this);
         this.heading = heading;
         this.world = world;
     }
 
     public void interact(){
+        Cell front = senseFront();
         Cell right = senseRight();
-        if (right.getType() != Type.NEST || !(right.getType() == Type.FREE && ((OpenCell)right).hasApfValue())){
+        Cell back = senseBack();
+        Cell left = senseLeft();
+        updateValue(front,right,back,left);
+        if (right.getType() != Type.NEST && !(right.getType() == Type.FREE && ((OpenCell)right).hasApfValue())){
             rotateRight();
+            move(right);
+            return;
         }
-        move(right);
+        if (front.getType() != Type.OBSTACLE){
+            move(front);
+        }
+    }
+
+    private void updateValue(Cell... cells) {
+        int min = Integer.MAX_VALUE;
+        for (Cell c: cells) {
+            if (c.getType() == Type.NEST){
+                currentCell.setApfValue(1);
+                return;
+            }
+            if (c.getType() == Type.FREE && ((OpenCell)c).hasApfValue()){
+                min = Math.min(min ,((OpenCell) c).getApfValue());
+            }
+        }
+        currentCell.setApfValue(min+1);
     }
 
     private void move(Cell toCell) {
@@ -55,6 +78,22 @@ public class Agent {
         }
     }
 
+    public Cell senseFront(){
+        if (heading == Heading.NORTH){
+            return world.getCell(currentCell.getX(),currentCell.getY()+1);
+        }
+        else if (heading == Heading.EAST){
+            return world.getCell(currentCell.getX()+1,currentCell.getY());
+        }
+        else if (heading == Heading.SOUTH){
+            return world.getCell(currentCell.getX(),currentCell.getY()-1);
+        }
+        else if (heading == Heading.WEST){
+            return world.getCell(currentCell.getX()-1,currentCell.getY());
+        }
+        return null;
+    }
+
     public Cell senseRight(){
         if (heading == Heading.NORTH){
             return world.getCell(currentCell.getX()+1,currentCell.getY());
@@ -70,18 +109,35 @@ public class Agent {
         }
         return null;
     }
-    public Cell senseFront(){
+
+    private Cell senseBack() {
         if (heading == Heading.NORTH){
-            return world.getCell(currentCell.getX(),currentCell.getY()+1);
-        }
-        else if (heading == Heading.EAST){
-            return world.getCell(currentCell.getX()+1,currentCell.getY());
-        }
-        else if (heading == Heading.SOUTH){
             return world.getCell(currentCell.getX(),currentCell.getY()-1);
         }
-        else if (heading == Heading.WEST){
+        else if (heading == Heading.EAST){
             return world.getCell(currentCell.getX()-1,currentCell.getY());
+        }
+        else if (heading == Heading.SOUTH){
+            return world.getCell(currentCell.getX(),currentCell.getY()+1);
+        }
+        else if (heading == Heading.WEST){
+            return world.getCell(currentCell.getX()+1,currentCell.getY());
+        }
+        return null;
+    }
+
+    private Cell senseLeft() {
+        if (heading == Heading.NORTH){
+            return world.getCell(currentCell.getX()-1,currentCell.getY());
+        }
+        else if (heading == Heading.EAST){
+            return world.getCell(currentCell.getX(),currentCell.getY()+1);
+        }
+        else if (heading == Heading.SOUTH){
+            return world.getCell(currentCell.getX()+1,currentCell.getY());
+        }
+        else if (heading == Heading.WEST){
+            return world.getCell(currentCell.getX(),currentCell.getY()-1);
         }
         return null;
     }

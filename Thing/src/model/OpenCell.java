@@ -29,7 +29,7 @@ public class OpenCell extends Cell{
     }
 
     public boolean placeAgent(Agent agent) {
-        if (agent == null){
+        if (this.agent == null){
             this.agent = agent;
             this.type = Type.AGENT;
             return true;
