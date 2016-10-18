@@ -11,7 +11,7 @@ import java.util.concurrent.ThreadFactory;
  * Created by Kyrre on 17.10.2016.
  */
 public class World {
-    static int WORLD_SIZE = 10;
+    static int WORLD_SIZE = 16;
     private ArrayList<Agent> agents;
     private int sizeX = WORLD_SIZE;
     private int sizeY = WORLD_SIZE;

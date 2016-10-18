@@ -40,7 +40,9 @@ public class Agent {
         }
         if (front.getType() != Type.OBSTACLE){
             move(front);
+            return;
         }
+        System.out.println();
     }
 
     private void updateValue(Cell... cells) {

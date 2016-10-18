@@ -55,6 +55,6 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         //launch(args);
-        new World(100).runSim();
+        new World(300).runSim();
     }
 }
