@@ -47,7 +47,7 @@ public abstract class Cell {
         return " ";
     }
 
-    public CellState getCellState() {
+    public CellState createCellState() {
         return new CellState(type);
     }
 }

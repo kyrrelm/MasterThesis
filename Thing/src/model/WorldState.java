@@ -15,7 +15,7 @@ public class WorldState {
         cellStates = new CellState[sizeX][sizeY];
         for (int x = 0; x < sizeX; x++) {
             for (int y = 0; y < sizeY; y++) {
-                cellStates[x][y] = grid[x][y].getCellState();
+                cellStates[x][y] = grid[x][y].createCellState();
             }
         }
     }

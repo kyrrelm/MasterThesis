@@ -8,9 +8,15 @@ import model.Cell.Type;
 public class CellState {
 
     public final Type type;
+    public final int apfValue;
 
     public CellState(Type type) {
         this.type = type;
+        this.apfValue = -1;
+    }
+    public CellState(Type type, int apfValue) {
+        this.type = type;
+        this.apfValue = apfValue;
     }
 
     @Override
@@ -21,8 +27,11 @@ public class CellState {
             return "N";
         if (type == Type.AGENT)
             return "A";
-        if (type == Type.FREE)
+        if (type == Type.FREE){
+            if (apfValue != -1)
+                return String.valueOf(apfValue);
             return " ";
+        }
         return "!";
     }
 

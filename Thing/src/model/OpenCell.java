@@ -56,4 +56,9 @@ public class OpenCell extends Cell{
             return false;
         return true;
     }
+
+    @Override
+    public CellState createCellState() {
+        return new CellState(type,apfValue);
+    }
 }
