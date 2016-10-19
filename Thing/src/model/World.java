@@ -18,7 +18,6 @@ public class World {
     private int sizeY = WORLD_SIZE;
     private Border border;
     private Cell[][] grid;
-    private int time;
 
     public Cell getCell(int x, int y) {
         if (x <= 0 || x >= sizeX || y <= 0 || y >= sizeY)
@@ -26,8 +25,7 @@ public class World {
         return grid[x][y];
     }
 
-    public World(int time) {
-        this.time = time;
+    public World() {
         this.grid = new Cell[sizeX][sizeY];
         this.border = new Border();
         agents = new ArrayList<>();
@@ -36,15 +34,19 @@ public class World {
         System.out.println(this);
     }
 
-    public void runSim(){
-
+    public ArrayList<WorldState> runSim(int numberOfTicks){
+        ArrayList<WorldState> worldStates = new ArrayList<>();
+        for (int i = 0; i < numberOfTicks; i++) {
+            worldStates.add(tick());
+        }
+        return worldStates;
     }
 
-    private void tick(){
-        for (Agent a : agents) {
-            a.interact();
-        }
+    private WorldState tick(){
+        agents.forEach(Agent::interact);
+        System.out.println("World:");
         System.out.println(this);
+        return new WorldState(grid);
     }
 
 
