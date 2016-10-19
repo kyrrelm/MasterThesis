@@ -31,12 +31,13 @@ public class World {
         agents = new ArrayList<>();
         generateWorld();
         generateAgents(1);
-        System.out.println("World constructor:");
-        System.out.println(this);
+        //System.out.println("World constructor:");
+        //System.out.println(this);
     }
 
     public ArrayList<WorldState> runSim(int numberOfTicks){
         ArrayList<WorldState> worldStates = new ArrayList<>();
+        worldStates.add(new WorldState(grid));
         for (int i = 0; i < numberOfTicks; i++) {
             worldStates.add(tick());
         }
@@ -45,8 +46,8 @@ public class World {
 
     private WorldState tick(){
         agents.forEach(Agent::interact);
-        System.out.println("World:");
-        System.out.println(this);
+        //System.out.println("World:");
+        //System.out.println(this);
         return new WorldState(grid);
     }
 
