@@ -12,10 +12,9 @@ import java.util.concurrent.ThreadFactory;
  * Created by Kyrre on 17.10.2016.
  */
 public class World {
-    static int WORLD_SIZE = 10;
     private ArrayList<Agent> agents;
-    private int sizeX = WORLD_SIZE;
-    private int sizeY = WORLD_SIZE;
+    private final int sizeX;
+    private final int sizeY;
     private Border border;
     private Cell[][] grid;
 
@@ -25,7 +24,9 @@ public class World {
         return grid[x][y];
     }
 
-    public World() {
+    public World(int width, int height) {
+        this.sizeX = width;
+        this.sizeY = height;
         this.grid = new Cell[sizeX][sizeY];
         this.border = new Border();
         agents = new ArrayList<>();

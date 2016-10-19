@@ -13,13 +13,15 @@ public class Simulator extends Task<ArrayList<WorldState>> {
 
     ArrayList<WorldState> worldStates;
     World world;
+    private final int numberOfTicks;
 
-    public Simulator(World world) {
+    public Simulator(World world, int numberOfTicks) {
         this.world = world;
+        this.numberOfTicks = numberOfTicks;
     }
 
     @Override
     protected ArrayList<WorldState> call() throws Exception {
-        return world.runSim(40);
+        return world.runSim(numberOfTicks);
     }
 }

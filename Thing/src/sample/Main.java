@@ -29,21 +29,21 @@ import static javafx.scene.input.KeyCode.T;
 
 public class Main extends Application {
 
+    private static final int SIZE = 9;
+    private static final int  NUMBER_OF_TICKS = 47;
     private static final javafx.util.Duration FREQUENCY = Duration.seconds(1);
-    private static ArrayList<WorldState> worldStates = new ArrayList<>();
+
+    private static int width = SIZE;
+    private static int height = SIZE;
+
     private static int playBackIndex = 0;
+    private static TextField[][] inputCells = new TextField[width][height];
+    private static ArrayList<WorldState> worldStates = new ArrayList<>();
 
     @Override
     public void start(Stage primaryStage) throws Exception{
 
-        int SIZE = 12;
-        int height = SIZE;
-        int width = SIZE;
-
         GridPane root = new GridPane();
-
-        TextField[][] inputCells = new TextField[width][height];
-
 
         for(int y = 0; y < height; y++){
             for(int x = 0; x < width; x++){
@@ -72,7 +72,12 @@ public class Main extends Application {
         primaryStage.show();
 
         initSimulation();
+        runPlayback();
 
+
+    }
+
+    private void runPlayback() {
         Timeline timeline = new Timeline(
                 new KeyFrame(
                         Duration.ZERO,
@@ -96,12 +101,10 @@ public class Main extends Application {
         );
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
-
-
     }
 
     private void initSimulation() {
-        Simulator simulator = new Simulator(new World());
+        Simulator simulator = new Simulator(new World(width, height), NUMBER_OF_TICKS);
         simulator.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
             @Override
             public void handle(WorkerStateEvent event) {
