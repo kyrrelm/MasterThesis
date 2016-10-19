@@ -12,8 +12,8 @@ public abstract class Cell {
         FREE,
         AGENT,
         BORDER;
-    }
 
+    }
     public Cell(int x, int y, Type type) {
         this.x = x;
         this.y = y;
@@ -21,9 +21,9 @@ public abstract class Cell {
     }
 
     protected int x;
+
     protected int y;
     protected Type type;
-
     public int getX() {
         return x;
     }
@@ -45,5 +45,9 @@ public abstract class Cell {
         if (type == Type.AGENT)
             return "A";
         return " ";
+    }
+
+    public CellState getCellState() {
+        return new CellState(type);
     }
 }

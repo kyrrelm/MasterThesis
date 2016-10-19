@@ -3,6 +3,7 @@ package model;
 
 import javafx.application.Platform;
 import javafx.concurrent.Task;
+import javafx.scene.control.Alert;
 
 import java.util.ArrayList;
 import java.util.concurrent.ThreadFactory;
@@ -11,7 +12,7 @@ import java.util.concurrent.ThreadFactory;
  * Created by Kyrre on 17.10.2016.
  */
 public class World {
-    static int WORLD_SIZE = 16;
+    static int WORLD_SIZE = 10;
     private ArrayList<Agent> agents;
     private int sizeX = WORLD_SIZE;
     private int sizeY = WORLD_SIZE;
@@ -35,25 +36,8 @@ public class World {
         System.out.println(this);
     }
 
-    public Task runSim(){
-        Task<Long> loop = new Task<Long>() {
-            @Override protected Long call() throws Exception {
-                long a=0;
-                long b=1;
-                for (long i = 0; i < time; i++){
-                    updateValue(a);
-                    tick();
-                }
-                return a;
-            }
+    public void runSim(){
 
-
-        };
-        Thread thread = new Thread(loop);
-        thread.setDaemon(true);
-        thread.start();
-
-        return loop;
     }
 
     private void tick(){

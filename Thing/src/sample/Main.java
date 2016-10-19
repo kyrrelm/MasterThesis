@@ -1,7 +1,12 @@
 package sample;
 
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Task;
+import javafx.concurrent.WorkerStateEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
@@ -10,8 +15,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import model.World;
+import sun.reflect.generics.tree.ReturnType;
 
 import java.util.Random;
+
+import static javafx.scene.input.KeyCode.T;
 
 public class Main extends Application {
 
@@ -19,12 +27,15 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
 
         int SIZE = 10;
-        int length = SIZE;
+        int height = SIZE;
         int width = SIZE;
 
         GridPane root = new GridPane();
 
-        for(int y = 0; y < length; y++){
+        TextField[][] inputCells = new TextField[width][height];
+
+
+        for(int y = 0; y < height; y++){
             for(int x = 0; x < width; x++){
 
                 Random rand = new Random();
@@ -37,7 +48,7 @@ public class Main extends Application {
                 tf.setAlignment(Pos.CENTER);
                 tf.setEditable(false);
                 tf.setText("(" + y + ")");
-
+                inputCells[x][y] = tf;
                 // Iterate the Index using the loops
                 root.setRowIndex(tf,y);
                 root.setColumnIndex(tf,x);
@@ -45,16 +56,19 @@ public class Main extends Application {
             }
         }
 
+
+
+
+
         Scene scene = new Scene(root, 500, 500);
         primaryStage.setTitle("Random Binary Matrix (JavaFX)");
         primaryStage.setScene(scene);
         primaryStage.show();
-
     }
 
 
     public static void main(String[] args) {
-        //launch(args);
-        new World(300).runSim();
+        launch(args);
+        //new World(300).runSim();
     }
 }
