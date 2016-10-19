@@ -31,6 +31,7 @@ public class World {
         agents = new ArrayList<>();
         generateWorld();
         generateAgents(1);
+        System.out.println("World constructor:");
         System.out.println(this);
     }
 

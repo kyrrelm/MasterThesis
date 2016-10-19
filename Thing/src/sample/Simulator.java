@@ -20,8 +20,6 @@ public class Simulator extends Task<ArrayList<WorldState>> {
 
     @Override
     protected ArrayList<WorldState> call() throws Exception {
-
-
-        return null;
+        return world.runSim(1);
     }
 }

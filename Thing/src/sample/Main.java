@@ -15,8 +15,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import model.World;
+import model.WorldState;
 import sun.reflect.generics.tree.ReturnType;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import static javafx.scene.input.KeyCode.T;
@@ -56,14 +58,27 @@ public class Main extends Application {
             }
         }
 
-
-
-
-
         Scene scene = new Scene(root, 500, 500);
         primaryStage.setTitle("Random Binary Matrix (JavaFX)");
         primaryStage.setScene(scene);
         primaryStage.show();
+
+        Simulator simulator = new Simulator(new World());
+        simulator.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+            @Override
+            public void handle(WorkerStateEvent event) {
+                ArrayList<WorldState> worldStates = (ArrayList<WorldState>) event.getSource().getValue();
+                WorldState firstState = worldStates.get(0);
+                System.out.println("WorldState:");
+                System.out.println(firstState);
+
+            }
+        });
+        Thread tr = new Thread(simulator);
+        tr.setDaemon(true);
+        tr.start();
+
+
     }
 
 
