@@ -29,14 +29,14 @@ import static javafx.scene.input.KeyCode.T;
 
 public class Main extends Application {
 
-    private static final javafx.util.Duration FREQUENCY = Duration.seconds(2);
+    private static final javafx.util.Duration FREQUENCY = Duration.seconds(1);
     private static ArrayList<WorldState> worldStates = new ArrayList<>();
     private static int playBackIndex = 0;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
 
-        int SIZE = 10;
+        int SIZE = 12;
         int height = SIZE;
         int width = SIZE;
 
@@ -79,7 +79,12 @@ public class Main extends Application {
                         new EventHandler<ActionEvent>() {
                             @Override public void handle(ActionEvent actionEvent) {
                                 if (worldStates.size() > playBackIndex){
-                                    System.out.println("timeline");
+                                    WorldState worldState = worldStates.get(playBackIndex);
+                                    for (int x = 0; x < worldState.cellStates[0].length; x++) {
+                                        for (int y = 0; y < worldState.cellStates.length; y++) {
+                                            inputCells[x][y].setText(worldState.cellStates[x][y].toString());
+                                        }
+                                    }
                                     playBackIndex++;
                                 }
                             }
