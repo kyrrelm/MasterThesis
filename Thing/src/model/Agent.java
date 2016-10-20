@@ -45,14 +45,18 @@ public class Agent {
         System.out.println();
     }
 
+    /**
+     *
+     * @param cells front, right, back, left
+     */
     private void updateValue(Cell... cells) {
-        int min = Integer.MAX_VALUE;
+        int min = Integer.MAX_VALUE-1;
         for (Cell c: cells) {
             if (c.getType() == Type.NEST){
                 currentCell.setApfValue(1);
                 return;
             }
-            if (c.getType() == Type.FREE && ((OpenCell)c).hasApfValue()){
+            if ((c instanceof OpenCell) && ((OpenCell) c).hasApfValue()){
                 min = Math.min(min ,((OpenCell) c).getApfValue());
             }
         }

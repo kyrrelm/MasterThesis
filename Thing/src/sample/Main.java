@@ -48,19 +48,16 @@ public class Main extends Application {
         for(int y = 0; y < height; y++){
             for(int x = 0; x < width; x++){
 
-                Random rand = new Random();
-                int rand1 = rand.nextInt(2);
-
                 // Create a new TextField in each Iteration
                 TextField tf = new TextField();
                 tf.setPrefHeight(50);
                 tf.setPrefWidth(50);
                 tf.setAlignment(Pos.CENTER);
                 tf.setEditable(false);
-                tf.setText("(" + y + ")");
+                tf.setText("---");
                 inputCells[x][y] = tf;
                 // Iterate the Index using the loops
-                root.setRowIndex(tf,y);
+                root.setRowIndex(tf,height-1-y);
                 root.setColumnIndex(tf,x);
                 root.getChildren().add(tf);
             }

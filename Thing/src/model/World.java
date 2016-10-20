@@ -56,6 +56,7 @@ public class World {
 
     private void generateWorld() {
         grid[sizeX/2][sizeY/2] = new OpenCell(sizeX/2, sizeY/2, Cell.Type.NEST);
+        //grid[2][2] = new OpenCell(2, 2, Cell.Type.NEST);
         for (int x = 0; x < sizeX; x++) {
             for (int y = 0; y < sizeY; y++) {
                 if (grid[x][y] == null){

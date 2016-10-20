@@ -19,7 +19,12 @@ public class OpenCell extends Cell{
     }
 
     public void setApfValue(int apfValue) {
-        this.apfValue = apfValue;
+        if (hasApfValue()){
+            this.apfValue = Math.min(this.apfValue, apfValue);
+        }
+        else {
+            this.apfValue = apfValue;
+        }
     }
 
     public boolean containAgent(){
