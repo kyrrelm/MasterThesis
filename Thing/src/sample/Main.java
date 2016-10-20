@@ -30,7 +30,7 @@ import static javafx.scene.input.KeyCode.T;
 public class Main extends Application {
 
     private static final int SIZE = 9;
-    private static final int  NUMBER_OF_TICKS = 47;
+    private static final int  NUMBER_OF_TICKS = 120;
     private static final javafx.util.Duration FREQUENCY = Duration.seconds(1);
 
     private static int width = SIZE;
@@ -115,6 +115,12 @@ public class Main extends Application {
                     System.out.println("WorldState "+count+++":");
                     System.out.println(w);
                 }
+            }
+        });
+        simulator.setOnFailed(new EventHandler<WorkerStateEvent>() {
+            @Override
+            public void handle(WorkerStateEvent event) {
+                simulator.getException().printStackTrace();
             }
         });
         Thread tr = new Thread(simulator);

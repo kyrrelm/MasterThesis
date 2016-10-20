@@ -38,7 +38,7 @@ public class Agent {
             move(right);
             return;
         }
-        if (front.getType() != Type.OBSTACLE){
+        if (front.getType() == Type.FREE){
             move(front);
             return;
         }

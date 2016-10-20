@@ -19,7 +19,7 @@ public class World {
     private Cell[][] grid;
 
     public Cell getCell(int x, int y) {
-        if (x <= 0 || x >= sizeX || y <= 0 || y >= sizeY)
+        if (x < 0 || x >= sizeX || y < 0 || y >= sizeY)
             return border;
         return grid[x][y];
     }
