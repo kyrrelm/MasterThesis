@@ -29,11 +29,11 @@ import static javafx.scene.input.KeyCode.T;
 
 public class Main extends Application {
 
-    private static final int SIZE = 9;
+    private static final int SIZE = 20;
     private static final int  NUMBER_OF_TICKS = 120;
-    private static final javafx.util.Duration FREQUENCY = Duration.seconds(1);
+    private static final javafx.util.Duration FREQUENCY = Duration.millis(500);
 
-    private static int width = SIZE;
+    private static int width = SIZE*2;
     private static int height = SIZE;
 
     private static int playBackIndex = 0;
@@ -63,7 +63,7 @@ public class Main extends Application {
             }
         }
 
-        Scene scene = new Scene(root, 500, 500);
+        Scene scene = new Scene(root, 900, 900);
         primaryStage.setTitle("Random Binary Matrix (JavaFX)");
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -82,8 +82,8 @@ public class Main extends Application {
                             @Override public void handle(ActionEvent actionEvent) {
                                 if (worldStates.size() > playBackIndex){
                                     WorldState worldState = worldStates.get(playBackIndex);
-                                    for (int x = 0; x < worldState.cellStates[0].length; x++) {
-                                        for (int y = 0; y < worldState.cellStates.length; y++) {
+                                    for (int x = 0; x < worldState.cellStates.length; x++) {
+                                        for (int y = 0; y < worldState.cellStates[0].length; y++) {
                                             inputCells[x][y].setText(worldState.cellStates[x][y].toString());
                                         }
                                     }

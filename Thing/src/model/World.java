@@ -67,7 +67,7 @@ public class World {
     }
 
     private void generateAgents(int amount){
-        agents.add(new Agent((OpenCell) grid[(sizeX/2)-1][sizeX/2], Agent.Heading.NORTH, this));
+        agents.add(new Agent((OpenCell) grid[(sizeX/2)-1][sizeY/2], Agent.Heading.NORTH, this));
     }
 
     @Override
