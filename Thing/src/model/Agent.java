@@ -1,6 +1,8 @@
 package model;
 
-import model.Cell.Type;
+import model.Cells.Cell;
+import model.Cells.Cell.Type;
+import model.Cells.OpenCell;
 
 /**
  * Created by Kyrre on 17.10.2016.
@@ -42,7 +44,13 @@ public class Agent {
             move(front);
             return;
         }
-        System.out.println();
+        if(front.getType() == Type.OBSTACLE){
+           avoidObstacle();
+        }
+    }
+
+    private void avoidObstacle() {
+
     }
 
     /**

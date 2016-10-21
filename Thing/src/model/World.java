@@ -1,12 +1,11 @@
 package model;
 
 
-import javafx.application.Platform;
-import javafx.concurrent.Task;
-import javafx.scene.control.Alert;
+import model.Cells.Cell;
+import model.Cells.OpenCell;
+import model.states.WorldState;
 
 import java.util.ArrayList;
-import java.util.concurrent.ThreadFactory;
 
 /**
  * Created by Kyrre on 17.10.2016.
@@ -58,7 +57,7 @@ public class World {
 
     private void generateWorld() {
         grid[nest.getX()][nest.getY()] = nest;
-        //grid[2][2] = new OpenCell(2, 2, Cell.Type.NEST);
+        //grid[2][2] = new OpenCell(2, 2, Cells.Type.NEST);
         for (int x = 0; x < sizeX; x++) {
             for (int y = 0; y < sizeY; y++) {
                 if (grid[x][y] == null){

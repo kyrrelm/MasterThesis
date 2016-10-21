@@ -2,7 +2,7 @@ package sample;
 
 import javafx.concurrent.Task;
 import model.World;
-import model.WorldState;
+import model.states.WorldState;
 
 import java.util.ArrayList;
 

@@ -9,12 +9,11 @@ import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import model.World;
-import model.WorldState;
+import model.states.WorldState;
 
 import java.util.ArrayList;
 
