@@ -7,11 +7,13 @@ public class OpenCell extends Cell{
 
     private int apfValue;
     private Agent agent;
+    private Type defaultType;
 
     public OpenCell(int x, int y, Type type) {
         super(x, y, type);
         apfValue = -1;
         agent = null;
+        defaultType = this.type;
     }
 
     public int getApfValue() {
@@ -43,7 +45,7 @@ public class OpenCell extends Cell{
     }
 
     public void removeAgent(){
-        this.type = Type.FREE;
+        this.type = defaultType;
         this.agent = null;
     }
 

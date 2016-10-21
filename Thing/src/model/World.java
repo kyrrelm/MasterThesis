@@ -17,6 +17,7 @@ public class World {
     private final int sizeY;
     private Border border;
     private Cell[][] grid;
+    private OpenCell nest;
 
     public Cell getCell(int x, int y) {
         if (x < 0 || x >= sizeX || y < 0 || y >= sizeY)
@@ -29,7 +30,8 @@ public class World {
         this.sizeY = height;
         this.grid = new Cell[sizeX][sizeY];
         this.border = new Border();
-        agents = new ArrayList<>();
+        this.agents = new ArrayList<>();
+        this.nest = new OpenCell(sizeX/2, sizeY/2, Cell.Type.NEST);
         generateWorld();
         generateAgents(1);
         //System.out.println("World constructor:");
@@ -55,7 +57,7 @@ public class World {
 
 
     private void generateWorld() {
-        grid[sizeX/2][sizeY/2] = new OpenCell(sizeX/2, sizeY/2, Cell.Type.NEST);
+        grid[nest.getX()][nest.getY()] = nest;
         //grid[2][2] = new OpenCell(2, 2, Cell.Type.NEST);
         for (int x = 0; x < sizeX; x++) {
             for (int y = 0; y < sizeY; y++) {
@@ -67,7 +69,7 @@ public class World {
     }
 
     private void generateAgents(int amount){
-        agents.add(new Agent((OpenCell) grid[(sizeX/2)-1][sizeY/2], Agent.Heading.NORTH, this));
+        agents.add(new Agent((OpenCell) grid[nest.getX()][nest.getY()], Agent.Heading.NORTH, this));
     }
 
     @Override

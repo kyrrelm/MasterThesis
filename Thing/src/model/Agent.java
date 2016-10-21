@@ -22,7 +22,7 @@ public class Agent {
 
     public Agent(OpenCell currentCell, Heading heading, World world) {
         this.currentCell = currentCell;
-        currentCell.placeAgent(this);
+        //currentCell.placeAgent(this);
         this.heading = heading;
         this.world = world;
     }
