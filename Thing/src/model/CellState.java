@@ -21,16 +21,22 @@ public class CellState {
 
     @Override
     public String toString() {
-        if (type == Type.OBSTACLE)
-            return "X";
-        if (type == Type.NEST)
-            return "N";
-        if (type == Type.AGENT)
-            return "A";
         if (type == Type.FREE){
             if (apfValue != -1)
                 return String.valueOf(apfValue);
             return " ";
+        }
+        if (type == Type.OBSTACLE) {
+            return "X";
+        }
+        if (type == Type.AGENT) {
+            return "A";
+        }
+        if (type == Type.NEST) {
+            return "N";
+        }
+        if (type == Type.FOOD) {
+            return "F";
         }
         return "!";
     }

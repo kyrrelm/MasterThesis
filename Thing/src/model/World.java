@@ -66,6 +66,7 @@ public class World {
                 }
             }
         }
+        grid[nest.getX()+1][nest.getY()+2] = new OpenCell(nest.getX()+1, nest.getY()+2, Cell.Type.FOOD);
     }
 
     private void generateAgents(int amount){

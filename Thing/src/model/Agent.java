@@ -33,12 +33,12 @@ public class Agent {
         Cell back = senseBack();
         Cell left = senseLeft();
         updateValue(front,right,back,left);
-        if (right.getType() != Type.NEST && !(right.getType() == Type.FREE && ((OpenCell)right).hasApfValue())){
+        if (right.getType() != Type.NEST && right instanceof OpenCell && !((OpenCell) right).hasApfValue()){
             rotateRight();
             move(right);
             return;
         }
-        if (front.getType() == Type.FREE){
+        if (front instanceof OpenCell){
             move(front);
             return;
         }
