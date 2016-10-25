@@ -12,6 +12,8 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import maps.Map;
+import maps.MapGenerator;
 import model.World;
 import model.states.WorldState;
 
@@ -99,6 +101,8 @@ public class Main extends Application {
     }
 
     private void initSimulation() {
+        Map map = MapGenerator.genMap(MapGenerator.OBSTACLE_TEST);
+        //Simulator simulator = new Simulator(new World(map), NUMBER_OF_TICKS);
         Simulator simulator = new Simulator(new World(width, height), NUMBER_OF_TICKS);
         simulator.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
             @Override
