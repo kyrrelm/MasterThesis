@@ -14,19 +14,21 @@ public class Agent {
         NORTH,
         EAST,
         SOUTH,
-        WEST;
+        WEST
 
     }
 
     private final World world;
     private Heading heading;
     private OpenCell currentCell;
+    private boolean avoidingObstacle;
 
     public Agent(OpenCell currentCell, Heading heading, World world) {
         this.currentCell = currentCell;
         //currentCell.placeAgent(this);
         this.heading = heading;
         this.world = world;
+        this.avoidingObstacle = false;
     }
 
     public void interact(){
@@ -45,12 +47,28 @@ public class Agent {
             return;
         }
         if(front.getType() == Type.OBSTACLE){
-           avoidObstacle();
+           //avoidObstacle(front,right,back,left);
         }
+
     }
 
-    private void avoidObstacle() {
 
+    private void avoidObstacle(Cell front, Cell right, Cell back, Cell left) {
+        avoidingObstacle = true;
+        if(front.getType() == Type.OBSTACLE){
+            rotateRight();
+            avoidObstacle(right,back,left,front);
+            return;
+        }
+        if (left instanceof OpenCell){
+            rotateLeft();
+            move(left);
+            return;
+        }
+        if (front instanceof OpenCell){
+            move(front);
+            return;
+        }
     }
 
     /**
@@ -77,6 +95,21 @@ public class Agent {
         currentCell.placeAgent(this);
     }
 
+    private void rotateLeft() {
+        if (heading == Heading.NORTH){
+            heading = Heading.WEST;
+        }
+        else if (heading == Heading.EAST){
+            heading = Heading.NORTH;
+        }
+        else if (heading == Heading.SOUTH){
+            heading = Heading.EAST;
+        }
+        else if (heading == Heading.WEST){
+            heading = Heading.SOUTH;
+        }
+    }
+
     private void rotateRight() {
         if (heading == Heading.NORTH){
             heading = Heading.EAST;
@@ -91,6 +124,7 @@ public class Agent {
             heading = Heading.NORTH;
         }
     }
+
 
     public Cell senseFront(){
         if (heading == Heading.NORTH){
