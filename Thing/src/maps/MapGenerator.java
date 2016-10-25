@@ -24,16 +24,18 @@ public class MapGenerator {
             {' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','X',' ',' ',' ',' ',' '},
             {' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','X',' ',' ',' ',' ',' '},
             {' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','X',' ',' ',' ',' ',' '},
+            {' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','X',' ',' ',' ',' ',' '},
+            {' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','X',' ',' ',' ',' ',' '},
             {' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','X',' ',' ',' ',' ',' '}
     };
 
 
     public static Map genMap(char[][] map) {
-        Cell[][] outputMap = new Cell[map.length][map[0].length];
+        Cell[][] outputMap = new Cell[map[0].length][map.length];
         OpenCell nest = null;
-        for (int x = 0; x < map.length; x++) {
-            for (int y = 0; y < map[0].length; y++) {
-                char value = map[x][y];
+        for (int x = 0; x < map[0].length; x++) {
+            for (int y = 0; y < map.length; y++) {
+                char value = map[map.length-1-y][x];
                 if (value == 'N'){
                     nest = new OpenCell(x,y, Cell.Type.NEST);
                     outputMap[x][y] = nest;
