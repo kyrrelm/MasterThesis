@@ -35,6 +35,11 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
 
+        Map map = MapGenerator.genMap(MapGenerator.OBSTACLE_TEST);
+        width = map.sizeX;
+        height = map.sizeY;
+        Simulator simulator = initSimulation(map);
+
         GridPane root = new GridPane();
 
         for(int y = 0; y < height; y++){
@@ -68,7 +73,6 @@ public class Main extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
 
-        Simulator simulator = initSimulation();
         startSimulation(simulator);
         runPlayback();
     }
@@ -99,10 +103,9 @@ public class Main extends Application {
         timeline.play();
     }
 
-    private Simulator initSimulation() {
-        Map map = MapGenerator.genMap(MapGenerator.OBSTACLE_TEST);
-        //Simulator simulator = new Simulator(new World(map), NUMBER_OF_TICKS);
-        return new Simulator(new World(width, height), NUMBER_OF_TICKS);
+    private Simulator initSimulation(Map map) {
+        return new Simulator(new World(map), NUMBER_OF_TICKS);
+        //return new Simulator(new World(width, height), NUMBER_OF_TICKS);
     }
 
     private void startSimulation(Simulator simulator){
