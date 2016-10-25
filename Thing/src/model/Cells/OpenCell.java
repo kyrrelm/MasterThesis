@@ -16,6 +16,9 @@ public class OpenCell extends Cell {
     public OpenCell(int x, int y, Type type) {
         super(x, y, type);
         apfValue = -1;
+        if (type == Type.NEST){
+            apfValue = 0;
+        }
         agent = null;
         defaultType = this.type;
     }
@@ -57,7 +60,7 @@ public class OpenCell extends Cell {
 
     @Override
     public String toString() {
-        if (apfValue == -1)
+        if (apfValue == -1 || type == Type.NEST)
             return super.toString();
         return String.valueOf(apfValue);
     }

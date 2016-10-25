@@ -36,9 +36,17 @@ public class Agent {
         Cell right = senseRight();
         Cell back = senseBack();
         Cell left = senseLeft();
+        if (avoidingObstacle){
+            avoidObstacle(front,right,back,left);
+            return;
+        }
         updateValue(front,right,back,left);
-        if (right.getType() != Type.NEST && right instanceof OpenCell && !((OpenCell) right).hasApfValue()){
+        if (!(right instanceof OpenCell && ((OpenCell) right).hasApfValue())){
             rotateRight();
+            if (right.getType() == Type.OBSTACLE){
+                avoidObstacle(right,back,left,front);
+                return;
+            }
             move(right);
             return;
         }
@@ -47,7 +55,8 @@ public class Agent {
             return;
         }
         if(front.getType() == Type.OBSTACLE){
-           //avoidObstacle(front,right,back,left);
+            avoidObstacle(front,right,back,left);
+            return;
         }
 
     }
@@ -78,10 +87,6 @@ public class Agent {
     private void updateValue(Cell... cells) {
         int min = Integer.MAX_VALUE-1;
         for (Cell c: cells) {
-            if (c.getType() == Type.NEST){
-                currentCell.setApfValue(1);
-                return;
-            }
             if ((c instanceof OpenCell) && ((OpenCell) c).hasApfValue()){
                 min = Math.min(min ,((OpenCell) c).getApfValue());
             }
