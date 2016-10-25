@@ -68,10 +68,9 @@ public class Main extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
 
-        initSimulation();
+        Simulator simulator = initSimulation();
+        startSimulation(simulator);
         runPlayback();
-
-
     }
 
     private void runPlayback() {
@@ -100,10 +99,13 @@ public class Main extends Application {
         timeline.play();
     }
 
-    private void initSimulation() {
+    private Simulator initSimulation() {
         Map map = MapGenerator.genMap(MapGenerator.OBSTACLE_TEST);
         //Simulator simulator = new Simulator(new World(map), NUMBER_OF_TICKS);
-        Simulator simulator = new Simulator(new World(width, height), NUMBER_OF_TICKS);
+        return new Simulator(new World(width, height), NUMBER_OF_TICKS);
+    }
+
+    private void startSimulation(Simulator simulator){
         simulator.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
             @Override
             public void handle(WorkerStateEvent event) {
