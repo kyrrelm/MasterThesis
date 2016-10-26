@@ -1,4 +1,6 @@
-package model;
+package model.states;
+
+import model.Cells.Cell;
 
 /**
  * Created by kyrrelm on 19.10.2016.
@@ -10,8 +12,8 @@ public class WorldState {
     private final int sizeY;
 
     public WorldState(Cell[][] grid) {
-        sizeX = grid[0].length;
-        sizeY = grid.length;
+        sizeX = grid.length;
+        sizeY = grid[0].length;
         cellStates = new CellState[sizeX][sizeY];
         for (int x = 0; x < sizeX; x++) {
             for (int y = 0; y < sizeY; y++) {

@@ -1,6 +1,8 @@
-package model;
+package model.Cells;
 
-public abstract class Cell {
+import model.states.CellState;
+
+public class Cell {
 
     /**
      * Created by Kyrre on 17.10.2016.

@@ -1,6 +1,8 @@
 package model;
 
-import model.Cell.Type;
+import model.Cells.Cell;
+import model.Cells.Cell.Type;
+import model.Cells.OpenCell;
 
 /**
  * Created by Kyrre on 17.10.2016.
@@ -12,19 +14,21 @@ public class Agent {
         NORTH,
         EAST,
         SOUTH,
-        WEST;
+        WEST
 
     }
 
     private final World world;
     private Heading heading;
     private OpenCell currentCell;
+    private boolean avoidingObstacle;
 
     public Agent(OpenCell currentCell, Heading heading, World world) {
         this.currentCell = currentCell;
-        currentCell.placeAgent(this);
+        //currentCell.placeAgent(this);
         this.heading = heading;
         this.world = world;
+        this.avoidingObstacle = false;
     }
 
     public void interact(){
@@ -32,27 +36,58 @@ public class Agent {
         Cell right = senseRight();
         Cell back = senseBack();
         Cell left = senseLeft();
+        if (avoidingObstacle){
+            avoidObstacle(front,right,back,left);
+            return;
+        }
         updateValue(front,right,back,left);
-        if (right.getType() != Type.NEST && !(right.getType() == Type.FREE && ((OpenCell)right).hasApfValue())){
+        if (!(right instanceof OpenCell && ((OpenCell) right).hasApfValue())){
             rotateRight();
+            if (right.getType() == Type.OBSTACLE){
+                avoidObstacle(right,back,left,front);
+                return;
+            }
             move(right);
             return;
         }
-        if (front.getType() != Type.OBSTACLE){
+        if (front instanceof OpenCell){
             move(front);
             return;
         }
-        System.out.println();
+        if(front.getType() == Type.OBSTACLE){
+            avoidObstacle(front,right,back,left);
+            return;
+        }
+
     }
 
+
+    private void avoidObstacle(Cell front, Cell right, Cell back, Cell left) {
+        avoidingObstacle = true;
+        if(front.getType() == Type.OBSTACLE){
+            rotateRight();
+            avoidObstacle(right,back,left,front);
+            return;
+        }
+        if (left instanceof OpenCell){
+            rotateLeft();
+            move(left);
+            return;
+        }
+        if (front instanceof OpenCell){
+            move(front);
+            return;
+        }
+    }
+
+    /**
+     *
+     * @param cells front, right, back, left
+     */
     private void updateValue(Cell... cells) {
-        int min = Integer.MAX_VALUE;
+        int min = Integer.MAX_VALUE-1;
         for (Cell c: cells) {
-            if (c.getType() == Type.NEST){
-                currentCell.setApfValue(1);
-                return;
-            }
-            if (c.getType() == Type.FREE && ((OpenCell)c).hasApfValue()){
+            if ((c instanceof OpenCell) && ((OpenCell) c).hasApfValue()){
                 min = Math.min(min ,((OpenCell) c).getApfValue());
             }
         }
@@ -63,6 +98,21 @@ public class Agent {
         currentCell.removeAgent();
         currentCell = (OpenCell) toCell;
         currentCell.placeAgent(this);
+    }
+
+    private void rotateLeft() {
+        if (heading == Heading.NORTH){
+            heading = Heading.WEST;
+        }
+        else if (heading == Heading.EAST){
+            heading = Heading.NORTH;
+        }
+        else if (heading == Heading.SOUTH){
+            heading = Heading.EAST;
+        }
+        else if (heading == Heading.WEST){
+            heading = Heading.SOUTH;
+        }
     }
 
     private void rotateRight() {
@@ -79,6 +129,7 @@ public class Agent {
             heading = Heading.NORTH;
         }
     }
+
 
     public Cell senseFront(){
         if (heading == Heading.NORTH){

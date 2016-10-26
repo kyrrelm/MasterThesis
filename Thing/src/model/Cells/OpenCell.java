@@ -1,17 +1,26 @@
-package model;
+package model.Cells;
+
+import model.Agent;
+import model.Cells.Cell;
+import model.states.CellState;
 
 /**
  * Created by Kyrre on 17.10.2016.
  */
-public class OpenCell extends Cell{
+public class OpenCell extends Cell {
 
     private int apfValue;
     private Agent agent;
+    private Type defaultType;
 
     public OpenCell(int x, int y, Type type) {
         super(x, y, type);
         apfValue = -1;
+        if (type == Type.NEST){
+            apfValue = 0;
+        }
         agent = null;
+        defaultType = this.type;
     }
 
     public int getApfValue() {
@@ -19,7 +28,12 @@ public class OpenCell extends Cell{
     }
 
     public void setApfValue(int apfValue) {
-        this.apfValue = apfValue;
+        if (hasApfValue()){
+            this.apfValue = Math.min(this.apfValue, apfValue);
+        }
+        else {
+            this.apfValue = apfValue;
+        }
     }
 
     public boolean containAgent(){
@@ -38,7 +52,7 @@ public class OpenCell extends Cell{
     }
 
     public void removeAgent(){
-        this.type = Type.FREE;
+        this.type = defaultType;
         this.agent = null;
     }
 
@@ -46,7 +60,7 @@ public class OpenCell extends Cell{
 
     @Override
     public String toString() {
-        if (apfValue == -1)
+        if (apfValue == -1 || type == Type.NEST)
             return super.toString();
         return String.valueOf(apfValue);
     }
