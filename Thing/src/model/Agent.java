@@ -63,12 +63,12 @@ public class Agent {
 
 
     private void avoidObstacle(Cell front, Cell right, Cell back, Cell left) {
-        avoidingObstacle = true;
-        if(front.getType() == Type.OBSTACLE){
+        if(front.getType() == Type.OBSTACLE && !avoidingObstacle){
             rotateRight();
             avoidObstacle(right,back,left,front);
             return;
         }
+        avoidingObstacle = true;
         if (left instanceof OpenCell){
             rotateLeft();
             move(left);
@@ -78,6 +78,11 @@ public class Agent {
             move(front);
             return;
         }
+        if (right instanceof OpenCell){
+            rotateRight();
+            move(right);
+        }
+        avoidingObstacle = true;
     }
 
     /**
