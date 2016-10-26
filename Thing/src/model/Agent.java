@@ -31,23 +31,26 @@ public class Agent {
         this.avoidingObstacle = false;
     }
 
+    private Cell front;
+    private Cell right;
+    private Cell back;
+    private Cell left;
+
+
     public void interact(){
-        Cell front = senseFront();
-        Cell right = senseRight();
-        Cell back = senseBack();
-        Cell left = senseLeft();
+        sense();
         if (avoidingObstacle){
-            avoidObstacle(front,right,back,left);
+            avoidObstacle();
             return;
         }
         updateValue(front,right,back,left);
         if (!(right instanceof OpenCell && ((OpenCell) right).hasApfValue())){
             rotateRight();
-            if (right.getType() == Type.OBSTACLE){
-                avoidObstacle(right,back,left,front);
+            if (front.getType() == Type.OBSTACLE){
+                avoidObstacle();
                 return;
             }
-            move(right);
+            move(front);
             return;
         }
         if (front instanceof OpenCell){
@@ -55,23 +58,30 @@ public class Agent {
             return;
         }
         if(front.getType() == Type.OBSTACLE){
-            avoidObstacle(front,right,back,left);
+            avoidObstacle();
             return;
         }
 
     }
 
+    private void sense() {
+        senseFront();
+        senseRight();
+        senseBack();
+        senseLeft();
+    }
 
-    private void avoidObstacle(Cell front, Cell right, Cell back, Cell left) {
+
+    private void avoidObstacle() {
         if(front.getType() == Type.OBSTACLE && !avoidingObstacle){
             rotateRight();
-            avoidObstacle(right,back,left,front);
+            avoidObstacle();
             return;
         }
         avoidingObstacle = true;
         if (left instanceof OpenCell){
             rotateLeft();
-            move(left);
+            move(front);
             return;
         }
         if (front instanceof OpenCell){
@@ -80,7 +90,7 @@ public class Agent {
         }
         if (right instanceof OpenCell){
             rotateRight();
-            move(right);
+            move(front);
         }
         avoidingObstacle = true;
     }
@@ -118,6 +128,11 @@ public class Agent {
         else if (heading == Heading.WEST){
             heading = Heading.SOUTH;
         }
+        Cell oldFront = front;
+        front = left;
+        left = back;
+        back = right;
+        right = oldFront;
     }
 
     private void rotateRight() {
@@ -133,71 +148,72 @@ public class Agent {
         else if (heading == Heading.WEST){
             heading = Heading.NORTH;
         }
+        Cell oldFront = front;
+        front = right;
+        right = back;
+        back = left;
+        left = oldFront;
     }
 
 
-    public Cell senseFront(){
+    public void senseFront(){
         if (heading == Heading.NORTH){
-            return world.getCell(currentCell.getX(),currentCell.getY()+1);
+            front = world.getCell(currentCell.getX(),currentCell.getY()+1);
         }
         else if (heading == Heading.EAST){
-            return world.getCell(currentCell.getX()+1,currentCell.getY());
+            front = world.getCell(currentCell.getX()+1,currentCell.getY());
         }
         else if (heading == Heading.SOUTH){
-            return world.getCell(currentCell.getX(),currentCell.getY()-1);
+            front = world.getCell(currentCell.getX(),currentCell.getY()-1);
         }
         else if (heading == Heading.WEST){
-            return world.getCell(currentCell.getX()-1,currentCell.getY());
+            front = world.getCell(currentCell.getX()-1,currentCell.getY());
         }
-        return null;
     }
 
-    public Cell senseRight(){
+    public void senseRight(){
         if (heading == Heading.NORTH){
-            return world.getCell(currentCell.getX()+1,currentCell.getY());
+            right = world.getCell(currentCell.getX()+1,currentCell.getY());
         }
         else if (heading == Heading.EAST){
-            return world.getCell(currentCell.getX(),currentCell.getY()-1);
+            right = world.getCell(currentCell.getX(),currentCell.getY()-1);
         }
         else if (heading == Heading.SOUTH){
-            return world.getCell(currentCell.getX()-1,currentCell.getY());
+            right = world.getCell(currentCell.getX()-1,currentCell.getY());
         }
         else if (heading == Heading.WEST){
-            return world.getCell(currentCell.getX(),currentCell.getY()+1);
+            right = world.getCell(currentCell.getX(),currentCell.getY()+1);
         }
-        return null;
     }
 
-    private Cell senseBack() {
+    private void senseBack() {
         if (heading == Heading.NORTH){
-            return world.getCell(currentCell.getX(),currentCell.getY()-1);
+            back = world.getCell(currentCell.getX(),currentCell.getY()-1);
         }
         else if (heading == Heading.EAST){
-            return world.getCell(currentCell.getX()-1,currentCell.getY());
+            back = world.getCell(currentCell.getX()-1,currentCell.getY());
         }
         else if (heading == Heading.SOUTH){
-            return world.getCell(currentCell.getX(),currentCell.getY()+1);
+            back = world.getCell(currentCell.getX(),currentCell.getY()+1);
         }
         else if (heading == Heading.WEST){
-            return world.getCell(currentCell.getX()+1,currentCell.getY());
+            back = world.getCell(currentCell.getX()+1,currentCell.getY());
         }
-        return null;
     }
 
-    private Cell senseLeft() {
+    private void senseLeft() {
         if (heading == Heading.NORTH){
-            return world.getCell(currentCell.getX()-1,currentCell.getY());
+            left = world.getCell(currentCell.getX()-1,currentCell.getY());
         }
         else if (heading == Heading.EAST){
-            return world.getCell(currentCell.getX(),currentCell.getY()+1);
+            left = world.getCell(currentCell.getX(),currentCell.getY()+1);
         }
         else if (heading == Heading.SOUTH){
-            return world.getCell(currentCell.getX()+1,currentCell.getY());
+            left = world.getCell(currentCell.getX()+1,currentCell.getY());
         }
         else if (heading == Heading.WEST){
-            return world.getCell(currentCell.getX(),currentCell.getY()-1);
+            left = world.getCell(currentCell.getX(),currentCell.getY()-1);
         }
-        return null;
     }
 
 }
