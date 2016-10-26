@@ -3,12 +3,15 @@ package sample;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.Slider;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -17,13 +20,14 @@ import maps.MapGenerator;
 import model.World;
 import model.states.WorldState;
 
+import java.security.Key;
 import java.util.ArrayList;
 
 public class Main extends Application {
 
     private static final int SIZE = 30;
     private static final int  NUMBER_OF_TICKS = 120;
-    private static final javafx.util.Duration FREQUENCY = Duration.millis(500);
+    private static javafx.util.Duration FREQUENCY = Duration.millis(500);
 
     private static int width = SIZE*2;
     private static int height = SIZE;
@@ -68,40 +72,84 @@ public class Main extends Application {
             }
         }
 
+
         Scene scene = new Scene(root, 900, 500);
         primaryStage.setTitle("Random Binary Matrix (JavaFX)");
         primaryStage.setScene(scene);
         primaryStage.show();
 
         startSimulation(simulator);
-        runPlayback();
+        Timeline timeline = runPlayback();
+        sliderSetup(root, timeline);
     }
 
-    private void runPlayback() {
-        Timeline timeline = new Timeline(
-                new KeyFrame(
-                        Duration.ZERO,
-                        new EventHandler<ActionEvent>() {
-                            @Override public void handle(ActionEvent actionEvent) {
-                                if (worldStates.size() > playBackIndex){
-                                    WorldState worldState = worldStates.get(playBackIndex);
-                                    for (int x = 0; x < worldState.cellStates.length; x++) {
-                                        for (int y = 0; y < worldState.cellStates[0].length; y++) {
-                                            outputCells[x][y].setText(worldState.cellStates[x][y].toString());
-                                        }
-                                    }
-                                    playBackIndex++;
+    private void sliderSetup(GridPane root, Timeline timeline) {
+        Slider slider = new Slider();
+        slider.setMin(10);
+        slider.setMax(100);
+        slider.setValue(FREQUENCY.toMillis()/10);
+        slider.setShowTickLabels(true);
+        slider.setShowTickMarks(true);
+        slider.setMajorTickUnit(50);
+        slider.setMinorTickCount(5);
+        slider.setBlockIncrement(10);
+        root.setRowIndex(slider,height);
+        root.setColumnIndex(slider,width);
+        root.getChildren().addAll(slider);
+
+        slider.valueProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                if (!slider.isValueChanging()){
+                    System.out.println("Why you no happen?");
+                    changeTimer(timeline, Duration.millis(newValue.doubleValue()*10));
+                }
+            }
+        });
+
+        slider.valueChangingProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> obs, Boolean wasChanging, Boolean isNowChanging) {
+                if (! isNowChanging) {
+                    System.out.println("Works?");
+                }
+            }
+        });
+    }
+
+    private Timeline runPlayback() {
+        KeyFrame mainFrame = new KeyFrame(
+                Duration.ZERO,
+                new EventHandler<ActionEvent>() {
+                    @Override public void handle(ActionEvent actionEvent) {
+                        if (worldStates.size() > playBackIndex){
+                            WorldState worldState = worldStates.get(playBackIndex);
+                            for (int x = 0; x < worldState.cellStates.length; x++) {
+                                for (int y = 0; y < worldState.cellStates[0].length; y++) {
+                                    outputCells[x][y].setText(worldState.cellStates[x][y].toString());
                                 }
                             }
+                            playBackIndex++;
                         }
-                ),
-                new KeyFrame(
-                        FREQUENCY
-                )
+                    }
+                }
         );
+        KeyFrame pause = new KeyFrame(FREQUENCY);
+        Timeline timeline = new Timeline(mainFrame,pause);
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
+        return timeline;
     }
+
+    private void changeTimer(Timeline timeline, final Duration timerInterval) {
+        KeyFrame mainFrame = timeline.getKeyFrames().get(0);
+        KeyFrame pause = new KeyFrame(timerInterval);
+        timeline.stop();
+        timeline.getKeyFrames().setAll(mainFrame, pause);
+        timeline.play();
+    }
+
+
 
     private Simulator initSimulation(Map map) {
         return new Simulator(new World(map), NUMBER_OF_TICKS);
