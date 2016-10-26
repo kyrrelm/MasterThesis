@@ -101,7 +101,6 @@ public class Main extends Application {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
                 if (!slider.isValueChanging()){
-                    System.out.println("Why you no happen?");
                     changeTimer(timeline, Duration.millis(newValue.doubleValue()*10));
                 }
             }
@@ -111,7 +110,7 @@ public class Main extends Application {
             @Override
             public void changed(ObservableValue<? extends Boolean> obs, Boolean wasChanging, Boolean isNowChanging) {
                 if (! isNowChanging) {
-                    System.out.println("Works?");
+                    changeTimer(timeline, Duration.millis(slider.getValue()*10));
                 }
             }
         });
