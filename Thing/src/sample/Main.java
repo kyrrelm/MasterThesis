@@ -12,6 +12,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -125,7 +126,13 @@ public class Main extends Application {
                             WorldState worldState = worldStates.get(playBackIndex);
                             for (int x = 0; x < worldState.cellStates.length; x++) {
                                 for (int y = 0; y < worldState.cellStates[0].length; y++) {
-                                    outputCells[x][y].setText(worldState.cellStates[x][y].toString());
+                                    if (worldState.cellStates[x][y].toString().equals("X")){
+                                        outputCells[x][y].setStyle("-fx-background-color: gray");
+                                        outputCells[x][y].setText("");
+                                    }
+                                    else {
+                                        outputCells[x][y].setText(worldState.cellStates[x][y].toString());
+                                    }
                                 }
                             }
                             playBackIndex++;
