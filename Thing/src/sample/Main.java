@@ -120,23 +120,21 @@ public class Main extends Application {
     private Timeline runPlayback() {
         KeyFrame mainFrame = new KeyFrame(
                 Duration.ZERO,
-                new EventHandler<ActionEvent>() {
-                    @Override public void handle(ActionEvent actionEvent) {
-                        if (worldStates.size() > playBackIndex){
-                            WorldState worldState = worldStates.get(playBackIndex);
-                            for (int x = 0; x < worldState.cellStates.length; x++) {
-                                for (int y = 0; y < worldState.cellStates[0].length; y++) {
-                                    if (worldState.cellStates[x][y].toString().equals("X")){
-                                        outputCells[x][y].setStyle("-fx-background-color: gray");
-                                        outputCells[x][y].setText("");
-                                    }
-                                    else {
-                                        outputCells[x][y].setText(worldState.cellStates[x][y].toString());
-                                    }
+                actionEvent -> {
+                    if (worldStates.size() > playBackIndex){
+                        WorldState worldState = worldStates.get(playBackIndex);
+                        for (int x = 0; x < worldState.cellStates.length; x++) {
+                            for (int y = 0; y < worldState.cellStates[0].length; y++) {
+                                if (worldState.cellStates[x][y].toString().equals("X")){
+                                    outputCells[x][y].setStyle("-fx-background-color: gray");
+                                    outputCells[x][y].setText("");
+                                }
+                                else {
+                                    outputCells[x][y].setText(worldState.cellStates[x][y].toString());
                                 }
                             }
-                            playBackIndex++;
                         }
+                        playBackIndex++;
                     }
                 }
         );
