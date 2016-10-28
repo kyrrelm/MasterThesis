@@ -39,7 +39,21 @@ public class Agent {
 
     public void interact(){
         sense();
+//        if ((left instanceof OpenCell && !((OpenCell) left).hasApfValue()) || (front instanceof OpenCell && !((OpenCell) front).hasApfValue())){
+//            avoidingObstacle = false;
+//        }
         if (avoidingObstacle){
+            if (left instanceof OpenCell && !((OpenCell) left).hasApfValue()){
+                avoidingObstacle = false;
+                rotateLeft();
+                move((OpenCell) front);
+                return;
+            }
+            if (front instanceof OpenCell && !((OpenCell) front).hasApfValue()){
+                avoidingObstacle = false;
+                move((OpenCell) front);
+                return;
+            }
             avoidObstacle();
             return;
         }
@@ -123,9 +137,6 @@ public class Agent {
         currentCell.removeAgent();
         currentCell = toCell;
         currentCell.placeAgent(this);
-        if (!currentCell.hasApfValue()){
-            avoidingObstacle = false;
-        }
     }
 
     private void rotateLeft() {
