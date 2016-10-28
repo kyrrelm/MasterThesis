@@ -91,8 +91,14 @@ public class Agent {
         if (right instanceof OpenCell){
             rotateRight();
             move(front);
+            return;
         }
-        avoidingObstacle = true;
+        while (!(right instanceof OpenCell)){
+            rotateRight();
+        }
+        rotateRight();
+        move(front);
+
     }
 
     /**
