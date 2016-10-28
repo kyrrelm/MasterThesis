@@ -10,6 +10,8 @@ import model.Cells.OpenCell;
 public class Agent {
 
 
+    private static final boolean USING_APF_VALUE = true;
+
     public enum Heading{
         NORTH,
         EAST,
@@ -120,6 +122,20 @@ public class Agent {
      * @param cells front, right, back, left
      */
     private void updateValue(Cell... cells) {
+       if (USING_APF_VALUE){
+           apfUpdate(cells);
+       }
+       else {
+           updatePheromone();
+       }
+    }
+
+    private int pheromone = 1;
+    private void updatePheromone() {
+        currentCell.setApfValue(pheromone++);
+    }
+
+    private void apfUpdate(Cell... cells){
         int min = Integer.MAX_VALUE-1;
         for (Cell c: cells) {
             if ((c instanceof OpenCell) && ((OpenCell) c).hasApfValue()){
