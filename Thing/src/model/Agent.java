@@ -50,11 +50,11 @@ public class Agent {
                 avoidObstacle();
                 return;
             }
-            move(front);
+            move((OpenCell) front);
             return;
         }
         if (front instanceof OpenCell){
-            move(front);
+            move((OpenCell) front);
             return;
         }
         if(front.getType() == Type.OBSTACLE){
@@ -81,23 +81,23 @@ public class Agent {
         avoidingObstacle = true;
         if (left instanceof OpenCell){
             rotateLeft();
-            move(front);
+            move((OpenCell) front);
             return;
         }
         if (front instanceof OpenCell){
-            move(front);
+            move((OpenCell) front);
             return;
         }
         if (right instanceof OpenCell){
             rotateRight();
-            move(front);
+            move((OpenCell) front);
             return;
         }
         while (!(right instanceof OpenCell)){
             rotateRight();
         }
         rotateRight();
-        move(front);
+        move((OpenCell) front);
 
     }
 
@@ -115,10 +115,17 @@ public class Agent {
         currentCell.setApfValue(min+1);
     }
 
-    private void move(Cell toCell) {
+    /**
+     * Not moving to front will break system
+     * @param toCell
+     */
+    private void move(OpenCell toCell) {
         currentCell.removeAgent();
-        currentCell = (OpenCell) toCell;
+        currentCell = toCell;
         currentCell.placeAgent(this);
+        if (!currentCell.hasApfValue()){
+            avoidingObstacle = false;
+        }
     }
 
     private void rotateLeft() {
