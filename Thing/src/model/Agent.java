@@ -66,19 +66,11 @@ public class Agent {
                 avoidObstacle();
                 return;
             }
-            move((OpenCell) front);
+            if (front instanceof OpenCell){
+                move((OpenCell) front);
+            }
             return;
         }
-
-//        if (front instanceof OpenCell && !((OpenCell) front).hasApfValue()){
-//            move((OpenCell) front);
-//            return;
-//        }
-//        if (left instanceof OpenCell && !((OpenCell) left).hasApfValue()){
-//            rotateLeft();
-//            move((OpenCell) front);
-//            return;
-//        }
 
 
         if (front instanceof OpenCell){
@@ -91,6 +83,7 @@ public class Agent {
             move((OpenCell) front);
             return;
         }
+
         if(front.getType() == Type.OBSTACLE){
             avoidObstacle();
             return;
@@ -99,7 +92,6 @@ public class Agent {
             rotateRight();
         }
         move((OpenCell) front);
-
     }
 
     public void climb(){
