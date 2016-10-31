@@ -77,6 +77,10 @@ public class Agent {
             avoidObstacle();
             return;
         }
+        while (front.getType() == Type.BORDER){
+            rotateRight();
+        }
+        move((OpenCell) front);
 
     }
 

@@ -27,7 +27,7 @@ import java.util.ArrayList;
 public class Main extends Application {
 
     private static final int SIZE = 30;
-    private static final int  NUMBER_OF_TICKS = 500;
+    private static final int  NUMBER_OF_TICKS = 1000;
     private static javafx.util.Duration FREQUENCY = Duration.millis(500);
 
     private static int width = SIZE*2;
