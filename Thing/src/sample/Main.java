@@ -27,7 +27,7 @@ import java.util.ArrayList;
 public class Main extends Application {
 
     private static final int SIZE = 30;
-    private static final int  NUMBER_OF_TICKS = 1000;
+    private static final int  NUMBER_OF_TICKS = 10000;
     private static javafx.util.Duration FREQUENCY = Duration.millis(500);
 
     private static int width = SIZE*2;
@@ -40,7 +40,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
 
-        Map map = MapGenerator.genMap(MapGenerator.OBSTACLE_TEST1);
+        Map map = MapGenerator.genMap(MapGenerator.OBSTACLE_HELL);
         width = map.sizeX;
         height = map.sizeY;
         Simulator simulator = initSimulation(map);
@@ -74,7 +74,7 @@ public class Main extends Application {
         }
 
 
-        Scene scene = new Scene(root, 900, 500);
+        Scene scene = new Scene(root, 1800, 1500);
         primaryStage.setTitle("Thing");
         primaryStage.setScene(scene);
         primaryStage.show();
