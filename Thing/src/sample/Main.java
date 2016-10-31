@@ -40,7 +40,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
 
-        Map map = MapGenerator.genMap(MapGenerator.OBSTACLE_TEST4);
+        Map map = MapGenerator.genMap(MapGenerator.OBSTACLE_HELL);
         width = map.sizeX;
         height = map.sizeY;
         outputCells = new Label[width][height];
@@ -75,7 +75,7 @@ public class Main extends Application {
         }
 
 
-        Scene scene = new Scene(root, 1800, 1500);
+        Scene scene = new Scene(root, 1800, 1300);
         primaryStage.setTitle("Thing");
         primaryStage.setScene(scene);
         primaryStage.show();
