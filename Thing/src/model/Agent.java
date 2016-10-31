@@ -70,6 +70,11 @@ public class Agent {
             return;
         }
         if (front instanceof OpenCell){
+
+            if (((OpenCell)front).hasApfValue() && left instanceof OpenCell && !((OpenCell) left).hasApfValue()){
+                rotateLeft();
+                move((OpenCell) front);
+            }
             move((OpenCell) front);
             return;
         }
