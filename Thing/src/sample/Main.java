@@ -40,7 +40,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
 
-        Map map = MapGenerator.genMap(MapGenerator.OBSTACLE_TEST);
+        Map map = MapGenerator.genMap(MapGenerator.OBSTACLE_TEST4);
         width = map.sizeX;
         height = map.sizeY;
         Simulator simulator = initSimulation(map);
@@ -75,7 +75,7 @@ public class Main extends Application {
 
 
         Scene scene = new Scene(root, 900, 500);
-        primaryStage.setTitle("Random Binary Matrix (JavaFX)");
+        primaryStage.setTitle("Thing");
         primaryStage.setScene(scene);
         primaryStage.show();
 
