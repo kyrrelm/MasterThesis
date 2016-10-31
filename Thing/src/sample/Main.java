@@ -87,7 +87,7 @@ public class Main extends Application {
 
     private void sliderSetup(GridPane root, Timeline timeline) {
         Slider slider = new Slider();
-        slider.setMin(10);
+        slider.setMin(1);
         slider.setMax(100);
         slider.setValue(FREQUENCY.toMillis()/10);
         slider.setShowTickLabels(true);
@@ -95,6 +95,7 @@ public class Main extends Application {
         slider.setMajorTickUnit(50);
         slider.setMinorTickCount(5);
         slider.setBlockIncrement(10);
+        slider.setPrefWidth(300);
         root.setRowIndex(slider,height);
         root.setColumnIndex(slider,width);
         root.getChildren().addAll(slider);
