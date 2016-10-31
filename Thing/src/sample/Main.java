@@ -40,7 +40,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
 
-        Map map = MapGenerator.genMap(MapGenerator.OBSTACLE_TEST4);
+        Map map = MapGenerator.genMap(MapGenerator.OBSTACLE_TEST1);
         width = map.sizeX;
         height = map.sizeY;
         Simulator simulator = initSimulation(map);
