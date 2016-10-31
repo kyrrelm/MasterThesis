@@ -34,15 +34,16 @@ public class Main extends Application {
     private static int height = SIZE;
 
     private static int playBackIndex = 0;
-    private static Label[][] outputCells = new Label[width][height];
+    private static Label[][] outputCells;
     private static ArrayList<WorldState> worldStates = new ArrayList<>();
 
     @Override
     public void start(Stage primaryStage) throws Exception{
 
-        Map map = MapGenerator.genMap(MapGenerator.OBSTACLE_HELL);
+        Map map = MapGenerator.genMap(MapGenerator.OBSTACLE_TEST4);
         width = map.sizeX;
         height = map.sizeY;
+        outputCells = new Label[width][height];
         Simulator simulator = initSimulation(map);
 
         GridPane root = new GridPane();
