@@ -77,6 +77,8 @@ public class Agent {
 
 
         if (!(right instanceof OpenCell && ((OpenCell) right).hasApfValue())){
+
+            //Fixes cycle bug of original
             if (front instanceof OpenCell && ((OpenCell) front).hasApfValue()){
                 move((OpenCell) front);
                 return;
