@@ -56,6 +56,9 @@ public class Agent {
                 move((OpenCell) front);
                 return;
             }
+            if (!hasFreeCell()){
+                climbGradient();
+            }
             avoidObstacle();
             return;
         }
@@ -108,6 +111,10 @@ public class Agent {
         move((OpenCell) front);
     }
 
+    private void climbGradient() {
+        
+    }
+
     //DETECT_PHEROMONE_ADJUST_HEADING_AND_MOVE
     public void moveToWaveFront(){
         if (front instanceof OpenCell){
@@ -126,6 +133,22 @@ public class Agent {
         senseRight();
         senseBack();
         senseLeft();
+    }
+
+    private boolean hasFreeCell() {
+        if (front instanceof OpenCell && !((OpenCell) front).hasApfValue()){
+            return true;
+        }
+        if (right instanceof OpenCell && !((OpenCell) right).hasApfValue()){
+            return true;
+        }
+        if (back instanceof OpenCell && !((OpenCell) back).hasApfValue()){
+            return true;
+        }
+        if (left instanceof OpenCell && !((OpenCell) left).hasApfValue()){
+            return true;
+        }
+        return false;
     }
 
 
