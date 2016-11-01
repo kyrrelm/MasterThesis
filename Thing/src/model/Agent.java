@@ -60,6 +60,22 @@ public class Agent {
             return;
         }
         updateValue(front,right,back,left);
+
+        //BORDER------------------------------------------------------------------------------
+        if (front.getType() == Type.BORDER || right.getType() == Type.BORDER){
+            while (!(front instanceof OpenCell) || right.getType() == Type.BORDER){
+                rotateRight();
+            }
+            move((OpenCell) front);
+            return;
+        }
+        if (left.getType() == Type.BORDER && front instanceof OpenCell && ((OpenCell) front).hasApfValue()){
+            move((OpenCell) front);
+            return;
+        }
+        //------------------------------------------------------------------------------------
+
+
         if (!(right instanceof OpenCell && ((OpenCell) right).hasApfValue())){
             rotateRight();
             if (front.getType() == Type.OBSTACLE){
@@ -88,6 +104,8 @@ public class Agent {
             avoidObstacle();
             return;
         }
+
+        //CAN BE REMOVED ?
         while (front.getType() == Type.BORDER){
             rotateRight();
         }
