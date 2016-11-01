@@ -77,6 +77,10 @@ public class Agent {
 
 
         if (!(right instanceof OpenCell && ((OpenCell) right).hasApfValue())){
+            if (front instanceof OpenCell && ((OpenCell) front).hasApfValue()){
+                move((OpenCell) front);
+                return;
+            }
             rotateRight();
             if (front.getType() == Type.OBSTACLE){
                 avoidObstacle();
@@ -88,17 +92,7 @@ public class Agent {
             return;
         }
 
-
-        if (front instanceof OpenCell){
-
-            if (((OpenCell)front).hasApfValue() && left instanceof OpenCell && !((OpenCell) left).hasApfValue()){
-                rotateLeft();
-                move((OpenCell) front);
-                return;
-            }
-            move((OpenCell) front);
-            return;
-        }
+        moveToWaveFront();
 
         if(front.getType() == Type.OBSTACLE){
             avoidObstacle();
@@ -112,8 +106,17 @@ public class Agent {
         move((OpenCell) front);
     }
 
-    public void climb(){
-
+    //DETECT_PHEROMONE_ADJUST_HEADING_AND_MOVE
+    public void moveToWaveFront(){
+        if (front instanceof OpenCell){
+            if (((OpenCell)front).hasApfValue() && left instanceof OpenCell && !((OpenCell) left).hasApfValue()){
+                rotateLeft();
+                move((OpenCell) front);
+                return;
+            }
+            move((OpenCell) front);
+            return;
+        }
     }
 
     private void sense() {
