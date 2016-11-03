@@ -45,21 +45,48 @@ public class Agent {
 //            avoidingObstacle = false;
 //        }
         if (avoidingObstacle){
-            if (left instanceof OpenCell && !((OpenCell) left).hasApfValue()){
-                avoidingObstacle = false;
-                rotateLeft();
-                move((OpenCell) front);
-                return;
-            }
-            if (front instanceof OpenCell && !((OpenCell) front).hasApfValue()){
-                avoidingObstacle = false;
-                move((OpenCell) front);
-                return;
-            }
-            avoidObstacle();
+            avoidObstacleSmasa();
             return;
         }
         updateValue(front,right,back,left);
+
+        if (right instanceof OpenCell && !((OpenCell) right).hasApfValue()){
+            rotateRight();
+            move((OpenCell) front);
+            return;
+        }
+        if (front instanceof OpenCell){
+            move((OpenCell) front);
+            return;
+        }
+        if (front.getType() == Type.OBSTACLE){
+            avoidObstacleSmasa();
+        }
+
+
+
+
+//        if (avoidingObstacle){
+//            if (front instanceof OpenCell && !((OpenCell) front).hasApfValue()){
+//                avoidingObstacle = false;
+//                move((OpenCell) front);
+//                return;
+//            }
+//            if (right instanceof OpenCell && !((OpenCell) right).hasApfValue()){
+//                avoidingObstacle = false;
+//                rotateRight();
+//                move((OpenCell) front);
+//                return;
+//            }
+//            if (left instanceof OpenCell && !((OpenCell) left).hasApfValue()){
+//                avoidingObstacle = false;
+//                rotateLeft();
+//                move((OpenCell) front);
+//                return;
+//            }
+//            avoidObstacle();
+//            return;
+//        }
 
         //BORDER------------------------------------------------------------------------------
         if (front.getType() == Type.BORDER || right.getType() == Type.BORDER){
@@ -76,39 +103,49 @@ public class Agent {
         //------------------------------------------------------------------------------------
 
 
-        if (!(right instanceof OpenCell && ((OpenCell) right).hasApfValue())){
 
-            //Fixes cycle bug of original
-            if (front instanceof OpenCell && ((OpenCell) front).hasApfValue()){
-                move((OpenCell) front);
-                return;
-            }
-            rotateRight();
-            if (front.getType() == Type.OBSTACLE){
-                avoidObstacle();
-                return;
-            }
-            if (front instanceof OpenCell){
-                move((OpenCell) front);
-            }
-            return;
-        }
-
-        moveToWaveFront();
-
-        if(front.getType() == Type.OBSTACLE){
-            avoidObstacle();
-            return;
-        }
-
-        //CAN BE REMOVED ?
-        while (front.getType() == Type.BORDER){
-            rotateRight();
-        }
-        move((OpenCell) front);
+//        moveToWaveFront();
+//
+//        if(front.getType() == Type.OBSTACLE){
+//            avoidObstacle();
+//            return;
+//        }
+//
+//        //CAN BE REMOVED ?
+//        while (front.getType() == Type.BORDER){
+//            rotateRight();
+//        }
     }
 
-    
+    private void avoidObstacleSmasa() {
+        while (!(front instanceof OpenCell) && avoidingObstacle == false){
+            rotateRight();
+        }
+        avoidingObstacle = true;
+        if (front instanceof OpenCell && !((OpenCell) front).hasApfValue()){
+            avoidingObstacle = false;
+            move((OpenCell) front);
+            return;
+        }
+        if (right instanceof OpenCell && !((OpenCell) right).hasApfValue()){
+            avoidingObstacle = false;
+            rotateRight();
+            move((OpenCell) front);
+            return;
+        }
+        if (left instanceof OpenCell && !((OpenCell) left).hasApfValue()){
+            avoidingObstacle = false;
+            rotateLeft();
+            move((OpenCell) front);
+            return;
+        }
+        if (front instanceof OpenCell){
+            move((OpenCell) front);
+            return;
+        }
+    }
+
+
     public void moveToWaveFront(){
         if (front instanceof OpenCell){
             if (((OpenCell)front).hasApfValue() && left instanceof OpenCell && !((OpenCell) left).hasApfValue()){
