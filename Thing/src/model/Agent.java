@@ -108,7 +108,7 @@ public class Agent {
         move((OpenCell) front);
     }
 
-    //DETECT_PHEROMONE_ADJUST_HEADING_AND_MOVE
+    
     public void moveToWaveFront(){
         if (front instanceof OpenCell){
             if (((OpenCell)front).hasApfValue() && left instanceof OpenCell && !((OpenCell) left).hasApfValue()){
