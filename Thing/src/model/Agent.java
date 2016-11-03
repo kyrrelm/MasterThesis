@@ -118,10 +118,10 @@ public class Agent {
     }
 
     private void avoidObstacleSmasa() {
-        avoidingObstacle = true;
-        while (!(front instanceof OpenCell)){
+        while (!(front instanceof OpenCell) && !avoidingObstacle){
             rotateRight();
         }
+        avoidingObstacle = true;
         if (front instanceof OpenCell && !((OpenCell) front).hasApfValue()){
             avoidingObstacle = false;
             move((OpenCell) front);
@@ -143,6 +143,10 @@ public class Agent {
             move((OpenCell) front);
             return;
         }
+        while (!(front instanceof OpenCell)){
+            rotateRight();
+        }
+        move((OpenCell) front);
     }
 
 
