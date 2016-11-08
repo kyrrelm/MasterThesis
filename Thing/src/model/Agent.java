@@ -124,7 +124,7 @@ public class Agent {
     private OpenCell findLowest(Cell... cells) {
         OpenCell lowest = null;
         for (Cell c: cells){
-            if (c instanceof OpenCell){
+            if (c instanceof OpenCell && ((OpenCell) c).hasApfValue()){
                 if (lowest == null){
                     lowest = (OpenCell) c;
                 }else if (lowest.getApfValue() > ((OpenCell) c).getApfValue()){
