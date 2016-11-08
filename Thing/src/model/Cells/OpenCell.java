@@ -17,7 +17,7 @@ public class OpenCell extends Cell {
     private Type defaultType;
     private HashSet<PhermoneColor> colors;
 
-    enum PhermoneColor {
+    public enum PhermoneColor {
         YELLOW;
     }
 

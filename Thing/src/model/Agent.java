@@ -3,6 +3,7 @@ package model;
 import model.Cells.Cell;
 import model.Cells.Cell.Type;
 import model.Cells.OpenCell;
+import model.Cells.OpenCell.PhermoneColor;
 import sample.Settings;
 
 /**
@@ -12,6 +13,7 @@ public class Agent {
 
 
     private static final boolean USING_APF_VALUE = true;
+    private boolean returnAndColor;
 
 
     public enum Heading{
@@ -33,6 +35,7 @@ public class Agent {
         this.heading = heading;
         this.world = world;
         this.avoidingObstacle = false;
+        this.returnAndColor = false;
         this.load = 0;
 
     }
@@ -45,16 +48,20 @@ public class Agent {
 
     public void interact(){
         sense();
-//        if ((left instanceof OpenCell && !((OpenCell) left).hasApfValue()) || (front instanceof OpenCell && !((OpenCell) front).hasApfValue())){
-//            avoidingObstacle = false;
-//        }
-
-        lookForFood();
 
         if (avoidingObstacle){
             avoidObstacleSmasa();
             return;
         }
+        if (returnAndColor){
+            returnAndColor();
+            return;
+        }
+
+        if (lookForFood()){
+            return;
+        }
+
         updateValue(front,right,back,left);
 
         if (right instanceof OpenCell && !((OpenCell) right).hasApfValue()){
@@ -70,31 +77,6 @@ public class Agent {
             avoidObstacleSmasa();
         }
 
-
-
-
-//        if (avoidingObstacle){
-//            if (front instanceof OpenCell && !((OpenCell) front).hasApfValue()){
-//                avoidingObstacle = false;
-//                move((OpenCell) front);
-//                return;
-//            }
-//            if (right instanceof OpenCell && !((OpenCell) right).hasApfValue()){
-//                avoidingObstacle = false;
-//                rotateRight();
-//                move((OpenCell) front);
-//                return;
-//            }
-//            if (left instanceof OpenCell && !((OpenCell) left).hasApfValue()){
-//                avoidingObstacle = false;
-//                rotateLeft();
-//                move((OpenCell) front);
-//                return;
-//            }
-//            avoidObstacle();
-//            return;
-//        }
-
         //BORDER------------------------------------------------------------------------------
         if (front.getType() == Type.BORDER || right.getType() == Type.BORDER){
             while (!(front instanceof OpenCell) || right.getType() == Type.BORDER){
@@ -109,40 +91,50 @@ public class Agent {
         }
         //------------------------------------------------------------------------------------
 
-
-
-//        moveToWaveFront();
-//
-//        if(front.getType() == Type.OBSTACLE){
-//            avoidObstacle();
-//            return;
-//        }
-//
-//        //CAN BE REMOVED ?
-//        while (front.getType() == Type.BORDER){
-//            rotateRight();
-//        }
     }
 
-    private void lookForFood() {
+    private boolean lookForFood() {
         if (currentCell.getType() == Type.FOOD){
             this.load = currentCell.takeFood(Settings.AGENT_CAPACITY);
+            returnAndColor();
+            return true;
         }
-        returnAndColor();
+        return false;
     }
 
     private void returnAndColor() {
+        returnAndColor = true;
         if (front.getType() == Type.NEST){
-           return;
+            returnAndColor = false;
+            return;
         }
         if (left.getType() == Type.NEST){
+            returnAndColor = false;
             return;
         }
         if (right.getType() == Type.NEST){
+            returnAndColor = false;
             return;
         }
-
+        OpenCell lowest = findLowest(front,right,back,left);
+        moveToCell(lowest);
+        lowest.color(PhermoneColor.YELLOW);
     }
+
+    private OpenCell findLowest(Cell... cells) {
+        OpenCell lowest = null;
+        for (Cell c: cells){
+            if (c instanceof OpenCell){
+                if (lowest == null){
+                    lowest = (OpenCell) c;
+                }else if (lowest.getApfValue() > ((OpenCell) c).getApfValue()){
+                    lowest = (OpenCell) c;
+                }
+            }
+        }
+        return lowest;
+    }
+
 
     private void avoidObstacleSmasa() {
         while (!(front instanceof OpenCell) && !avoidingObstacle){
