@@ -60,14 +60,12 @@ public class OpenCell extends Cell {
     public boolean placeAgent(Agent agent) {
         if (this.agent == null){
             this.agent = agent;
-            this.type = Type.AGENT;
             return true;
         }
         return false;
     }
 
     public void removeAgent(){
-        this.type = defaultType;
         this.agent = null;
     }
 
@@ -106,6 +104,10 @@ public class OpenCell extends Cell {
 
     @Override
     public CellState createCellState() {
-        return new CellState(type,apfValue,foodCount);
+        Type tmp = this.type;
+        if (this.agent != null){
+            tmp = Type.AGENT;
+        }
+        return new CellState(tmp,apfValue,foodCount);
     }
 }
