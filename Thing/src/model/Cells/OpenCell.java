@@ -4,6 +4,8 @@ import model.Agent;
 import model.Cells.Cell;
 import model.states.CellState;
 
+import java.util.HashSet;
+
 /**
  * Created by Kyrre on 17.10.2016.
  */
@@ -13,6 +15,11 @@ public class OpenCell extends Cell {
     private int apfValue;
     private Agent agent;
     private Type defaultType;
+    private HashSet<PhermoneColor> colors;
+
+    enum PhermoneColor {
+        YELLOW;
+    }
 
     public OpenCell(int x, int y, Type type) {
         super(x, y, type);
@@ -23,6 +30,7 @@ public class OpenCell extends Cell {
         agent = null;
         defaultType = this.type;
         foodCount = 0;
+        colors = new HashSet<>();
     }
 
     public OpenCell(int x, int y, Type type, int foodCount) {
@@ -89,6 +97,10 @@ public class OpenCell extends Cell {
             type = Type.FREE;
         }
         return tmp;
+    }
+
+    public void color(PhermoneColor color){
+        this.colors.add(color);
     }
 
 

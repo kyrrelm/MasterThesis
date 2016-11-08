@@ -3,6 +3,7 @@ package model;
 import model.Cells.Cell;
 import model.Cells.Cell.Type;
 import model.Cells.OpenCell;
+import sample.Settings;
 
 /**
  * Created by Kyrre on 17.10.2016.
@@ -12,25 +13,28 @@ public class Agent {
 
     private static final boolean USING_APF_VALUE = true;
 
+
     public enum Heading{
         NORTH,
         EAST,
         SOUTH,
-        WEST
-
+        WEST;
     }
 
     private final World world;
+
     private Heading heading;
     private OpenCell currentCell;
     private boolean avoidingObstacle;
+    private int load;
 
     public Agent(OpenCell currentCell, Heading heading, World world) {
         this.currentCell = currentCell;
-        //currentCell.placeAgent(this);
         this.heading = heading;
         this.world = world;
         this.avoidingObstacle = false;
+        this.load = 0;
+
     }
 
     private Cell front;
@@ -121,23 +125,23 @@ public class Agent {
     }
 
     private void lookForFood() {
-        if (front.getType() == Type.FOOD){
-            avoidingObstacle = false;
-            move((OpenCell) front);
+        if (currentCell.getType() == Type.FOOD){
+            this.load = currentCell.takeFood(Settings.AGENT_CAPACITY);
+        }
+        returnAndColor();
+    }
+
+    private void returnAndColor() {
+        if (front.getType() == Type.NEST){
+           return;
+        }
+        if (left.getType() == Type.NEST){
             return;
         }
-        if (right instanceof OpenCell && !((OpenCell) right).hasApfValue()){
-            avoidingObstacle = false;
-            rotateRight();
-            move((OpenCell) front);
+        if (right.getType() == Type.NEST){
             return;
         }
-        if (left instanceof OpenCell && !((OpenCell) left).hasApfValue()){
-            avoidingObstacle = false;
-            rotateLeft();
-            move((OpenCell) front);
-            return;
-        }
+        
     }
 
     private void avoidObstacleSmasa() {
