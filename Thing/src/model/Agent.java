@@ -141,7 +141,7 @@ public class Agent {
         if (right.getType() == Type.NEST){
             return;
         }
-        
+
     }
 
     private void avoidObstacleSmasa() {
@@ -333,6 +333,30 @@ public class Agent {
         else if (heading == Heading.WEST){
             right = world.getCell(currentCell.getX(),currentCell.getY()+1);
         }
+    }
+
+    private boolean moveToCell(OpenCell cell){
+        if (cell.equals(front)){
+            move((OpenCell) front);
+            return true;
+        }
+        if (cell.equals(left)){
+            rotateLeft();
+            move((OpenCell) front);
+            return true;
+        }
+        if (cell.equals(right)){
+            rotateRight();
+            move((OpenCell) front);
+            return true;
+        }
+        if (cell.equals(back)){
+            rotateRight();
+            rotateRight();
+            move((OpenCell) front);
+            return true;
+        }
+        return false;
     }
 
     private void senseBack() {
