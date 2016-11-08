@@ -300,6 +300,9 @@ public class MapGenerator {
                 else if (value == 'X'){
                     outputMap[x][y] = new Cell(x,y, Cell.Type.OBSTACLE);
                 }
+                else if (Character.isDigit(value)){
+
+                }
                 else {
                     outputMap[x][y] = new OpenCell(x,y, Cell.Type.FREE);
                 }

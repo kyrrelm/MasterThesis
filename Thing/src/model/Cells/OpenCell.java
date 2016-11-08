@@ -9,6 +9,7 @@ import model.states.CellState;
  */
 public class OpenCell extends Cell {
 
+    private int foodCount;
     private int apfValue;
     private Agent agent;
     private Type defaultType;
@@ -21,6 +22,12 @@ public class OpenCell extends Cell {
         }
         agent = null;
         defaultType = this.type;
+        foodCount = 0;
+    }
+
+    public OpenCell(int x, int y, Type type, int foodCount) {
+        this(x, y, type);
+        this.foodCount = foodCount;
     }
 
     public int getApfValue() {
@@ -70,6 +77,17 @@ public class OpenCell extends Cell {
             return false;
         return true;
     }
+
+    public boolean hasFood(){
+        return foodCount > 0;
+    }
+
+    public int takeFood(int amount){
+        int tmp = Math.min(amount, foodCount);
+        foodCount = Math.max(foodCount-amount, 0);
+        return tmp;
+    }
+    
 
     @Override
     public CellState createCellState() {
