@@ -217,16 +217,6 @@ public class Agent {
         currentCell.setApfValue(pheromone++);
     }
 
-    private void apfUpdate(Cell... cells){
-        int min = Integer.MAX_VALUE-1;
-        for (Cell c: cells) {
-            if ((c instanceof OpenCell) && ((OpenCell) c).hasApfValue()){
-                min = Math.min(min ,((OpenCell) c).getApfValue());
-            }
-        }
-        currentCell.setApfValue(min+1);
-    }
-
     /**
      * Not moving to front will break system
      * @param toCell
@@ -235,6 +225,16 @@ public class Agent {
         currentCell.removeAgent();
         currentCell = toCell;
         currentCell.placeAgent(this);
+    }
+
+    private void apfUpdate(Cell... cells){
+        int min = Integer.MAX_VALUE-1;
+        for (Cell c: cells) {
+            if ((c instanceof OpenCell) && ((OpenCell) c).hasApfValue()){
+                min = Math.min(min ,((OpenCell) c).getApfValue());
+            }
+        }
+        currentCell.setApfValue(min+1);
     }
 
     private void rotateLeft() {
