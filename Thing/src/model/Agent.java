@@ -44,6 +44,9 @@ public class Agent {
 //        if ((left instanceof OpenCell && !((OpenCell) left).hasApfValue()) || (front instanceof OpenCell && !((OpenCell) front).hasApfValue())){
 //            avoidingObstacle = false;
 //        }
+
+        lookForFood();
+
         if (avoidingObstacle){
             avoidObstacleSmasa();
             return;
@@ -115,6 +118,26 @@ public class Agent {
 //        while (front.getType() == Type.BORDER){
 //            rotateRight();
 //        }
+    }
+
+    private void lookForFood() {
+        if (front.getType() == Type.FOOD){
+            avoidingObstacle = false;
+            move((OpenCell) front);
+            return;
+        }
+        if (right instanceof OpenCell && !((OpenCell) right).hasApfValue()){
+            avoidingObstacle = false;
+            rotateRight();
+            move((OpenCell) front);
+            return;
+        }
+        if (left instanceof OpenCell && !((OpenCell) left).hasApfValue()){
+            avoidingObstacle = false;
+            rotateLeft();
+            move((OpenCell) front);
+            return;
+        }
     }
 
     private void avoidObstacleSmasa() {

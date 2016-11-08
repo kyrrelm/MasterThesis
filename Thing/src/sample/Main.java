@@ -40,7 +40,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
 
-        Map map = MapGenerator.genMap(MapGenerator.SMASA3);
+        Map map = MapGenerator.genMap(MapGenerator.SMASA_FOOD);
         width = map.sizeX;
         height = map.sizeY;
         outputCells = new Label[width][height];

@@ -14,7 +14,7 @@ public class CellState {
         this.type = type;
         this.apfValue = -1;
     }
-    public CellState(Type type, int apfValue) {
+    public CellState(Type type, int apfValue, int foodCount) {
         this.type = type;
         this.apfValue = apfValue;
     }
@@ -25,6 +25,9 @@ public class CellState {
             if (apfValue != -1)
                 return String.valueOf(apfValue);
             return " ";
+        }
+        if (type == Type.FOOD){
+            return "F";
         }
         if (type == Type.OBSTACLE) {
             return "X";

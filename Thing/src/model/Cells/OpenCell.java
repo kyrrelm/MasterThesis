@@ -85,12 +85,15 @@ public class OpenCell extends Cell {
     public int takeFood(int amount){
         int tmp = Math.min(amount, foodCount);
         foodCount = Math.max(foodCount-amount, 0);
+        if (foodCount == 0){
+            type = Type.FREE;
+        }
         return tmp;
     }
-    
+
 
     @Override
     public CellState createCellState() {
-        return new CellState(type,apfValue);
+        return new CellState(type,apfValue,foodCount);
     }
 }
