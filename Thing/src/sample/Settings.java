@@ -18,6 +18,7 @@ public class Settings {
         switch (color){
             case YELLOW:{
              return "-fx-background-color: yellow";
+                
             }
         }
         return null;
