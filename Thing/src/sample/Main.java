@@ -18,6 +18,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import maps.Map;
 import maps.MapGenerator;
+import model.Cells.Cell;
 import model.World;
 import model.states.WorldState;
 
@@ -40,7 +41,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
 
-        Map map = MapGenerator.genMap(MapGenerator.SMASA_FOOD);
+        Map map = MapGenerator.genMap(Settings.MAP);
         width = map.sizeX;
         height = map.sizeY;
         outputCells = new Label[width][height];
@@ -127,7 +128,7 @@ public class Main extends Application {
                         WorldState worldState = worldStates.get(playBackIndex);
                         for (int x = 0; x < worldState.cellStates.length; x++) {
                             for (int y = 0; y < worldState.cellStates[0].length; y++) {
-                                if (worldState.cellStates[x][y].toString().equals("X")){
+                                if (worldState.cellStates[x][y].type == Cell.Type.OBSTACLE){
                                     outputCells[x][y].setStyle("-fx-background-color: gray");
                                     outputCells[x][y].setText("");
                                 }
