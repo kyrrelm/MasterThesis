@@ -18,10 +18,8 @@ public class Agent {
     }
 
     private static final boolean USING_APF_VALUE = true;
-    private boolean returnAndColor;
+
     private  int trailId;
-
-
     public enum Heading{
         NORTH,
         EAST,
@@ -29,11 +27,15 @@ public class Agent {
         WEST;
     }
 
-    private final World world;
 
+    private final World world;
     private Heading heading;
+
     private OpenCell currentCell;
+
     private boolean avoidingObstacle;
+    private boolean returnAndColor;
+    private boolean atHome;
     private int load;
 
     public Agent(OpenCell currentCell, Heading heading, World world) {
@@ -42,6 +44,7 @@ public class Agent {
         this.world = world;
         this.avoidingObstacle = false;
         this.returnAndColor = false;
+        this.atHome = false;
         this.load = 0;
         this.trailId = -1;
 
@@ -55,7 +58,10 @@ public class Agent {
 
     public void interact(){
         sense();
-
+        
+        if(atHome){
+            unload();
+        }
         if (avoidingObstacle){
             avoidObstacleSmasa();
             return;
@@ -124,7 +130,7 @@ public class Agent {
             returnAndColor = false;
             rotateLeft();
             move((OpenCell) front);
-            unload();
+            atHome = true;
             return;
         }
         if (right.getType() == Type.NEST){
