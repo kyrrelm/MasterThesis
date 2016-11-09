@@ -56,7 +56,7 @@ public class Main extends Application {
                 outputCell.setPrefHeight(20);
                 outputCell.setPrefWidth(20);
                 outputCell.setAlignment(Pos.CENTER);
-                outputCell.setStyle("-fx-border-colorYellow: lightgray;");
+                outputCell.setStyle("-fx-border-color: lightgray;");
                 // Create a new TextField in each Iteration
 //                TextField tf = new TextField();
 //                tf.setPrefHeight(50);

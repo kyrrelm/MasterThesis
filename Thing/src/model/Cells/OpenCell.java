@@ -97,6 +97,7 @@ public class OpenCell extends Cell {
         }
         return tmp;
     }
+
     public void colorYellow(int id) {
         this.trailIds.add(id);
         this.colors.add(PheromoneColor.YELLOW);
