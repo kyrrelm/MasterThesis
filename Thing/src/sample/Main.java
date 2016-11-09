@@ -121,6 +121,7 @@ public class Main extends Application {
     }
 
     private Timeline runPlayback() {
+
         KeyFrame mainFrame = new KeyFrame(
                 Duration.ZERO,
                 actionEvent -> {
@@ -177,6 +178,8 @@ public class Main extends Application {
 //                    System.out.println("WorldState "+count+++":");
 //                    System.out.println(w);
 //                }
+
+                System.out.println("Food retrieved: "+Stats.getInstance().getFoodCount());
             }
         });
         simulator.setOnFailed(new EventHandler<WorkerStateEvent>() {

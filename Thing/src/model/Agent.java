@@ -5,6 +5,7 @@ import model.Cells.Cell.Type;
 import model.Cells.OpenCell;
 import model.Cells.OpenCell.PheromoneColor;
 import sample.Settings;
+import sample.Stats;
 
 /**
  * Created by Kyrre on 17.10.2016.
@@ -106,19 +107,32 @@ public class Agent {
         returnAndColor = true;
         if (front.getType() == Type.NEST){
             returnAndColor = false;
+            move((OpenCell) front);
+            unload();
             return;
         }
         if (left.getType() == Type.NEST){
             returnAndColor = false;
+            rotateLeft();
+            move((OpenCell) front);
+            unload();
             return;
         }
         if (right.getType() == Type.NEST){
             returnAndColor = false;
+            rotateRight();
+            move((OpenCell) front);
+            unload();
             return;
         }
         OpenCell lowest = findLowest(front,right,back,left);
         moveToCell(lowest);
         lowest.color(PheromoneColor.YELLOW);
+    }
+
+    private void unload() {
+        Stats.getInstance().depositFood(load);
+        load = 0;
     }
 
     private OpenCell findLowest(Cell... cells) {
