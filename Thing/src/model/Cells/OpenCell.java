@@ -97,16 +97,10 @@ public class OpenCell extends Cell {
         }
         return tmp;
     }
-
-    public void colorYellow(int id){
+    public void colorYellow(int id) {
         this.trailIds.add(id);
         this.colors.add(PheromoneColor.YELLOW);
     }
-
-    public void color(PheromoneColor color){
-        this.colors.add(color);
-    }
-
 
     @Override
     public CellState createCellState() {

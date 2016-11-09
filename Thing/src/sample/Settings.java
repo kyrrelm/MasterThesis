@@ -17,7 +17,7 @@ public class Settings {
     public static String giveColor(PheromoneColor color) {
         switch (color){
             case YELLOW:{
-             return "-fx-background-colorYellow: yellow";
+             return "-fx-background-color: yellow";
             }
         }
         return null;
