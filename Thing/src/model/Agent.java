@@ -22,7 +22,7 @@ public class Agent {
         NORTH,
         EAST,
         SOUTH,
-        WEST
+        WEST;
     }
 
 

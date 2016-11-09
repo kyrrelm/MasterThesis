@@ -130,7 +130,7 @@ public class Main extends Application {
                         for (int x = 0; x < worldState.cellStates.length; x++) {
                             for (int y = 0; y < worldState.cellStates[0].length; y++) {
                                 if (worldState.cellStates[x][y].type == Cell.Type.OBSTACLE){
-                                    outputCells[x][y].setStyle("-fx-background-colorYellow: gray");
+                                    outputCells[x][y].setStyle("-fx-background-color: gray");
                                     outputCells[x][y].setText("");
                                 }
                                 else {
