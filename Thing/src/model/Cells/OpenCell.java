@@ -15,6 +15,7 @@ public class OpenCell extends Cell {
     private Agent agent;
     private Type defaultType;
     private HashSet<PheromoneColor> colors;
+    private HashSet<Integer> trailIds;
 
     public enum PheromoneColor {
         YELLOW;
@@ -30,6 +31,7 @@ public class OpenCell extends Cell {
         defaultType = this.type;
         foodCount = 0;
         colors = new HashSet<>();
+        trailIds = new HashSet<>();
     }
 
     public OpenCell(int x, int y, Type type, int foodCount) {
@@ -94,6 +96,11 @@ public class OpenCell extends Cell {
             type = Type.FREE;
         }
         return tmp;
+    }
+
+    public void colorYellow(int id){
+        this.trailIds.add(id);
+        this.colors.add(PheromoneColor.YELLOW);
     }
 
     public void color(PheromoneColor color){

@@ -56,7 +56,7 @@ public class Main extends Application {
                 outputCell.setPrefHeight(20);
                 outputCell.setPrefWidth(20);
                 outputCell.setAlignment(Pos.CENTER);
-                outputCell.setStyle("-fx-border-color: lightgray;");
+                outputCell.setStyle("-fx-border-colorYellow: lightgray;");
                 // Create a new TextField in each Iteration
 //                TextField tf = new TextField();
 //                tf.setPrefHeight(50);
@@ -130,7 +130,7 @@ public class Main extends Application {
                         for (int x = 0; x < worldState.cellStates.length; x++) {
                             for (int y = 0; y < worldState.cellStates[0].length; y++) {
                                 if (worldState.cellStates[x][y].type == Cell.Type.OBSTACLE){
-                                    outputCells[x][y].setStyle("-fx-background-color: gray");
+                                    outputCells[x][y].setStyle("-fx-background-colorYellow: gray");
                                     outputCells[x][y].setText("");
                                 }
                                 else {

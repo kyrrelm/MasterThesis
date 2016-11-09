@@ -15,13 +15,17 @@ public class Agent {
 
     private static final boolean USING_APF_VALUE = true;
     private boolean returnAndColor;
+    private static int trailIdGen = 0;
+    private static int genTrailId(){
+        return trailIdGen++;
+    }
 
 
     public enum Heading{
         NORTH,
         EAST,
         SOUTH,
-        WEST;
+        WEST
     }
 
     private final World world;
@@ -30,6 +34,7 @@ public class Agent {
     private OpenCell currentCell;
     private boolean avoidingObstacle;
     private int load;
+    private int trailId;
 
     public Agent(OpenCell currentCell, Heading heading, World world) {
         this.currentCell = currentCell;
@@ -38,6 +43,7 @@ public class Agent {
         this.avoidingObstacle = false;
         this.returnAndColor = false;
         this.load = 0;
+        this.trailId = -1;
 
     }
 
@@ -104,6 +110,9 @@ public class Agent {
     }
 
     private void returnAndColor() {
+        if (!returnAndColor){
+            trailId = genTrailId();
+        }
         returnAndColor = true;
         if (front.getType() == Type.NEST){
             returnAndColor = false;
@@ -127,7 +136,7 @@ public class Agent {
         }
         OpenCell lowest = findLowest(front,right,back,left);
         moveToCell(lowest);
-        lowest.color(PheromoneColor.YELLOW);
+        lowest.colorYellow(trailId);
     }
 
     private void unload() {
