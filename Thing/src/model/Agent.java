@@ -3,7 +3,7 @@ package model;
 import model.Cells.Cell;
 import model.Cells.Cell.Type;
 import model.Cells.OpenCell;
-import model.Cells.OpenCell.PhermoneColor;
+import model.Cells.OpenCell.PheromoneColor;
 import sample.Settings;
 
 /**
@@ -118,7 +118,7 @@ public class Agent {
         }
         OpenCell lowest = findLowest(front,right,back,left);
         moveToCell(lowest);
-        lowest.color(PhermoneColor.YELLOW);
+        lowest.color(PheromoneColor.YELLOW);
     }
 
     private OpenCell findLowest(Cell... cells) {

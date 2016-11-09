@@ -134,6 +134,9 @@ public class Main extends Application {
                                 }
                                 else {
                                     outputCells[x][y].setText(worldState.cellStates[x][y].toString());
+                                    if (worldState.cellStates[x][y].hasColor()){
+                                        outputCells[x][y].setStyle(Settings.giveColor(worldState.cellStates[x][y].getColor()));
+                                    }
                                 }
                             }
                         }

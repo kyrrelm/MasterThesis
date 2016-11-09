@@ -1,7 +1,6 @@
 package model.Cells;
 
 import model.Agent;
-import model.Cells.Cell;
 import model.states.CellState;
 
 import java.util.HashSet;
@@ -15,9 +14,9 @@ public class OpenCell extends Cell {
     private int apfValue;
     private Agent agent;
     private Type defaultType;
-    private HashSet<PhermoneColor> colors;
+    private HashSet<PheromoneColor> colors;
 
-    public enum PhermoneColor {
+    public enum PheromoneColor {
         YELLOW;
     }
 
@@ -97,7 +96,7 @@ public class OpenCell extends Cell {
         return tmp;
     }
 
-    public void color(PhermoneColor color){
+    public void color(PheromoneColor color){
         this.colors.add(color);
     }
 
@@ -108,6 +107,10 @@ public class OpenCell extends Cell {
         if (this.agent != null){
             tmp = Type.AGENT;
         }
-        return new CellState(tmp,apfValue,foodCount);
+        PheromoneColor color = null;
+        if (!colors.isEmpty()){
+            color = (PheromoneColor) colors.toArray()[0];
+        }
+        return new CellState(tmp,apfValue,color);
     }
 }
