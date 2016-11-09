@@ -12,9 +12,14 @@ import sample.Stats;
  */
 public class Agent {
 
+    private static int idGenTrail = 0;
+    private static int genIdTrail(){
+        return idGenTrail++;
+    }
 
     private static final boolean USING_APF_VALUE = true;
     private boolean returnAndColor;
+    private  int trailId;
 
 
     public enum Heading{
@@ -38,6 +43,7 @@ public class Agent {
         this.avoidingObstacle = false;
         this.returnAndColor = false;
         this.load = 0;
+        this.trailId = -1;
 
     }
 
@@ -104,6 +110,9 @@ public class Agent {
     }
 
     private void returnAndColor() {
+        if (!returnAndColor){
+            trailId = genIdTrail();
+        }
         returnAndColor = true;
         if (front.getType() == Type.NEST){
             returnAndColor = false;
@@ -127,7 +136,7 @@ public class Agent {
         }
         OpenCell lowest = findLowest(front,right,back,left);
         moveToCell(lowest);
-        lowest.color(PheromoneColor.YELLOW);
+        lowest.colorYellow(trailId);
     }
 
     private void unload() {
