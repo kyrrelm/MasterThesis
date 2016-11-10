@@ -249,7 +249,7 @@ public class MapGenerator {
             {' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '},
             {' ',' ',' ',' ',' ',' ',' ',' ',' ','N',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '},
             {' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '},
-            {' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','3',' ',' ',' ',' ',' ',' ',' ',' ',' '},
+            {' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','1',' ',' ',' ',' ',' ',' ',' ',' ',' '},
             {' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '},
             {' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '},
             {' ',' ',' ',' ',' ',' ',' ',' ','2',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '},
@@ -349,7 +349,7 @@ public class MapGenerator {
                     outputMap[x][y] = new Cell(x,y, Cell.Type.OBSTACLE);
                 }
                 else if (Character.isDigit(value)){
-                    outputMap[x][y] = new OpenCell(x,y, Cell.Type.FOOD, Character.getNumericValue(value)*Settings.FOOD_COEFFICIENT);
+                    outputMap[x][y] = new OpenCell(x,y, Character.getNumericValue(value)*Settings.FOOD_COEFFICIENT);
                 }
                 else {
                     outputMap[x][y] = new OpenCell(x,y, Cell.Type.FREE);

@@ -12,6 +12,7 @@ import sample.Stats;
 public class Agent {
 
     private static int idGenTrail = 0;
+    private int foodAmountAtLastLocation;
     private static int genIdTrail(){
         return idGenTrail++;
     }
@@ -23,14 +24,16 @@ public class Agent {
         EAST,
         SOUTH,
         WEST;
+
     }
     private final World world;
-
-
     private Heading heading;
+
+
     private OpenCell currentCell;
 
-    private boolean removingTrail;
+    private boolean returningToNest;
+    private boolean climbingTrail;
     private boolean avoidingObstacle;
     private boolean returnAndColor;
     private boolean atHome;
@@ -44,8 +47,10 @@ public class Agent {
         this.avoidingObstacle = false;
         this.returnAndColor = false;
         this.atHome = false;
-        this.removingTrail = false;
+        this.climbingTrail = false;
+        this.returningToNest = false;
         this.load = 0;
+        this.foodAmountAtLastLocation = 0;
         this.trailId = -1;
 
     }
@@ -66,8 +71,8 @@ public class Agent {
                 return;
             }
         }
-        if (removingTrail){
-            if (removeTrail(senseAndReturnTrail(front,right,left))){
+        if (climbingTrail){
+            if (climbTrail(senseAndReturnTrail(front,right,left))){
                 return;
             }
         }
@@ -77,6 +82,10 @@ public class Agent {
         }
         if (returnAndColor){
             returnAndColor();
+            return;
+        }
+        if (returningToNest){
+            returnToNest(senseAndReturnTrail(front,right,left));
             return;
         }
 
@@ -118,17 +127,19 @@ public class Agent {
 
     private boolean handleTrail() {
         OpenCell trail = senseAndReturnTrail(front,right,back,left);
-        return removeTrail(trail);
+        return climbTrail(trail);
     }
 
-    private boolean removeTrail(OpenCell trail) {
-        removingTrail = true;
+    private boolean climbTrail(OpenCell trail) {
+        climbingTrail = true;
         if (trail == null){
-            removingTrail = false;
+            climbingTrail = false;
             return false;
         }
         moveToCell(trail);
-        trail.removeTrail(trailId);
+        if (foodAmountAtLastLocation == 0){
+            trail.removeTrail(trailId);
+        }
         return true;
     }
 
@@ -148,10 +159,31 @@ public class Agent {
     private boolean lookForFood() {
         if (currentCell.getType() == Type.FOOD){
             this.load = currentCell.takeFood(Settings.AGENT_CAPACITY);
-            returnAndColor();
+            this.foodAmountAtLastLocation = currentCell.getFoodCount();
+            OpenCell existingTrail = senseAndReturnTrail(front,right,back,left);
+            if (existingTrail == null){
+                returnAndColor();
+            }
+            else {
+                trailId = currentCell.getFirstTrailId();
+                returnToNest(existingTrail);
+            }
             return true;
         }
         return false;
+    }
+
+    private void returnToNest(OpenCell existingTrail) {
+        returningToNest = true;
+        if (existingTrail != null){
+            moveToCell(existingTrail);
+            return;
+        }
+        if (goToNest()){
+            returningToNest = false;
+            return;
+        }
+        System.out.println("Something wrong in returnToNest");
     }
 
     private void returnAndColor() {
@@ -160,29 +192,34 @@ public class Agent {
             currentCell.colorTrail(trailId);
         }
         returnAndColor = true;
-        if (front.getType() == Type.NEST){
+        if(goToNest()){
             returnAndColor = false;
-            move((OpenCell) front);
-            atHome = true;
-            return;
-        }
-        if (left.getType() == Type.NEST){
-            returnAndColor = false;
-            rotateLeft();
-            move((OpenCell) front);
-            atHome = true;
-            return;
-        }
-        if (right.getType() == Type.NEST){
-            returnAndColor = false;
-            rotateRight();
-            move((OpenCell) front);
-            atHome = true;
             return;
         }
         OpenCell lowest = findLowest(front,right,back,left);
         moveToCell(lowest);
         lowest.colorTrail(trailId);
+    }
+
+    private boolean goToNest() {
+        if (front.getType() == Type.NEST){
+            move((OpenCell) front);
+            atHome = true;
+            return true;
+        }
+        if (left.getType() == Type.NEST){
+            rotateLeft();
+            move((OpenCell) front);
+            atHome = true;
+            return true;
+        }
+        if (right.getType() == Type.NEST){
+            rotateRight();
+            move((OpenCell) front);
+            atHome = true;
+            return true;
+        }
+        return false;
     }
 
     private void unload() {
