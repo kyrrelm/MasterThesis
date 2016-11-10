@@ -17,10 +17,12 @@ public class Settings {
     public static String giveColor(PheromoneColor color) {
         switch (color){
             case YELLOW:{
-             return "-fx-background-color: yellow";
+             return "-fx-background-color: yellow;" +
+                     "-fx-border-color: lightgray;";
             }
             case DEFAULT:{
-                return "-fx-background-color: white";
+                return "-fx-background-color: white;" +
+                        "-fx-border-color: lightgray;";
             }
         }
         return null;
