@@ -3,7 +3,6 @@ package model;
 import model.Cells.Cell;
 import model.Cells.Cell.Type;
 import model.Cells.OpenCell;
-import model.Cells.OpenCell.PheromoneColor;
 import sample.Settings;
 import sample.Stats;
 
@@ -60,6 +59,8 @@ public class Agent {
         
         if(atHome){
             unload();
+            handleTrail();
+
         }
         if (avoidingObstacle){
             avoidObstacleSmasa();
@@ -105,6 +106,10 @@ public class Agent {
 
     }
 
+    private void handleTrail() {
+
+    }
+
     private boolean lookForFood() {
         if (currentCell.getType() == Type.FOOD){
             this.load = currentCell.takeFood(Settings.AGENT_CAPACITY);
@@ -141,7 +146,7 @@ public class Agent {
         }
         OpenCell lowest = findLowest(front,right,back,left);
         moveToCell(lowest);
-        lowest.colorYellow(trailId);
+        lowest.colorTrail(trailId);
     }
 
     private void unload() {
