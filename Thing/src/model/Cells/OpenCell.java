@@ -19,8 +19,8 @@ public class OpenCell extends Cell {
 
     public enum PheromoneColor {
         YELLOW;
-    }
 
+    }
     public OpenCell(int x, int y, Type type) {
         super(x, y, type);
         apfValue = -1;
@@ -70,14 +70,14 @@ public class OpenCell extends Cell {
         this.agent = null;
     }
 
-
-
     @Override
     public String toString() {
         if (apfValue == -1 || type == Type.NEST)
             return super.toString();
         return String.valueOf(apfValue);
     }
+
+
 
     public boolean hasApfValue() {
         if (apfValue == -1)
@@ -101,6 +101,17 @@ public class OpenCell extends Cell {
     public void colorTrail(int id) {
         this.trailIds.add(id);
         this.colors.add(PheromoneColor.YELLOW);
+    }
+
+    public boolean hasTrail(int id){
+        return trailIds.contains(id);
+    }
+
+    public void removeTrail(int id) {
+        trailIds.remove(id);
+        if (trailIds.isEmpty()){
+            colors.remove(PheromoneColor.YELLOW);
+        }
     }
 
     @Override

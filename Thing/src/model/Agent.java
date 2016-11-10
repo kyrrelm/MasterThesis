@@ -17,19 +17,20 @@ public class Agent {
     }
 
     private static final boolean USING_APF_VALUE = true;
+
     public enum Heading{
         NORTH,
         EAST,
         SOUTH,
         WEST;
     }
-
-
     private final World world;
-    private Heading heading;
 
+
+    private Heading heading;
     private OpenCell currentCell;
 
+    private boolean removingTrail;
     private boolean avoidingObstacle;
     private boolean returnAndColor;
     private boolean atHome;
@@ -43,6 +44,7 @@ public class Agent {
         this.avoidingObstacle = false;
         this.returnAndColor = false;
         this.atHome = false;
+        this.removingTrail = false;
         this.load = 0;
         this.trailId = -1;
 
@@ -59,8 +61,9 @@ public class Agent {
         
         if(atHome){
             unload();
-            handleTrail();
-
+            if (handleTrail()){
+                return;
+            }
         }
         if (avoidingObstacle){
             avoidObstacleSmasa();
@@ -106,10 +109,35 @@ public class Agent {
 
     }
 
-    private void handleTrail() {
-
+    private boolean handleTrail() {
+        OpenCell trail = senseAndReturnTrail(front,right,back,left);
+        return removeTrail(trail);
     }
 
+    private boolean removeTrail(OpenCell trail) {
+        removingTrail = true;
+        if (trail == null){
+            removingTrail = false;
+            return false;
+        }
+        moveToCell(trail);
+        trail.removeTrail(trailId);
+        return true;
+    }
+
+    private OpenCell senseAndReturnTrail(Cell... cells) {
+        for (Cell cell: cells) {
+            if (cell instanceof OpenCell && ((OpenCell) cell).hasTrail(trailId)){
+                return (OpenCell) cell;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Re-writing this to snse neigbours breaks trail stuff
+     * @return
+     */
     private boolean lookForFood() {
         if (currentCell.getType() == Type.FOOD){
             this.load = currentCell.takeFood(Settings.AGENT_CAPACITY);
@@ -122,12 +150,13 @@ public class Agent {
     private void returnAndColor() {
         if (!returnAndColor){
             trailId = genIdTrail();
+            currentCell.colorTrail(trailId);
         }
         returnAndColor = true;
         if (front.getType() == Type.NEST){
             returnAndColor = false;
             move((OpenCell) front);
-            unload();
+            atHome = true;
             return;
         }
         if (left.getType() == Type.NEST){
@@ -141,7 +170,7 @@ public class Agent {
             returnAndColor = false;
             rotateRight();
             move((OpenCell) front);
-            unload();
+            atHome = true;
             return;
         }
         OpenCell lowest = findLowest(front,right,back,left);
