@@ -61,7 +61,13 @@ public class Agent {
         
         if(atHome){
             unload();
+            atHome = false;
             if (handleTrail()){
+                return;
+            }
+        }
+        if (removingTrail){
+            if (removeTrail(senseAndReturnTrail(front,right,left))){
                 return;
             }
         }
@@ -74,11 +80,12 @@ public class Agent {
             return;
         }
 
+        updateValue(front,right,back,left);
+
         if (lookForFood()){
             return;
         }
 
-        updateValue(front,right,back,left);
 
         if (right instanceof OpenCell && !((OpenCell) right).hasApfValue()){
             rotateRight();
