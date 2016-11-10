@@ -18,7 +18,8 @@ public class OpenCell extends Cell {
     private HashSet<Integer> trailIds;
 
     public enum PheromoneColor {
-        YELLOW;
+        DEFAULT,
+        YELLOW
 
     }
     public OpenCell(int x, int y, Type type) {
@@ -120,7 +121,7 @@ public class OpenCell extends Cell {
         if (this.agent != null){
             tmp = Type.AGENT;
         }
-        PheromoneColor color = null;
+        PheromoneColor color = PheromoneColor.DEFAULT;
         if (!colors.isEmpty()){
             color = (PheromoneColor) colors.toArray()[0];
         }

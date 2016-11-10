@@ -19,6 +19,9 @@ public class Settings {
             case YELLOW:{
              return "-fx-background-color: yellow";
             }
+            case DEFAULT:{
+                return "-fx-background-color: white";
+            }
         }
         return null;
     }
