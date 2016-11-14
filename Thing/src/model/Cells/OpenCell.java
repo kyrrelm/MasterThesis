@@ -22,8 +22,9 @@ public class OpenCell extends Cell {
         BROWN,
         YELLOW;
 
-
     }
+
+
     public OpenCell(int x, int y, Type type) {
         super(x, y, type);
         apfValue = -1;
@@ -36,15 +37,14 @@ public class OpenCell extends Cell {
         colors = new HashSet<>();
         trailIds = new HashSet<>();
     }
-
     public OpenCell(int x, int y, int foodCount) {
         this(x, y, Type.FOOD);
         this.foodCount = foodCount;
     }
+
     public int getApfValue() {
         return apfValue;
     }
-
     public void setApfValue(int apfValue) {
         if (hasApfValue()){
             this.apfValue = Math.min(this.apfValue, apfValue);
@@ -91,11 +91,11 @@ public class OpenCell extends Cell {
         return true;
     }
 
-
-
     public boolean hasFood(){
         return foodCount > 0;
     }
+
+
 
     public int takeFood(int amount){
         int tmp = Math.min(amount, foodCount);
@@ -113,6 +113,10 @@ public class OpenCell extends Cell {
     public void colorTrail(int id) {
         this.trailIds.add(id);
         this.colors.add(PheromoneColor.YELLOW);
+    }
+
+    public boolean containsColor(PheromoneColor brown) {
+        return colors.contains(brown);
     }
 
     public int getFirstTrailId() {

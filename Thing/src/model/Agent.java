@@ -101,6 +101,14 @@ public class Agent {
         }
 
 
+        if (currentCell.containsColor(PheromoneColor.BROWN)){
+            if (right instanceof OpenCell){
+                if (((OpenCell) right).containsColor(PheromoneColor.BROWN)){
+                    diffuseBrown(left);
+                }
+            }
+        }
+
         if (right instanceof OpenCell && !((OpenCell) right).hasApfValue()){
             rotateRight();
             move((OpenCell) front);
