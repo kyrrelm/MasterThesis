@@ -12,7 +12,7 @@ public class OpenCell extends Cell {
 
     private int foodCount;
     private int apfValue;
-    private Agent agent;
+    private HashSet<Agent> agents;
     private Type defaultType;
     private HashSet<PheromoneColor> colors;
     private HashSet<Integer> trailIds;
@@ -30,7 +30,7 @@ public class OpenCell extends Cell {
         if (type == Type.NEST){
             apfValue = 0;
         }
-        agent = null;
+        agents = new HashSet<>();
         defaultType = this.type;
         foodCount = 0;
         colors = new HashSet<>();
@@ -54,10 +54,11 @@ public class OpenCell extends Cell {
         }
     }
 
-    public boolean containAgent(){
-        if (agent == null)
-            return false;
-        return true;
+    public boolean containsAgent(){
+        return !agents.isEmpty();
+//        if (agent == null)
+//            return false;
+//        return true;
     }
 
     public int getFoodCount() {
@@ -65,15 +66,16 @@ public class OpenCell extends Cell {
     }
 
     public boolean placeAgent(Agent agent) {
-        if (this.agent == null){
-            this.agent = agent;
-            return true;
-        }
-        return false;
+        return this.agents.add(agent);
+//        if (this.agent == null){
+//            this.agent = agent;
+//            return true;
+//        }
+//        return false;
     }
 
-    public void removeAgent(){
-        this.agent = null;
+    public void removeAgent(Agent agent){
+        this.agents.remove(agent);
     }
 
     @Override
@@ -134,7 +136,7 @@ public class OpenCell extends Cell {
     @Override
     public CellState createCellState() {
         Type tmp = this.type;
-        if (this.agent != null){
+        if (!this.agents.isEmpty()){
             tmp = Type.AGENT;
         }
         PheromoneColor color = PheromoneColor.DEFAULT;

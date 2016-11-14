@@ -64,8 +64,12 @@ public class Agent {
 
 
     public void interact(){
+
         sense();
-        
+
+        updateValue(front,right,back,left);
+
+
         if(atHome){
             unload();
             atHome = false;
@@ -91,7 +95,6 @@ public class Agent {
             return;
         }
 
-        updateValue(front,right,back,left);
 
         if (lookForFood()){
             return;
@@ -358,9 +361,11 @@ public class Agent {
      * @param toCell
      */
     private void move(OpenCell toCell) {
-        currentCell.removeAgent();
+        currentCell.removeAgent(this);
         currentCell = toCell;
         currentCell.placeAgent(this);
+        sense();
+        updateValue(front,right,back,left);
     }
 
     private void apfUpdate(Cell... cells){
