@@ -20,6 +20,10 @@ public class Settings {
              return "-fx-background-color: yellow;" +
                      "-fx-border-color: lightgray;";
             }
+            case BROWN:{
+                return "-fx-background-color: sandybrown;" +
+                        "-fx-border-color: lightgray;";
+            }
             case DEFAULT:{
                 return "-fx-background-color: white;" +
                         "-fx-border-color: lightgray;";

@@ -6,6 +6,8 @@ import model.Cells.OpenCell;
 import sample.Settings;
 import sample.Stats;
 
+import static model.Cells.OpenCell.*;
+
 /**
  * Created by Kyrre on 17.10.2016.
  */
@@ -158,6 +160,7 @@ public class Agent {
      */
     private boolean lookForFood() {
         if (currentCell.getType() == Type.FOOD){
+            diffuseBrown(currentCell, left);
             this.load = currentCell.takeFood(Settings.AGENT_CAPACITY);
             this.foodAmountAtLastLocation = currentCell.getFoodCount();
             OpenCell existingTrail = senseAndReturnTrail(front,right,back,left);
@@ -171,6 +174,14 @@ public class Agent {
             return true;
         }
         return false;
+    }
+
+    private void diffuseBrown(Cell... cells) {
+        for (Cell c: cells) {
+            if (c instanceof OpenCell){
+                ((OpenCell) c).color(PheromoneColor.BROWN);
+            }
+        }
     }
 
     private void returnToNest(OpenCell existingTrail) {

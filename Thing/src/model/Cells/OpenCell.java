@@ -19,6 +19,7 @@ public class OpenCell extends Cell {
 
     public enum PheromoneColor {
         DEFAULT,
+        BROWN,
         YELLOW;
 
 
@@ -101,6 +102,10 @@ public class OpenCell extends Cell {
             type = Type.FREE;
         }
         return tmp;
+    }
+
+    public boolean color(PheromoneColor color){
+        return colors.add(color);
     }
 
     public void colorTrail(int id) {
