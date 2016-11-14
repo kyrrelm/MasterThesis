@@ -6,6 +6,7 @@ import maps.MapGenerator;
 import model.Cells.Cell;
 import model.Cells.OpenCell;
 import model.states.WorldState;
+import sample.Settings;
 
 import java.util.ArrayList;
 
@@ -31,7 +32,7 @@ public class World {
         this.sizeY = map.sizeY;
         this.grid = map.grid;
         this.nest = map.nest;
-        generateAgents(1);
+        generateAgents(Settings.NUMBER_OF_AGENTS);
     }
 
     public World(int width, int height) {
@@ -41,7 +42,7 @@ public class World {
         this.grid = new Cell[sizeX][sizeY];
         this.nest = new OpenCell(sizeX/2, sizeY/2, Cell.Type.NEST);
         generateDefaultMap();
-        generateAgents(1);
+        generateAgents(Settings.NUMBER_OF_AGENTS);
     }
 
     public ArrayList<WorldState> runSim(int numberOfTicks){
@@ -76,7 +77,9 @@ public class World {
 
 
     private void generateAgents(int amount){
-        agents.add(new Agent((OpenCell) grid[nest.getX()][nest.getY()], Agent.Heading.NORTH, this));
+        for (int i = 0; i < amount; i++) {
+            agents.add(new Agent((OpenCell) grid[nest.getX()][nest.getY()], Agent.Heading.NORTH, this));
+        }
     }
 
     public Cell getCell(int x, int y) {
