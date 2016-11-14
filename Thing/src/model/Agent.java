@@ -15,6 +15,8 @@ public class Agent {
 
     private static int idGenTrail = 0;
     private int foodAmountAtLastLocation;
+    private boolean followingBrown;
+
     private static int genIdTrail(){
         return idGenTrail++;
     }
@@ -51,6 +53,7 @@ public class Agent {
         this.atHome = false;
         this.climbingTrail = false;
         this.returningToNest = false;
+        this.followingBrown = false;
         this.load = 0;
         this.foodAmountAtLastLocation = 0;
         this.trailId = -1;
@@ -76,6 +79,10 @@ public class Agent {
             if (handleTrail()){
                 return;
             }
+        }
+        if (followingBrown){
+            followBrown();
+            return;
         }
         if (climbingTrail){
             if (climbTrail(senseAndReturnTrail(front,right,left))){
@@ -105,6 +112,9 @@ public class Agent {
             if (right instanceof OpenCell){
                 if (((OpenCell) right).containsColor(PheromoneColor.BROWN)){
                     diffuseBrown(left);
+                    rotateRight();
+                    followBrown();
+                    return;
                 }
             }
         }
@@ -136,6 +146,19 @@ public class Agent {
         }
         //------------------------------------------------------------------------------------
 
+    }
+
+    private void followBrown() {
+        followingBrown = true;
+        if (front instanceof OpenCell){
+            if (((OpenCell) front).containsColor(PheromoneColor.BROWN)){
+                move((OpenCell) front);
+            }
+            else if(front.getType() == Type.FOOD){
+                move((OpenCell) front);
+                followingBrown = false;
+            }
+        }
     }
 
     private boolean handleTrail() {
