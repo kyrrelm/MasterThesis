@@ -119,6 +119,10 @@ public class OpenCell extends Cell {
         return colors.contains(color);
     }
 
+    public boolean removeColor(PheromoneColor color){
+        return colors.remove(color);
+    }
+
     public int getFirstTrailId() {
         if (trailIds.isEmpty()){
             return -1;

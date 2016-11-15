@@ -200,6 +200,9 @@ public class Agent {
             }
             this.load = currentCell.takeFood(Settings.AGENT_CAPACITY);
             this.foodAmountAtLastLocation = currentCell.getFoodCount();
+            if (foodAmountAtLastLocation == 0){
+                currentCell.removeColor(PheromoneColor.BROWN);
+            }
             trailId = currentCell.getFirstTrailId();
             OpenCell existingTrail = senseAndReturnTrail(front,right,back,left);
             if (existingTrail == null){
