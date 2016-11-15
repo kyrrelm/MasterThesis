@@ -175,6 +175,9 @@ public class Agent {
     private boolean climbTrail(OpenCell trail) {
         climbingTrail = true;
         if (trail == null){
+            if (foodAmountAtLastLocation == 0 && senseAndRemoveBrown(front, right, back, left)){
+                return true;
+            }
             climbingTrail = false;
             return false;
         }
@@ -183,6 +186,17 @@ public class Agent {
             trail.removeTrail(trailId);
         }
         return true;
+    }
+
+    private boolean senseAndRemoveBrown(Cell... cells) {
+        for (Cell cell: cells){
+            if (cell instanceof OpenCell && ((OpenCell) cell).containsColor(PheromoneColor.BROWN)){
+                moveToCell((OpenCell) cell);
+                ((OpenCell) cell).removeColor(PheromoneColor.BROWN);
+                return true;
+            }
+        }
+        return false;
     }
 
     private OpenCell senseAndReturnTrail(Cell... cells) {
@@ -205,9 +219,6 @@ public class Agent {
             }
             this.load = currentCell.takeFood(Settings.AGENT_CAPACITY);
             this.foodAmountAtLastLocation = currentCell.getFoodCount();
-            if (foodAmountAtLastLocation == 0){
-                currentCell.removeColor(PheromoneColor.BROWN);
-            }
             trailId = currentCell.getFirstTrailId();
             OpenCell existingTrail = senseAndReturnTrail(front,right,back,left);
             if (existingTrail == null){
