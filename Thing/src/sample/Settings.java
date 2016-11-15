@@ -13,7 +13,7 @@ public class Settings {
     public static final int AGENT_CAPACITY = 4;
 
     public static final char[][] MAP = MapGenerator.SMASA_FOOD;
-    public static final int NUMBER_OF_AGENTS = 1;
+    public static final int NUMBER_OF_AGENTS = 2;
 
     public static String giveColor(PheromoneColor color) {
         switch (color){

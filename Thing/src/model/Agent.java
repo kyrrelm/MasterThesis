@@ -81,8 +81,9 @@ public class Agent {
             }
         }
         if (followingBrown){
-            followBrown();
-            return;
+            if (followBrown()){
+                return;
+            }
         }
         if (climbingTrail){
             if (climbTrail(senseAndReturnTrail(front,right,left))){
@@ -148,17 +149,21 @@ public class Agent {
 
     }
 
-    private void followBrown() {
+    private boolean followBrown() {
         followingBrown = true;
         if (front instanceof OpenCell){
             if(front.getType() == Type.FOOD){
                 move((OpenCell) front);
                 followingBrown = false;
+                return true;
             }
             else if (((OpenCell) front).containsColor(PheromoneColor.BROWN)){
                 move((OpenCell) front);
+                return true;
             }
         }
+        followingBrown = false;
+        return false;
         //TODO: If food disappears on the way
     }
 
