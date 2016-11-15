@@ -184,6 +184,7 @@ public class Agent {
         moveToCell(trail);
         if (foodAmountAtLastLocation == 0){
             trail.removeTrail(trailId);
+            trail.removeColor(PheromoneColor.BROWN);
         }
         return true;
     }
