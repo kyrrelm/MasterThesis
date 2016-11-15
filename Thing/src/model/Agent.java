@@ -195,7 +195,9 @@ public class Agent {
      */
     private boolean lookForFood() {
         if (currentCell.getType() == Type.FOOD){
-            diffuseBrown(currentCell, left);
+            if (!currentCell.containsColor(PheromoneColor.BROWN)){
+                diffuseBrown(currentCell, left);
+            }
             this.load = currentCell.takeFood(Settings.AGENT_CAPACITY);
             this.foodAmountAtLastLocation = currentCell.getFoodCount();
             trailId = currentCell.getFirstTrailId();

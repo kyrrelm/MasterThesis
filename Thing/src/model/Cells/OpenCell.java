@@ -115,8 +115,8 @@ public class OpenCell extends Cell {
         this.colors.add(PheromoneColor.YELLOW);
     }
 
-    public boolean containsColor(PheromoneColor brown) {
-        return colors.contains(brown);
+    public boolean containsColor(PheromoneColor color) {
+        return colors.contains(color);
     }
 
     public int getFirstTrailId() {
