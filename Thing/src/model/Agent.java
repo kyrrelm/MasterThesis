@@ -198,12 +198,12 @@ public class Agent {
             diffuseBrown(currentCell, left);
             this.load = currentCell.takeFood(Settings.AGENT_CAPACITY);
             this.foodAmountAtLastLocation = currentCell.getFoodCount();
+            trailId = currentCell.getFirstTrailId();
             OpenCell existingTrail = senseAndReturnTrail(front,right,back,left);
             if (existingTrail == null){
                 returnAndColor();
             }
             else {
-                trailId = currentCell.getFirstTrailId();
                 returnToNest(existingTrail);
             }
             return true;
