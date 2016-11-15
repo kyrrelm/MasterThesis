@@ -147,6 +147,6 @@ public class OpenCell extends Cell {
         if (!colors.isEmpty()){
             color = (PheromoneColor) colors.toArray()[0];
         }
-        return new CellState(tmp,apfValue,color);
+        return new CellState(tmp,apfValue,color, agents.size());
     }
 }

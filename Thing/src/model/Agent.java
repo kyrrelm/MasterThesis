@@ -151,14 +151,15 @@ public class Agent {
     private void followBrown() {
         followingBrown = true;
         if (front instanceof OpenCell){
-            if (((OpenCell) front).containsColor(PheromoneColor.BROWN)){
-                move((OpenCell) front);
-            }
-            else if(front.getType() == Type.FOOD){
+            if(front.getType() == Type.FOOD){
                 move((OpenCell) front);
                 followingBrown = false;
             }
+            else if (((OpenCell) front).containsColor(PheromoneColor.BROWN)){
+                move((OpenCell) front);
+            }
         }
+        //TODO: If food disappears on the way
     }
 
     private boolean handleTrail() {
