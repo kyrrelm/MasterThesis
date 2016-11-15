@@ -20,8 +20,8 @@ public class OpenCell extends Cell {
     public enum PheromoneColor {
         DEFAULT,
         BROWN,
-        YELLOW;
-
+        YELLOW,
+        AGENT;
     }
 
 
@@ -144,12 +144,13 @@ public class OpenCell extends Cell {
     @Override
     public CellState createCellState() {
         Type tmp = this.type;
-        if (!this.agents.isEmpty()){
-            tmp = Type.AGENT;
-        }
         PheromoneColor color = PheromoneColor.DEFAULT;
         if (!colors.isEmpty()){
             color = (PheromoneColor) colors.toArray()[0];
+        }
+        if (!this.agents.isEmpty()){
+            tmp = Type.AGENT;
+            color = PheromoneColor.AGENT;
         }
         return new CellState(tmp,apfValue,color, agents.size());
     }

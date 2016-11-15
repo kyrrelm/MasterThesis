@@ -13,7 +13,7 @@ public class Settings {
     public static final int AGENT_CAPACITY = 4;
 
     public static final char[][] MAP = MapGenerator.SMASA_FOOD;
-    public static final int NUMBER_OF_AGENTS = 1;
+    public static final int NUMBER_OF_AGENTS = 10;
 
     public static String giveColor(PheromoneColor color) {
         switch (color){
@@ -23,6 +23,10 @@ public class Settings {
             }
             case BROWN:{
                 return "-fx-background-color: sandybrown;" +
+                        "-fx-border-color: lightgray;";
+            }
+            case AGENT:{
+                return "-fx-background-color: lightblue;" +
                         "-fx-border-color: lightgray;";
             }
             case DEFAULT:{
