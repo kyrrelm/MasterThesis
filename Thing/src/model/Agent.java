@@ -133,20 +133,23 @@ public class Agent {
             avoidObstacleSmasa();
         }
 
-        //BORDER------------------------------------------------------------------------------
+        avoidBorder();
+
+    }
+
+    private boolean avoidBorder() {
         if (front.getType() == Type.BORDER || right.getType() == Type.BORDER){
             while (!(front instanceof OpenCell) || right.getType() == Type.BORDER){
                 rotateRight();
             }
             move((OpenCell) front);
-            return;
+            return true;
         }
         if (left.getType() == Type.BORDER && front instanceof OpenCell && ((OpenCell) front).hasApfValue()){
             move((OpenCell) front);
-            return;
+            return true;
         }
-        //------------------------------------------------------------------------------------
-
+        return false;
     }
 
     private boolean followBrown() {
@@ -334,6 +337,10 @@ public class Agent {
         }
         if (front instanceof OpenCell){
             move((OpenCell) front);
+            return;
+        }
+        if (avoidBorder()){
+            avoidingObstacle = false;
             return;
         }
         while (!(front instanceof OpenCell)){
