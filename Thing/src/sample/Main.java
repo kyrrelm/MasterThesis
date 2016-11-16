@@ -133,6 +133,10 @@ public class Main extends Application {
                                     outputCells[x][y].setStyle("-fx-background-color: gray");
                                     outputCells[x][y].setText("");
                                 }
+                                else if (worldState.cellStates[x][y].type == Cell.Type.NEST){
+                                    outputCells[x][y].setStyle("-fx-background-color: slateblue; -fx-border-color: lightgray;");
+                                    outputCells[x][y].setText("N");
+                                }
                                 else {
                                     outputCells[x][y].setText(worldState.cellStates[x][y].toString());
                                     if (worldState.cellStates[x][y].hasColor()){
