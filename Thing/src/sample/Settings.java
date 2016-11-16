@@ -17,7 +17,7 @@ public class Settings {
 
     public static final boolean USING_APF_VALUE = true;
 
-    public static final Map MAP = MapGenerator.APF_KILLER_FOOD;
+    public static final Map MAP = MapGenerator.BIG_FOOD;
 
     public static String giveColor(PheromoneColor color) {
         switch (color){
