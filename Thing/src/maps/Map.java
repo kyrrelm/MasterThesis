@@ -12,8 +12,12 @@ public class Map {
     public final int sizeX;
     public final int sizeY;
     public final OpenCell nest;
+    public final String name;
+    public final int foodCount;
 
-    public Map(Cell[][] grid, OpenCell nest) {
+    public Map(String name, OpenCell nest, int foodCount, Cell[][] grid) {
+        this.name = name;
+        this.foodCount = foodCount;
         this.grid = grid;
         this.sizeX = grid.length;
         this.sizeY = grid[0].length;

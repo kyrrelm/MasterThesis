@@ -21,13 +21,12 @@ public class Agent {
         return idGenTrail++;
     }
 
-    private static final boolean USING_APF_VALUE = true;
 
     public enum Heading{
         NORTH,
         EAST,
         SOUTH,
-        WEST;
+        WEST
 
     }
     private final World world;
@@ -404,7 +403,7 @@ public class Agent {
      * @param cells front, right, back, left
      */
     private void updateValue(Cell... cells) {
-       if (USING_APF_VALUE){
+       if (Settings.USING_APF_VALUE){
            apfUpdate(cells);
        }
        else {

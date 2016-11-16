@@ -6,13 +6,11 @@ import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.concurrent.WorkerStateEvent;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
-import javafx.scene.layout.Background;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -22,7 +20,6 @@ import model.Cells.Cell;
 import model.World;
 import model.states.WorldState;
 
-import java.security.Key;
 import java.util.ArrayList;
 
 public class Main extends Application {
@@ -41,7 +38,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
 
-        Map map = MapGenerator.genMap(Settings.MAP);
+        Map map = Settings.MAP;
         width = map.sizeX;
         height = map.sizeY;
         outputCells = new Label[width][height];
@@ -182,8 +179,6 @@ public class Main extends Application {
 //                    System.out.println("WorldState "+count+++":");
 //                    System.out.println(w);
 //                }
-
-                System.out.println("Food retrieved: "+Stats.getInstance().getFoodCount());
             }
         });
         simulator.setOnFailed(new EventHandler<WorkerStateEvent>() {

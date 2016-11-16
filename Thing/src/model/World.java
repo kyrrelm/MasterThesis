@@ -7,6 +7,7 @@ import model.Cells.Cell;
 import model.Cells.OpenCell;
 import model.states.WorldState;
 import sample.Settings;
+import sample.Stats;
 
 import java.util.ArrayList;
 
@@ -51,6 +52,7 @@ public class World {
         for (int i = 0; i < numberOfTicks; i++) {
             worldStates.add(tick());
         }
+        Stats.getInstance().log();
         return worldStates;
     }
 

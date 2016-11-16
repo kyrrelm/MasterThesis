@@ -22,4 +22,11 @@ public class Stats {
     public int getFoodCount() {
         return foodCount;
     }
+
+    public void log() {
+        System.out.println("--------------- Info ---------------");
+        System.out.println(Settings.getLog());
+        System.out.println("--------------- Result ---------------");
+        System.out.println("Food retrieved: "+ Stats.getInstance().getFoodCount());
+    }
 }

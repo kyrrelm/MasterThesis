@@ -1,5 +1,6 @@
 package sample;
 
+import maps.Map;
 import maps.MapGenerator;
 import model.Cells.OpenCell.PheromoneColor;
 
@@ -12,8 +13,11 @@ public class Settings {
 
     public static final int AGENT_CAPACITY = 4;
 
-    public static final char[][] MAP = MapGenerator.OBSTACLE_HELL_FOOD;
     public static final int NUMBER_OF_AGENTS = 10;
+
+    public static final boolean USING_APF_VALUE = true;
+
+    public static final Map MAP = MapGenerator.APF_KILLER_FOOD;
 
     public static String giveColor(PheromoneColor color) {
         switch (color){
@@ -35,5 +39,12 @@ public class Settings {
             }
         }
         return null;
+    }
+
+    public static String getLog() {
+        String output =  "Map: "+ MAP.name + "\nTotal food count: " + MAP.foodCount
+                +"\nFood range: " + FOOD_COEFFICIENT + " - " + FOOD_COEFFICIENT*9 + "\nNumber of agents: "
+                + NUMBER_OF_AGENTS +"\nAgent capacity: "+ AGENT_CAPACITY + "\nUsing pheromones: "+ !USING_APF_VALUE;
+        return output;
     }
 }
