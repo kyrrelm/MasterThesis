@@ -11,6 +11,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
+import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -29,9 +30,10 @@ public class Main extends Application {
     private static javafx.util.Duration FREQUENCY = Duration.millis(500);
 
     private static int width = SIZE*2;
-    private static int height = SIZE;
 
+    private static int height = SIZE;
     private static int playBackIndex = 0;
+
     private static Label[][] outputCells;
     private static ArrayList<WorldState> worldStates = new ArrayList<>();
 
@@ -139,6 +141,9 @@ public class Main extends Application {
                                     if (worldState.cellStates[x][y].hasColor()){
                                         outputCells[x][y].setStyle(Settings.giveColor(worldState.cellStates[x][y].getColor()));
                                     }
+                                }
+                                if (worldState.cellStates[x][y].type == Cell.Type.AGENT){
+
                                 }
                             }
                         }
