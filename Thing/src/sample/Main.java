@@ -6,22 +6,21 @@ import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.concurrent.WorkerStateEvent;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
-import javafx.scene.layout.Background;
+import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import maps.Map;
 import maps.MapGenerator;
+import model.Cells.Cell;
 import model.World;
 import model.states.WorldState;
 
-import java.security.Key;
 import java.util.ArrayList;
 
 public class Main extends Application {
@@ -31,16 +30,17 @@ public class Main extends Application {
     private static javafx.util.Duration FREQUENCY = Duration.millis(500);
 
     private static int width = SIZE*2;
-    private static int height = SIZE;
 
+    private static int height = SIZE;
     private static int playBackIndex = 0;
+
     private static Label[][] outputCells;
     private static ArrayList<WorldState> worldStates = new ArrayList<>();
 
     @Override
     public void start(Stage primaryStage) throws Exception{
 
-        Map map = MapGenerator.genMap(MapGenerator.LOCAL_OPTIMA);
+        Map map = Settings.MAP;
         width = map.sizeX;
         height = map.sizeY;
         outputCells = new Label[width][height];
@@ -75,7 +75,7 @@ public class Main extends Application {
         }
 
 
-        Scene scene = new Scene(root, 1800, 1300);
+        Scene scene = new Scene(root, 1500, 800);
         primaryStage.setTitle("Thing");
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -120,6 +120,7 @@ public class Main extends Application {
     }
 
     private Timeline runPlayback() {
+
         KeyFrame mainFrame = new KeyFrame(
                 Duration.ZERO,
                 actionEvent -> {
@@ -127,12 +128,22 @@ public class Main extends Application {
                         WorldState worldState = worldStates.get(playBackIndex);
                         for (int x = 0; x < worldState.cellStates.length; x++) {
                             for (int y = 0; y < worldState.cellStates[0].length; y++) {
-                                if (worldState.cellStates[x][y].toString().equals("X")){
+                                if (worldState.cellStates[x][y].type == Cell.Type.OBSTACLE){
                                     outputCells[x][y].setStyle("-fx-background-color: gray");
                                     outputCells[x][y].setText("");
                                 }
+                                else if (worldState.cellStates[x][y].type == Cell.Type.NEST){
+                                    outputCells[x][y].setStyle("-fx-background-color: slateblue; -fx-border-color: lightgray;");
+                                    outputCells[x][y].setText("N");
+                                }
                                 else {
                                     outputCells[x][y].setText(worldState.cellStates[x][y].toString());
+                                    if (worldState.cellStates[x][y].hasColor()){
+                                        outputCells[x][y].setStyle(Settings.giveColor(worldState.cellStates[x][y].getColor()));
+                                    }
+                                }
+                                if (worldState.cellStates[x][y].type == Cell.Type.AGENT){
+
                                 }
                             }
                         }
