@@ -2,7 +2,6 @@ package model;
 
 
 import maps.Map;
-import maps.MapGenerator;
 import model.Cells.Cell;
 import model.Cells.OpenCell;
 import model.states.WorldState;
@@ -50,14 +49,14 @@ public class World {
         ArrayList<WorldState> worldStates = new ArrayList<>();
         worldStates.add(new WorldState(grid));
         for (int i = 0; i < numberOfTicks; i++) {
-            worldStates.add(tick());
+            worldStates.add(tick(i));
         }
-        Stats.getInstance().log();
+        Stats.getInstance().print();
         return worldStates;
     }
 
-    private WorldState tick(){
-        agents.forEach(Agent::interact);
+    private WorldState tick(int i){
+        agents.forEach(agent -> agent.interact(i));
         //System.out.println("World:");
         //System.out.println(this);
         return new WorldState(grid);

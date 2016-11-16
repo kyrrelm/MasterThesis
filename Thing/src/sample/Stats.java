@@ -6,6 +6,7 @@ package sample;
 public class Stats {
     private static Stats ourInstance = new Stats();
     private int foodCount;
+    private int timeOfCompletion;
 
     public static Stats getInstance() {
         return ourInstance;
@@ -13,20 +14,30 @@ public class Stats {
 
     private Stats() {
         this.foodCount = 0;
+        this.timeOfCompletion = -1;
     }
 
-    public void depositFood(int quantity){
+    public void depositFood(int quantity, int timestep){
         this.foodCount += quantity;
+        if (foodCount == Settings.MAP.foodCount){
+            this.timeOfCompletion = timestep;
+        }
     }
 
     public int getFoodCount() {
         return foodCount;
     }
 
-    public void log() {
+    public void print() {
         System.out.println("--------------- Info ---------------");
         System.out.println(Settings.getLog());
         System.out.println("--------------- Result ---------------");
-        System.out.println("Food retrieved: "+ Stats.getInstance().getFoodCount());
+        System.out.println(log());
+
+    }
+
+    public String log(){
+        String output = "Food retrieved: "+ Stats.getInstance().getFoodCount()+"\nTime of completion: "+ timeOfCompletion;
+        return output;
     }
 }

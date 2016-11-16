@@ -16,6 +16,7 @@ public class Agent {
     private static int idGenTrail = 0;
     private int foodAmountAtLastLocation;
     private boolean followingBrown;
+    private int timestep;
 
     private static int genIdTrail(){
         return idGenTrail++;
@@ -56,7 +57,7 @@ public class Agent {
         this.load = 0;
         this.foodAmountAtLastLocation = 0;
         this.trailId = -1;
-
+        this.timestep = -1;
     }
 
     private Cell front;
@@ -65,8 +66,8 @@ public class Agent {
     private Cell left;
 
 
-    public void interact(){
-
+    public void interact(int timestep){
+        this.timestep = timestep;
         sense();
 
         updateValue(front,right,back,left);
@@ -116,6 +117,12 @@ public class Agent {
                     followBrown();
                     return;
                 }
+                else {
+                    currentCell.removeColor(PheromoneColor.BROWN);
+                }
+            }else {
+                currentCell.removeColor(PheromoneColor.BROWN);
+
             }
         }
 
@@ -293,7 +300,7 @@ public class Agent {
     }
 
     private void unload() {
-        Stats.getInstance().depositFood(load);
+        Stats.getInstance().depositFood(load, timestep);
         load = 0;
     }
 

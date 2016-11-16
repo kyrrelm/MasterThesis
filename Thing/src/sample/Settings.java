@@ -13,7 +13,7 @@ public class Settings {
 
     public static final int AGENT_CAPACITY = 4;
 
-    public static final int NUMBER_OF_AGENTS = 10;
+    public static final int NUMBER_OF_AGENTS = 30;
 
     public static final boolean USING_APF_VALUE = true;
 
