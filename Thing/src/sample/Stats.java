@@ -35,7 +35,7 @@ public class Stats {
     }
 
     public String output(){
-        String output = "\n--------------- Info ---------------\n"+ Settings.getLog()+ "\n--------------- Result ---------------\n" + log();
+        String output = "\n------------------ Info ------------------\n"+ Settings.getLog()+ "\n----------------- Result -----------------\n" + log() + "\n------------------------------------------\n";
         return output;
     }
 

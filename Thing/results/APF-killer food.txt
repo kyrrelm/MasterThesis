@@ -1,0 +1,36 @@
+
+------------------ Info ------------------
+Map: APF-killer food
+Total food count: 120
+Food range: 10 - 90
+Number of agents: 30
+Agent capacity: 4
+Using pheromones: false
+----------------- Result -----------------
+Food retrieved: 120
+Time of completion: 294
+------------------------------------------
+
+------------------ Info ------------------
+Map: APF-killer food
+Total food count: 120
+Food range: 10 - 90
+Number of agents: 30
+Agent capacity: 4
+Using pheromones: false
+----------------- Result -----------------
+Food retrieved: 120
+Time of completion: 294
+------------------------------------------
+
+------------------ Info ------------------
+Map: APF-killer food
+Total food count: 120
+Food range: 10 - 90
+Number of agents: 10
+Agent capacity: 4
+Using pheromones: true
+----------------- Result -----------------
+Food retrieved: 120
+Time of completion: 788
+------------------------------------------
