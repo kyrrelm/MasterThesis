@@ -1,5 +1,7 @@
 package sample;
 
+import utils.FileHandler;
+
 /**
  * Created by kyrrelm on 09.11.2016.
  */
@@ -29,15 +31,20 @@ public class Stats {
     }
 
     public void print() {
-        System.out.println("--------------- Info ---------------");
-        System.out.println(Settings.getLog());
-        System.out.println("--------------- Result ---------------");
-        System.out.println(log());
+        System.out.println(output());
+    }
 
+    public String output(){
+        String output = "\n--------------- Info ---------------\n"+ Settings.getLog()+ "\n--------------- Result ---------------\n" + log();
+        return output;
     }
 
     public String log(){
         String output = "Food retrieved: "+ Stats.getInstance().getFoodCount()+"\nTime of completion: "+ timeOfCompletion;
         return output;
+    }
+
+    public void save() {
+        FileHandler.writeToUniqueFile(output());
     }
 }

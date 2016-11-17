@@ -52,6 +52,7 @@ public class World {
             worldStates.add(tick(i));
         }
         Stats.getInstance().print();
+        Stats.getInstance().save();
         return worldStates;
     }
 
