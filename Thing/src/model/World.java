@@ -50,6 +50,9 @@ public class World {
         worldStates.add(new WorldState(grid));
         for (int i = 0; i < numberOfTicks; i++) {
             worldStates.add(tick(i));
+            if (Stats.getInstance().isDone()){
+                break;
+            }
         }
         Stats.getInstance().print();
         Stats.getInstance().save();
