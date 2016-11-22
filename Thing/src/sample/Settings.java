@@ -2,7 +2,7 @@ package sample;
 
 import maps.Map;
 import maps.MapGenerator;
-import model.Cells.OpenCell.PheromoneColor;
+import model.cell.OpenCell.PheromoneColor;
 
 /**
  * Created by kyrrelm on 08.11.2016.
@@ -44,7 +44,7 @@ public class Settings {
     public static String getLog() {
         String output =  "Map: "+ MAP.name + "\nTotal food count: " + MAP.foodCount
                 +"\nFood range: " + FOOD_COEFFICIENT + " - " + FOOD_COEFFICIENT*9 + "\nNumber of agents: "
-                + NUMBER_OF_AGENTS +"\nAgent capacity: "+ AGENT_CAPACITY + "\nUsing pheromones: "+ !USING_APF_VALUE;
+                + NUMBER_OF_AGENTS +"\nScout capacity: "+ AGENT_CAPACITY + "\nUsing pheromones: "+ !USING_APF_VALUE;
         return output;
     }
 }

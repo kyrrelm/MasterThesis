@@ -2,8 +2,9 @@ package model;
 
 
 import maps.Map;
-import model.Cells.Cell;
-import model.Cells.OpenCell;
+import model.agent.Scout;
+import model.cell.Cell;
+import model.cell.OpenCell;
 import model.states.WorldState;
 import sample.Settings;
 import sample.Stats;
@@ -14,7 +15,7 @@ import java.util.ArrayList;
  * Created by Kyrre on 17.10.2016.
  */
 public class World {
-    private ArrayList<Agent> agents;
+    private ArrayList<Scout> scouts;
     private final int sizeX;
     private final int sizeY;
     private Border border;
@@ -23,7 +24,7 @@ public class World {
 
     private void init(){
         this.border = new Border();
-        this.agents = new ArrayList<>();
+        this.scouts = new ArrayList<>();
     }
 
     public World(Map map) {
@@ -60,7 +61,7 @@ public class World {
     }
 
     private WorldState tick(int i){
-        agents.forEach(agent -> agent.interact(i));
+        scouts.forEach(scout -> scout.interact(i));
         //System.out.println("World:");
         //System.out.println(this);
         return new WorldState(grid);
@@ -68,7 +69,7 @@ public class World {
 
     private void generateDefaultMap() {
         grid[nest.getX()][nest.getY()] = nest;
-        //grid[2][2] = new OpenCell(2, 2, Cells.Type.NEST);
+        //grid[2][2] = new OpenCell(2, 2, cell.Type.NEST);
         for (int x = 0; x < sizeX; x++) {
             for (int y = 0; y < sizeY; y++) {
                 if (grid[x][y] == null){
@@ -83,7 +84,7 @@ public class World {
 
     private void generateAgents(int amount){
         for (int i = 0; i < amount; i++) {
-            agents.add(new Agent((OpenCell) grid[nest.getX()][nest.getY()], Agent.Heading.NORTH, this));
+            scouts.add(new Scout((OpenCell) grid[nest.getX()][nest.getY()], Scout.Heading.NORTH, this));
         }
     }
 

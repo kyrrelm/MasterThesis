@@ -1,6 +1,6 @@
 package model;
 
-import model.Cells.Cell;
+import model.cell.Cell;
 
 /**
  * Created by Kyrre on 17.10.2016.

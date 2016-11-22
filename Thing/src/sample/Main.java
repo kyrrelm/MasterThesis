@@ -11,13 +11,11 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
-import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import maps.Map;
-import maps.MapGenerator;
-import model.Cells.Cell;
+import model.cell.Cell;
 import model.World;
 import model.states.WorldState;
 

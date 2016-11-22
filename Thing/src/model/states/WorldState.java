@@ -1,6 +1,6 @@
 package model.states;
 
-import model.Cells.Cell;
+import model.cell.Cell;
 
 /**
  * Created by kyrrelm on 19.10.2016.
