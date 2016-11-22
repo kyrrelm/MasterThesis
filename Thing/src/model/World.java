@@ -2,8 +2,10 @@ package model;
 
 
 import maps.Map;
-import model.Cells.Cell;
-import model.Cells.OpenCell;
+import model.agent.Agent;
+import model.agent.Scout;
+import model.cell.Cell;
+import model.cell.OpenCell;
 import model.states.WorldState;
 import sample.Settings;
 import sample.Stats;
@@ -83,7 +85,7 @@ public class World {
 
     private void generateAgents(int amount){
         for (int i = 0; i < amount; i++) {
-            agents.add(new Agent((OpenCell) grid[nest.getX()][nest.getY()], Agent.Heading.NORTH, this));
+            agents.add(new Scout((OpenCell) grid[nest.getX()][nest.getY()], Agent.Heading.NORTH, this));
         }
     }
 

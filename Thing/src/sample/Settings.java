@@ -2,7 +2,7 @@ package sample;
 
 import maps.Map;
 import maps.MapGenerator;
-import model.Cells.OpenCell.PheromoneColor;
+import model.cell.OpenCell.PheromoneColor;
 
 /**
  * Created by kyrrelm on 08.11.2016.

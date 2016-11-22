@@ -17,7 +17,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import maps.Map;
 import maps.MapGenerator;
-import model.Cells.Cell;
+import model.cell.Cell;
 import model.World;
 import model.states.WorldState;
 

@@ -1,7 +1,7 @@
 package model.states;
 
-import model.Cells.Cell.Type;
-import model.Cells.OpenCell.PheromoneColor;
+import model.cell.Cell.Type;
+import model.cell.OpenCell.PheromoneColor;
 
 /**
  * Created by kyrrelm on 19.10.2016.

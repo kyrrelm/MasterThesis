@@ -1,8 +1,8 @@
 package maps;
 
 import sample.Settings;
-import model.Cells.Cell;
-import model.Cells.OpenCell;
+import model.cell.Cell;
+import model.cell.OpenCell;
 
 /**
  * Created by Kyrre on 25.10.2016.

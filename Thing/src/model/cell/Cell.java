@@ -1,4 +1,4 @@
-package model.Cells;
+package model.cell;
 
 import model.states.CellState;
 

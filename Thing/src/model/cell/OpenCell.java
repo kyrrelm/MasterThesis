@@ -1,6 +1,6 @@
-package model.Cells;
+package model.cell;
 
-import model.Agent;
+import model.agent.Agent;
 import model.states.CellState;
 
 import java.util.HashSet;
@@ -56,9 +56,6 @@ public class OpenCell extends Cell {
 
     public boolean containsAgent(){
         return !agents.isEmpty();
-//        if (agent == null)
-//            return false;
-//        return true;
     }
 
     public int getFoodCount() {
@@ -67,11 +64,6 @@ public class OpenCell extends Cell {
 
     public boolean placeAgent(Agent agent) {
         return this.agents.add(agent);
-//        if (this.agent == null){
-//            this.agent = agent;
-//            return true;
-//        }
-//        return false;
     }
 
     public void removeAgent(Agent agent){
