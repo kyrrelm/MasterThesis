@@ -2,6 +2,7 @@ package model;
 
 
 import maps.Map;
+import model.agent.Agent;
 import model.agent.Scout;
 import model.cell.Cell;
 import model.cell.OpenCell;
@@ -15,7 +16,7 @@ import java.util.ArrayList;
  * Created by Kyrre on 17.10.2016.
  */
 public class World {
-    private ArrayList<Scout> scouts;
+    private ArrayList<Agent> agents;
     private final int sizeX;
     private final int sizeY;
     private Border border;
@@ -24,7 +25,7 @@ public class World {
 
     private void init(){
         this.border = new Border();
-        this.scouts = new ArrayList<>();
+        this.agents = new ArrayList<>();
     }
 
     public World(Map map) {
@@ -61,7 +62,7 @@ public class World {
     }
 
     private WorldState tick(int i){
-        scouts.forEach(scout -> scout.interact(i));
+        agents.forEach(agent -> agent.interact(i));
         //System.out.println("World:");
         //System.out.println(this);
         return new WorldState(grid);
@@ -84,7 +85,7 @@ public class World {
 
     private void generateAgents(int amount){
         for (int i = 0; i < amount; i++) {
-            scouts.add(new Scout((OpenCell) grid[nest.getX()][nest.getY()], Scout.Heading.NORTH, this));
+            agents.add(new Scout((OpenCell) grid[nest.getX()][nest.getY()], Scout.Heading.NORTH, this));
         }
     }
 
