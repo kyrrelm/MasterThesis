@@ -306,15 +306,15 @@ public abstract class Agent {
         currentCell.setApfValue(min+1);
     }
 
-    protected boolean handleTrail() {
+    protected boolean handleTrail(boolean removeBrown) {
         OpenCell trail = senseAndReturnTrail(front,right,back,left);
-        return climbTrail(trail);
+        return climbTrail(trail, removeBrown);
     }
 
-    protected boolean climbTrail(OpenCell trail) {
+    protected boolean climbTrail(OpenCell trail, boolean removeBrown) {
         climbingTrail = true;
         if (trail == null){
-            if (foodAmountAtLastLocation == 0 && senseAndRemoveBrown(front, right, back, left)){
+            if (foodAmountAtLastLocation == 0 && removeBrown && senseAndRemoveBrown(front, right, back, left)){
                 return true;
             }
             climbingTrail = false;
@@ -346,6 +346,40 @@ public abstract class Agent {
             }
         }
         return null;
+    }
+
+    protected void returnToNest(OpenCell existingTrail) {
+        returningToNest = true;
+        if (existingTrail != null){
+            moveToCell(existingTrail);
+            return;
+        }
+        if (goToNest()){
+            returningToNest = false;
+            return;
+        }
+        System.out.println("Something wrong in returnToNest");
+    }
+
+    protected boolean goToNest() {
+        if (front.getType() == Cell.Type.NEST){
+            move((OpenCell) front);
+            atHome = true;
+            return true;
+        }
+        if (left.getType() == Cell.Type.NEST){
+            rotateLeft();
+            move((OpenCell) front);
+            atHome = true;
+            return true;
+        }
+        if (right.getType() == Cell.Type.NEST){
+            rotateRight();
+            move((OpenCell) front);
+            atHome = true;
+            return true;
+        }
+        return false;
     }
 
 

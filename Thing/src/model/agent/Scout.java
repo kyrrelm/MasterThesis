@@ -37,7 +37,7 @@ public class Scout extends Agent{
         if(atHome){
             unload();
             atHome = false;
-            if (handleTrail()){
+            if (handleTrail(true)){
                 return true;
             }
         }
@@ -47,7 +47,7 @@ public class Scout extends Agent{
             }
         }
         if (climbingTrail){
-            if (climbTrail(senseAndReturnTrail(front,right,left))){
+            if (climbTrail(senseAndReturnTrail(front,right,left), true)){
                 return true;
             }
         }
@@ -63,8 +63,6 @@ public class Scout extends Agent{
             returnToNest(senseAndReturnTrail(front,right,left));
             return true;
         }
-
-
         if (lookForFood()){
             return true;
         }
@@ -120,7 +118,7 @@ public class Scout extends Agent{
 
 
     /**
-     * Re-writing this to snse neigbours breaks trail stuff
+     * Re-writing this to sense neigbours breaks trail stuff
      * @return
      */
     private boolean lookForFood() {
@@ -151,19 +149,6 @@ public class Scout extends Agent{
         }
     }
 
-    private void returnToNest(OpenCell existingTrail) {
-        returningToNest = true;
-        if (existingTrail != null){
-            moveToCell(existingTrail);
-            return;
-        }
-        if (goToNest()){
-            returningToNest = false;
-            return;
-        }
-        System.out.println("Something wrong in returnToNest");
-    }
-
     private void returnAndColor() {
         if (!returnAndColor){
             trailId = genIdTrail();
@@ -185,27 +170,6 @@ public class Scout extends Agent{
         if (currentCell.getType() == Type.NEST){
             currentCell.recruitHarvesters(trailId, 1);
         }
-    }
-
-    private boolean goToNest() {
-        if (front.getType() == Type.NEST){
-            move((OpenCell) front);
-            atHome = true;
-            return true;
-        }
-        if (left.getType() == Type.NEST){
-            rotateLeft();
-            move((OpenCell) front);
-            atHome = true;
-            return true;
-        }
-        if (right.getType() == Type.NEST){
-            rotateRight();
-            move((OpenCell) front);
-            atHome = true;
-            return true;
-        }
-        return false;
     }
 
     private OpenCell findLowest(Cell... cells) {
