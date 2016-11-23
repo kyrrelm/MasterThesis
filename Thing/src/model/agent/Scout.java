@@ -2,7 +2,6 @@ package model.agent;
 
 import model.World;
 import model.cell.Cell;
-import model.cell.Cell.Type;
 import model.cell.OpenCell;
 import sample.Settings;
 
@@ -20,15 +19,11 @@ public class Scout extends Agent{
         return idGenTrail++;
     }
 
-    private boolean returningToNest;
     private boolean returnAndColor;
-    private boolean atHome;
 
     public Scout(OpenCell currentCell, Heading heading, World world) {
-        super(currentCell, heading, world);
+        super(currentCell, heading, world, AgentType.SCOUT);
         this.returnAndColor = false;
-        this.atHome = false;
-        this.returningToNest = false;
         this.followingBrown = false;
     }
 
@@ -128,7 +123,7 @@ public class Scout extends Agent{
             if (!currentCell.containsColor(PheromoneColor.BROWN)){
                 diffuseBrown(currentCell, left);
             }
-            this.load = currentCell.takeFood(Settings.AGENT_CAPACITY);
+            this.load = currentCell.takeFood(Settings.SCOUT_CAPACITY);
             this.foodAmountAtLastLocation = currentCell.getFoodCount();
             trailId = currentCell.getFirstTrailId();
             OpenCell existingTrail = senseAndReturnTrail(front,right,back,left);

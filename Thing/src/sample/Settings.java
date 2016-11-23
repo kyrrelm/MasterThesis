@@ -11,12 +11,13 @@ public class Settings {
 
     public static final int FOOD_COEFFICIENT = 10;
 
-    public static final int AGENT_CAPACITY = 4;
+    public static final int NUMBER_OF_SCOUTS = 30;
+    public static final int SCOUT_CAPACITY = 4;
 
-    public static final int NUMBER_OF_AGENTS = 30;
+    public static final int NUMBER_OF_HARVESTERS = 0;
+    public static final int HARVESTER_CAPACITY = 20;
 
     public static final boolean USING_APF_VALUE = true;
-
     public static final Map MAP = MapGenerator.APF_KILLER_FOOD;
 
     public static String giveColor(PheromoneColor color) {
@@ -43,8 +44,12 @@ public class Settings {
 
     public static String getLog() {
         String output =  "Map: "+ MAP.name + "\nTotal food count: " + MAP.foodCount
-                +"\nFood range: " + FOOD_COEFFICIENT + " - " + FOOD_COEFFICIENT*9 + "\nNumber of agents: "
-                + NUMBER_OF_AGENTS +"\nAgent capacity: "+ AGENT_CAPACITY + "\nUsing pheromones: "+ !USING_APF_VALUE;
+                +"\nFood range: " + FOOD_COEFFICIENT + " - " + FOOD_COEFFICIENT*9
+                + "\nNumber of scouts: " + NUMBER_OF_SCOUTS
+                +"\nScout capacity: "+ SCOUT_CAPACITY
+                + "\nNumber of harvesters: "+ NUMBER_OF_HARVESTERS
+                + "\nHarvester capacity: " + HARVESTER_CAPACITY
+                + "\nUsing pheromones: "+ !USING_APF_VALUE;
         return output;
     }
 }

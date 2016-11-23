@@ -1,5 +1,7 @@
 package model.states;
 
+import model.agent.Agent;
+import model.agent.Agent.AgentType;
 import model.cell.Cell.Type;
 import model.cell.OpenCell.PheromoneColor;
 
@@ -12,18 +14,21 @@ public class CellState {
     public final int apfValue;
     private final PheromoneColor color;
     private final int agentCount;
+    private final AgentType agentType;
 
     public CellState(Type type) {
         this.type = type;
         this.apfValue = -1;
         this.color = null;
         this.agentCount = -1;
+        this.agentType = AgentType.DEFAULT;
     }
-    public CellState(Type type, int apfValue, PheromoneColor color, int agentCount) {
+    public CellState(Type type, int apfValue, PheromoneColor color, int agentCount, AgentType agentType) {
         this.type = type;
         this.apfValue = apfValue;
         this.color = color;
         this.agentCount = agentCount;
+        this.agentType = agentType;
     }
 
     @Override
@@ -40,7 +45,20 @@ public class CellState {
             return "X";
         }
         if (type == Type.AGENT) {
-            String out = "A";
+            String out;
+            switch (agentType){
+                case SCOUT:{
+                    out = "S";
+                    break;
+                }
+                case HARVESTER:{
+                    out = "H";
+                    break;
+                }
+                default:{
+                    out = "A";
+                }
+            }
             if (agentCount > 1){
                 out += agentCount;
             }

@@ -12,14 +12,21 @@ import sample.Stats;
 public abstract class Agent {
 
 
-
     public enum Heading{
         NORTH,
         EAST,
         SOUTH,
         WEST;
+
     }
 
+
+    public enum AgentType {
+        HARVESTER,
+        SCOUT,
+        DEFAULT;
+    }
+    public final AgentType agentType;
     protected final World world;
 
     protected Heading heading;
@@ -37,11 +44,15 @@ public abstract class Agent {
 
     protected boolean avoidingObstacle;
     protected boolean climbingTrail;
+    protected boolean returningToNest;
+    protected boolean atHome;
 
-    protected Agent(OpenCell currentCell, Heading heading, World world){
+    protected Agent(OpenCell currentCell, Heading heading, World world, AgentType agentType){
         this.currentCell = currentCell;
         this.heading = heading;
         this.world = world;
+        this.agentType = agentType;
+
         this.front = null;
         this.right = null;
         this.back = null;
@@ -54,6 +65,8 @@ public abstract class Agent {
 
         this.avoidingObstacle = false;
         this.climbingTrail = false;
+        this.atHome = false;
+        this.returningToNest = false;
     }
 
     public void interact(int timestep){

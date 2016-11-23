@@ -3,6 +3,7 @@ package model;
 
 import maps.Map;
 import model.agent.Agent;
+import model.agent.Harvester;
 import model.agent.Scout;
 import model.cell.Cell;
 import model.cell.OpenCell;
@@ -34,7 +35,7 @@ public class World {
         this.sizeY = map.sizeY;
         this.grid = map.grid;
         this.nest = map.nest;
-        generateAgents(Settings.NUMBER_OF_AGENTS);
+        generateAgents();
     }
 
     public World(int width, int height) {
@@ -44,7 +45,7 @@ public class World {
         this.grid = new Cell[sizeX][sizeY];
         this.nest = new OpenCell(sizeX/2, sizeY/2, Cell.Type.NEST);
         generateDefaultMap();
-        generateAgents(Settings.NUMBER_OF_AGENTS);
+        generateAgents();
     }
 
     public ArrayList<WorldState> runSim(int numberOfTicks){
@@ -70,7 +71,7 @@ public class World {
 
     private void generateDefaultMap() {
         grid[nest.getX()][nest.getY()] = nest;
-        //grid[2][2] = new OpenCell(2, 2, Cells.Type.NEST);
+        //grid[2][2] = new OpenCell(2, 2, Cells.AgentType.NEST);
         for (int x = 0; x < sizeX; x++) {
             for (int y = 0; y < sizeY; y++) {
                 if (grid[x][y] == null){
@@ -83,9 +84,12 @@ public class World {
 
 
 
-    private void generateAgents(int amount){
-        for (int i = 0; i < amount; i++) {
+    private void generateAgents(){
+        for (int i = 0; i < Settings.NUMBER_OF_SCOUTS; i++) {
             agents.add(new Scout((OpenCell) grid[nest.getX()][nest.getY()], Agent.Heading.NORTH, this));
+        }
+        for (int i = 0; i < Settings.NUMBER_OF_HARVESTERS; i++) {
+            agents.add(new Harvester((OpenCell) grid[nest.getX()][nest.getY()], Agent.Heading.NORTH, this));
         }
     }
 

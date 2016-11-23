@@ -137,13 +137,25 @@ public class OpenCell extends Cell {
     public CellState createCellState() {
         Type tmp = this.type;
         PheromoneColor color = PheromoneColor.DEFAULT;
+        Agent.AgentType agentType = Agent.AgentType.DEFAULT;
         if (!colors.isEmpty()){
             color = (PheromoneColor) colors.toArray()[0];
         }
-        if (!this.agents.isEmpty()){
+        if (!agents.isEmpty()){
             tmp = Type.AGENT;
             color = PheromoneColor.AGENT;
+            for (Agent a: agents) {
+                if (agentType == Agent.AgentType.DEFAULT){
+                    agentType = a.agentType;
+                }else if (agentType != a.agentType){
+                    agentType = Agent.AgentType.DEFAULT;
+                    break;
+                }
+            }
+            if (agents.size() == 1){
+                agentType = ((Agent)agents.toArray()[0]).agentType;
+            }
         }
-        return new CellState(tmp,apfValue,color, agents.size());
+        return new CellState(tmp,apfValue,color, agents.size(), agentType);
     }
 }

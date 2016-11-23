@@ -142,9 +142,6 @@ public class Main extends Application {
                                         outputCells[x][y].setStyle(Settings.giveColor(worldState.cellStates[x][y].getColor()));
                                     }
                                 }
-                                if (worldState.cellStates[x][y].type == Cell.Type.AGENT){
-
-                                }
                             }
                         }
                         playBackIndex++;
