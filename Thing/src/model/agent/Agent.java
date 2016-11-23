@@ -21,6 +21,8 @@ public abstract class Agent {
     }
 
 
+
+
     public enum AgentType {
         HARVESTER,
         SCOUT,
@@ -28,25 +30,24 @@ public abstract class Agent {
     }
     public final AgentType agentType;
     protected final World world;
-
     protected Heading heading;
-    protected OpenCell currentCell;
 
+    protected OpenCell currentCell;
     protected Cell front;
+
     protected Cell right;
     protected Cell back;
     protected Cell left;
-
     private int timestep;
+
     protected int load;
     protected int foodAmountAtLastLocation;
     protected int trailId;
-
     protected boolean avoidingObstacle;
+
     protected boolean climbingTrail;
     protected boolean returningToNest;
     protected boolean atHome;
-
     protected Agent(OpenCell currentCell, Heading heading, World world, AgentType agentType){
         this.currentCell = currentCell;
         this.heading = heading;
@@ -84,7 +85,6 @@ public abstract class Agent {
 
     protected abstract boolean behave();
 
-
     protected boolean avoidBorder() {
         if (front.getType() == Cell.Type.BORDER || right.getType() == Cell.Type.BORDER){
             while (!(front instanceof OpenCell) || right.getType() == Cell.Type.BORDER){
@@ -99,6 +99,7 @@ public abstract class Agent {
         }
         return false;
     }
+
 
     protected void avoidObstacleSmasa() {
         while (!(front instanceof OpenCell) && !avoidingObstacle){
@@ -139,6 +140,10 @@ public abstract class Agent {
     protected void unload() {
         Stats.getInstance().depositFood(load, timestep);
         load = 0;
+    }
+
+    public void setTrailId(int id) {
+        trailId = id;
     }
 
     protected void sense() {

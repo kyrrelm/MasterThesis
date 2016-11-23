@@ -204,7 +204,7 @@ public class MapGenerator {
     });
 
 
-    public static final Map SMASA_22 = genMap("Smasa 2",new char[][]{
+    public static final Map SMASA_2 = genMap("Smasa 2",new char[][]{
             {' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '},
             {' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '},
             {' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '},

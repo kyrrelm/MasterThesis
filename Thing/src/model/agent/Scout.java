@@ -14,6 +14,7 @@ public class Scout extends Agent{
 
     private static int idGenTrail = 0;
     private boolean followingBrown;
+    private boolean recruitHarvesters;
 
     private static int genIdTrail(){
         return idGenTrail++;
@@ -25,10 +26,14 @@ public class Scout extends Agent{
         super(currentCell, heading, world, AgentType.SCOUT);
         this.returnAndColor = false;
         this.followingBrown = false;
+        this.recruitHarvesters = false;
     }
 
     protected boolean behave() {
         updateValue(front,right,back,left);
+        if (recruitHarvesters){
+            recruitHarvesters();
+        }
         if(atHome){
             unload();
             atHome = false;
@@ -166,12 +171,20 @@ public class Scout extends Agent{
         }
         returnAndColor = true;
         if(goToNest()){
+            recruitHarvesters = true;
             returnAndColor = false;
             return;
         }
         OpenCell lowest = findLowest(front,right,back,left);
         moveToCell(lowest);
         lowest.colorTrail(trailId);
+    }
+
+    private void recruitHarvesters() {
+        recruitHarvesters = false;
+        if (currentCell.getType() == Type.NEST){
+            currentCell.recruitHarvesters(trailId, 1);
+        }
     }
 
     private boolean goToNest() {

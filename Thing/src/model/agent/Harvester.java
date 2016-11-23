@@ -10,6 +10,7 @@ public class Harvester extends Agent{
 
     public Harvester(OpenCell currentCell, Heading heading, World world) {
         super(currentCell, heading, world, AgentType.HARVESTER);
+        currentCell.placeAgent(this);
         this.atHome = true;
     }
 

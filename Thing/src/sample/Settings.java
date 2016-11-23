@@ -11,14 +11,14 @@ public class Settings {
 
     public static final int FOOD_COEFFICIENT = 10;
 
-    public static final int NUMBER_OF_SCOUTS = 30;
+    public static final int NUMBER_OF_SCOUTS = 1;
     public static final int SCOUT_CAPACITY = 4;
 
-    public static final int NUMBER_OF_HARVESTERS = 0;
+    public static final int NUMBER_OF_HARVESTERS = 1;
     public static final int HARVESTER_CAPACITY = 20;
 
     public static final boolean USING_APF_VALUE = true;
-    public static final Map MAP = MapGenerator.APF_KILLER_FOOD;
+    public static final Map MAP = MapGenerator.SMASA_FOOD_1;
 
     public static String giveColor(PheromoneColor color) {
         switch (color){

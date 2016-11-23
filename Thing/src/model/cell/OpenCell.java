@@ -19,12 +19,12 @@ public class OpenCell extends Cell {
 
     public enum PheromoneColor {
         DEFAULT,
+
         BROWN,
         YELLOW,
         AGENT;
+
     }
-
-
     public OpenCell(int x, int y, Type type) {
         super(x, y, type);
         apfValue = -1;
@@ -37,20 +37,35 @@ public class OpenCell extends Cell {
         colors = new HashSet<>();
         trailIds = new HashSet<>();
     }
+
+
     public OpenCell(int x, int y, int foodCount) {
         this(x, y, Type.FOOD);
         this.foodCount = foodCount;
     }
-
     public int getApfValue() {
         return apfValue;
     }
+
     public void setApfValue(int apfValue) {
         if (hasApfValue()){
             this.apfValue = Math.min(this.apfValue, apfValue);
         }
         else {
             this.apfValue = apfValue;
+        }
+    }
+    public void recruitHarvesters(int trailId, int max) {
+        int count = 0;
+        for (Agent agent: agents) {
+            if (agent.agentType == Agent.AgentType.HARVESTER){
+                if (count++ < max){
+                    agent.setTrailId(trailId);
+                }
+                else {
+                    break;
+                }
+            }
         }
     }
 
