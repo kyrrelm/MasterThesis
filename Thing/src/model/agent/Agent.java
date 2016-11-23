@@ -59,11 +59,17 @@ public abstract class Agent {
     public void interact(int timestep){
         this.timestep = timestep;
         sense();
-        behave();
+        if (behave()){
+            return;
+        }
+        if (front.getType() == Cell.Type.OBSTACLE){
+            avoidObstacleSmasa();
+            return;
+        }
         avoidBorder();
     }
 
-    protected abstract void behave();
+    protected abstract boolean behave();
 
 
     protected boolean avoidBorder() {

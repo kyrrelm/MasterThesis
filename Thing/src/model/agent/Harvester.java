@@ -13,7 +13,7 @@ public class Harvester extends Agent{
     }
 
     @Override
-    protected void behave() {
-
+    protected boolean behave() {
+        return false;
     }
 }

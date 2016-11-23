@@ -32,41 +32,41 @@ public class Scout extends Agent{
         this.followingBrown = false;
     }
 
-    protected void behave() {
+    protected boolean behave() {
         updateValue(front,right,back,left);
         if(atHome){
             unload();
             atHome = false;
             if (handleTrail()){
-                return;
+                return true;
             }
         }
         if (followingBrown){
             if (followBrown()){
-                return;
+                return true;
             }
         }
         if (climbingTrail){
             if (climbTrail(senseAndReturnTrail(front,right,left))){
-                return;
+                return true;
             }
         }
         if (avoidingObstacle){
             avoidObstacleSmasa();
-            return;
+            return true;
         }
         if (returnAndColor){
             returnAndColor();
-            return;
+            return true;
         }
         if (returningToNest){
             returnToNest(senseAndReturnTrail(front,right,left));
-            return;
+            return true;
         }
 
 
         if (lookForFood()){
-            return;
+            return true;
         }
 
 
@@ -76,7 +76,7 @@ public class Scout extends Agent{
                     diffuseBrown(left);
                     rotateRight();
                     followBrown();
-                    return;
+                    return true;
                 }
                 else {
                     currentCell.removeColor(PheromoneColor.BROWN);
@@ -90,15 +90,13 @@ public class Scout extends Agent{
         if (right instanceof OpenCell && !((OpenCell) right).hasApfValue()){
             rotateRight();
             move((OpenCell) front);
-            return;
+            return true;
         }
         if (front instanceof OpenCell){
             move((OpenCell) front);
-            return;
+            return true;
         }
-        if (front.getType() == Type.OBSTACLE){
-            avoidObstacleSmasa();
-        }
+        return false;
     }
 
 
