@@ -168,7 +168,7 @@ public class Scout extends Agent{
     private void recruitHarvesters() {
         recruitHarvesters = false;
         if (currentCell.getType() == Type.NEST){
-            currentCell.recruitHarvesters(trailId, 1);
+            currentCell.recruitHarvesters(trailId, Settings.RECRUIT_SIZE);
         }
     }
 

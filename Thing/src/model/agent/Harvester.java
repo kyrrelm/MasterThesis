@@ -23,8 +23,8 @@ public class Harvester extends Agent{
             unload();
             if (handleTrail(false)){
                 atHome = false;
-                return true;
             }
+            return true;
         }
         if (climbingTrail){
             if (climbTrail(senseAndReturnTrail(front,right,left), false)){
@@ -35,7 +35,21 @@ public class Harvester extends Agent{
             returnToNest(senseAndReturnTrail(front,right,left));
             return true;
         }
-        return pickUpFood();
+        if (!pickUpFood()){
+            returningToNest = true;
+            returnToNest(senseAndReturnTrail(front,right,back,left));
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    protected boolean goToNest() {
+        boolean atNest = super.goToNest();
+        if (foodAmountAtLastLocation == 0){
+            trailId = -1;
+        }
+        return atNest;
     }
 
     private boolean pickUpFood() {

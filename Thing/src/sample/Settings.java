@@ -15,11 +15,19 @@ public class Settings {
     public static final int HARVESTER_CAPACITY = 20;
 
 
-    public static final int NUMBER_OF_SCOUTS = 1;
-    public static final int NUMBER_OF_HARVESTERS = 0;
+    public static final int NUMBER_OF_SCOUTS = 2;
+    public static final int NUMBER_OF_HARVESTERS = 1;
+
+    public static final int RECRUIT_SIZE = 1;
 
     public static final boolean USING_APF_VALUE = true;
     public static final Map MAP = MapGenerator.SMASA_FOOD_1;
+
+
+    //----------------- Heterogeneous ---------------
+    public static final boolean SCOUT_REMOVE_TRAIL = false;
+
+
 
     public static String giveColor(PheromoneColor color) {
         switch (color){

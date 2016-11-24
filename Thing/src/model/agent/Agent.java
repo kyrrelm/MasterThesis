@@ -142,8 +142,10 @@ public abstract class Agent {
         load = 0;
     }
 
-    public void setTrailId(int id) {
-        trailId = id;
+    public void recruit(int id) {
+        if (trailId == -1){
+            trailId = id;
+        }
     }
 
     protected void sense() {
@@ -321,7 +323,7 @@ public abstract class Agent {
             return false;
         }
         moveToCell(trail);
-        if (foodAmountAtLastLocation == 0){
+        if (Settings.SCOUT_REMOVE_TRAIL && foodAmountAtLastLocation == 0){
             trail.removeTrail(trailId);
             trail.removeColor(OpenCell.PheromoneColor.BROWN);
         }

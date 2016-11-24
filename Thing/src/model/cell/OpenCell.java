@@ -60,7 +60,7 @@ public class OpenCell extends Cell {
         for (Agent agent: agents) {
             if (agent.agentType == Agent.AgentType.HARVESTER){
                 if (count++ < max){
-                    agent.setTrailId(trailId);
+                    agent.recruit(trailId);
                 }
                 else {
                     break;
