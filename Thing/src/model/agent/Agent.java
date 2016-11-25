@@ -106,6 +106,10 @@ public abstract class Agent {
             rotateRight();
         }
         avoidingObstacle = true;
+        if (front.getType() == Cell.Type.BORDER){
+            avoidBorder();
+            return;
+        }
         if (front instanceof OpenCell && !((OpenCell) front).hasApfValue()){
             avoidingObstacle = false;
             move((OpenCell) front);
