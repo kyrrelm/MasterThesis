@@ -15,8 +15,8 @@ public class Settings {
     public static final int HARVESTER_CAPACITY = 20;
 
 
-    public static final int NUMBER_OF_SCOUTS = 4;
-    public static final int NUMBER_OF_HARVESTERS = 0;
+    public static final int NUMBER_OF_SCOUTS = 2;
+    public static final int NUMBER_OF_HARVESTERS = 2;
 
     public static final int RECRUIT_SIZE = 1;
 

@@ -46,6 +46,9 @@ public class Harvester extends Agent{
         }
         if (!pickUpFood()){
             foodAmountAtLastLocation = 0;
+            if (senseAndRemoveBrown(front,right,back,left)){
+                return true;
+            }
             returnToNest(senseAndReturnTrail(front,right,back,left), Settings.HARVESTER_REMOVE_TRAIL);
             return true;
         }
