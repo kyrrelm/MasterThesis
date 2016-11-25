@@ -350,8 +350,11 @@ public abstract class Agent {
         return null;
     }
 
-    protected void returnToNest(OpenCell existingTrail) {
+    protected void returnToNest(OpenCell existingTrail, boolean canRemoveTrail) {
         returningToNest = true;
+        if (canRemoveTrail && foodAmountAtLastLocation == 0){
+            currentCell.removeTrail(trailId);
+        }
         if (existingTrail != null){
             moveToCell(existingTrail);
             return;
@@ -360,7 +363,10 @@ public abstract class Agent {
             returningToNest = false;
             return;
         }
-        System.out.println("Something wrong in returnToNest");
+        System.out.println("Something wrong in returnToNest "+agentType);
+        System.out.println("Food at last; "+foodAmountAtLastLocation);
+        System.out.println(existingTrail);
+        System.out.println(canRemoveTrail);
     }
 
     protected boolean goToNest() {

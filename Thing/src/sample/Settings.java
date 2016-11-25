@@ -26,7 +26,7 @@ public class Settings {
 
     //----------------- Heterogeneous ---------------
     public static final boolean SCOUT_REMOVE_TRAIL = true;
-
+    public static final boolean HARVESTER_REMOVE_TRAIL = false;
 
 
     public static String giveColor(PheromoneColor color) {

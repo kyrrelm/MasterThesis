@@ -32,16 +32,16 @@ public class Harvester extends Agent{
             }
         }
         if (returningToNest){
-            returnToNest(senseAndReturnTrail(front,right,left));
+            returnToNest(senseAndReturnTrail(front,right,left), Settings.HARVESTER_REMOVE_TRAIL);
             return true;
         }
         if (!pickUpFood()){
             foodAmountAtLastLocation = 0;
             returningToNest = true;
-            returnToNest(senseAndReturnTrail(front,right,back,left));
+            returnToNest(senseAndReturnTrail(front,right,back,left), Settings.HARVESTER_REMOVE_TRAIL);
             return true;
         }
-        return false;
+        return true;
     }
 
     @Override
@@ -57,7 +57,7 @@ public class Harvester extends Agent{
         if (currentCell.getType() == Type.FOOD){
             this.load = currentCell.takeFood(Settings.HARVESTER_CAPACITY);
             this.foodAmountAtLastLocation = currentCell.getFoodCount();
-            returnToNest(senseAndReturnTrail(front,right,back,left));
+            returnToNest(senseAndReturnTrail(front,right,back,left), Settings.HARVESTER_REMOVE_TRAIL);
             return true;
         }
         return false;

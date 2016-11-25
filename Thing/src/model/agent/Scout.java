@@ -60,7 +60,7 @@ public class Scout extends Agent{
             return true;
         }
         if (returningToNest){
-            returnToNest(senseAndReturnTrail(front,right,left));
+            returnToNest(senseAndReturnTrail(front,right,left), false);
             return true;
         }
         if (lookForFood()){
@@ -134,7 +134,7 @@ public class Scout extends Agent{
                 returnAndColor();
             }
             else {
-                returnToNest(existingTrail);
+                returnToNest(existingTrail, false);
             }
             return true;
         }
