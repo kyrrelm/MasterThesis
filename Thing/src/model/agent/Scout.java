@@ -186,4 +186,9 @@ public class Scout extends Agent{
         return lowest;
     }
 
+    @Override
+    protected void move(OpenCell toCell) {
+        super.move(toCell);
+        updateValue(front,right,back,left);
+    }
 }

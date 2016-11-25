@@ -15,7 +15,7 @@ public class Settings {
     public static final int HARVESTER_CAPACITY = 20;
 
 
-    public static final int NUMBER_OF_SCOUTS = 2;
+    public static final int NUMBER_OF_SCOUTS = 3;
     public static final int NUMBER_OF_HARVESTERS = 1;
 
     public static final int RECRUIT_SIZE = 1;
@@ -26,7 +26,7 @@ public class Settings {
 
     //----------------- Heterogeneous ---------------
     public static final boolean SCOUT_REMOVE_TRAIL = true;
-    public static final boolean HARVESTER_REMOVE_TRAIL = false;
+    public static final boolean HARVESTER_REMOVE_TRAIL = true;
 
 
     public static String giveColor(PheromoneColor color) {

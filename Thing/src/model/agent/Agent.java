@@ -401,6 +401,5 @@ public abstract class Agent {
         currentCell.placeAgent(this);
         Stats.getInstance().consumeEnergy(1);
         sense();
-        updateValue(front,right,back,left);
     }
 }
