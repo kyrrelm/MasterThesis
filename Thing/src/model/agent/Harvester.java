@@ -36,6 +36,7 @@ public class Harvester extends Agent{
             return true;
         }
         if (!pickUpFood()){
+            foodAmountAtLastLocation = 0;
             returningToNest = true;
             returnToNest(senseAndReturnTrail(front,right,back,left));
             return true;
