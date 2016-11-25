@@ -91,6 +91,10 @@ public class Scout extends Agent{
             return true;
         }
         if (front instanceof OpenCell){
+//            if (((OpenCell) front).hasApfValue() && left instanceof OpenCell && !((OpenCell) left).hasApfValue()){
+//                rotateLeft();
+//                move((OpenCell) front);
+//            }
             move((OpenCell) front);
             return true;
         }
@@ -170,20 +174,6 @@ public class Scout extends Agent{
         if (currentCell.getType() == Type.NEST){
             currentCell.recruitHarvesters(trailId, Settings.RECRUIT_SIZE);
         }
-    }
-
-    private OpenCell findLowest(Cell... cells) {
-        OpenCell lowest = null;
-        for (Cell c: cells){
-            if (c instanceof OpenCell && ((OpenCell) c).hasApfValue()){
-                if (lowest == null){
-                    lowest = (OpenCell) c;
-                }else if (lowest.getApfValue() > ((OpenCell) c).getApfValue()){
-                    lowest = (OpenCell) c;
-                }
-            }
-        }
-        return lowest;
     }
 
     @Override

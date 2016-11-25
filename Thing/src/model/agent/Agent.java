@@ -354,23 +354,20 @@ public abstract class Agent {
         return null;
     }
 
-    protected void returnToNest(OpenCell existingTrail, boolean canRemoveTrail) {
+    protected boolean returnToNest(OpenCell existingTrail, boolean canRemoveTrail) {
         returningToNest = true;
         if (canRemoveTrail && foodAmountAtLastLocation == 0){
             currentCell.removeTrail(trailId);
         }
         if (existingTrail != null){
             moveToCell(existingTrail);
-            return;
+            return true;
         }
         if (goToNest()){
             returningToNest = false;
-            return;
+            return true;
         }
-        System.out.println("Something wrong in returnToNest "+agentType);
-        System.out.println("Food at last; "+foodAmountAtLastLocation);
-        System.out.println(existingTrail);
-        System.out.println(canRemoveTrail);
+        return false;
     }
 
     protected boolean goToNest() {
@@ -392,6 +389,20 @@ public abstract class Agent {
             return true;
         }
         return false;
+    }
+
+    protected OpenCell findLowest(Cell... cells) {
+        OpenCell lowest = null;
+        for (Cell c: cells){
+            if (c instanceof OpenCell && ((OpenCell) c).hasApfValue()){
+                if (lowest == null){
+                    lowest = (OpenCell) c;
+                }else if (lowest.getApfValue() > ((OpenCell) c).getApfValue()){
+                    lowest = (OpenCell) c;
+                }
+            }
+        }
+        return lowest;
     }
 
 

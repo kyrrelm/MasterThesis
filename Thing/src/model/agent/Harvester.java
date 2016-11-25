@@ -13,12 +13,14 @@ import static model.cell.Cell.*;
 public class Harvester extends Agent{
 
     private boolean senseAndRemoveBrown;
+    private boolean returningToNestWithoutTrail;
 
     public Harvester(OpenCell currentCell, Heading heading, World world) {
         super(currentCell, heading, world, AgentType.HARVESTER);
         currentCell.placeAgent(this);
         this.atHome = true;
         this.senseAndRemoveBrown = false;
+        this.returningToNestWithoutTrail = false;
     }
 
     @Override
@@ -36,7 +38,14 @@ public class Harvester extends Agent{
             }
         }
         if (returningToNest){
-            returnToNest(senseAndReturnTrail(front,right,left), Settings.HARVESTER_REMOVE_TRAIL);
+            if (!returnToNest(senseAndReturnTrail(front,right,left), Settings.HARVESTER_REMOVE_TRAIL)){
+                returnToNestWithoutTrail();
+                return true;
+            }
+            return true;
+        }
+        if (returningToNestWithoutTrail){
+            returnToNestWithoutTrail();
             return true;
         }
         if (senseAndRemoveBrown){
@@ -49,10 +58,22 @@ public class Harvester extends Agent{
             if (senseAndRemoveBrown(front,right,back,left)){
                 return true;
             }
-            returnToNest(senseAndReturnTrail(front,right,back,left), Settings.HARVESTER_REMOVE_TRAIL);
-            return true;
+            if (!returnToNest(senseAndReturnTrail(front,right,back,left), Settings.HARVESTER_REMOVE_TRAIL)){
+                returnToNestWithoutTrail();
+                return true;
+            }
         }
         return true;
+    }
+
+    private void returnToNestWithoutTrail() {
+        returningToNestWithoutTrail = true;
+        if(goToNest()){
+            returningToNestWithoutTrail = false;
+            return;
+        }
+        OpenCell lowest = findLowest(front,right,back,left);
+        moveToCell(lowest);
     }
 
     @Override
