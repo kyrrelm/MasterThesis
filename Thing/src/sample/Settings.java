@@ -25,7 +25,7 @@ public class Settings {
 
 
     //----------------- Heterogeneous ---------------
-    public static final boolean SCOUT_REMOVE_TRAIL = false;
+    public static final boolean SCOUT_REMOVE_TRAIL = true;
 
 
 

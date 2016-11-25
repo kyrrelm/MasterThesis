@@ -21,13 +21,13 @@ public class Harvester extends Agent{
     protected boolean behave() {
         if(atHome){
             unload();
-            if (handleTrail(false)){
+            if (handleTrail(false,false)){
                 atHome = false;
             }
             return true;
         }
         if (climbingTrail){
-            if (climbTrail(senseAndReturnTrail(front,right,left), false)){
+            if (climbTrail(senseAndReturnTrail(front,right,left),false,false)){
                 return true;
             }
         }

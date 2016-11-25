@@ -308,22 +308,22 @@ public abstract class Agent {
         currentCell.setApfValue(min+1);
     }
 
-    protected boolean handleTrail(boolean removeBrown) {
+    protected boolean handleTrail(boolean canRemoveTrail, boolean canRemoveBrown) {
         OpenCell trail = senseAndReturnTrail(front,right,back,left);
-        return climbTrail(trail, removeBrown);
+        return climbTrail(trail, canRemoveTrail, canRemoveBrown);
     }
 
-    protected boolean climbTrail(OpenCell trail, boolean removeBrown) {
+    protected boolean climbTrail(OpenCell trail, boolean canRemoveTrail, boolean canRemoveBrown) {
         climbingTrail = true;
         if (trail == null){
-            if (foodAmountAtLastLocation == 0 && removeBrown && senseAndRemoveBrown(front, right, back, left)){
+            if (foodAmountAtLastLocation == 0 && canRemoveBrown && senseAndRemoveBrown(front, right, back, left)){
                 return true;
             }
             climbingTrail = false;
             return false;
         }
         moveToCell(trail);
-        if (Settings.SCOUT_REMOVE_TRAIL && foodAmountAtLastLocation == 0){
+        if (canRemoveTrail && foodAmountAtLastLocation == 0){
             trail.removeTrail(trailId);
             trail.removeColor(OpenCell.PheromoneColor.BROWN);
         }

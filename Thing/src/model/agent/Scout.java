@@ -37,7 +37,7 @@ public class Scout extends Agent{
         if(atHome){
             unload();
             atHome = false;
-            if (handleTrail(true)){
+            if (handleTrail(Settings.SCOUT_REMOVE_TRAIL,true)){
                 return true;
             }
         }
@@ -47,7 +47,7 @@ public class Scout extends Agent{
             }
         }
         if (climbingTrail){
-            if (climbTrail(senseAndReturnTrail(front,right,left), true)){
+            if (climbTrail(senseAndReturnTrail(front,right,left), Settings.SCOUT_REMOVE_TRAIL, true)){
                 return true;
             }
         }
