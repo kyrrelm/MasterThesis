@@ -91,10 +91,12 @@ public class Scout extends Agent{
             return true;
         }
         if (front instanceof OpenCell){
-//            if (((OpenCell) front).hasApfValue() && left instanceof OpenCell && !((OpenCell) left).hasApfValue()){
-//                rotateLeft();
-//                move((OpenCell) front);
-//            }
+            //Moves left
+            if (((OpenCell) front).hasApfValue() && left instanceof OpenCell && !((OpenCell) left).hasApfValue()){
+                rotateLeft();
+                move((OpenCell) front);
+                return true;
+            }
             move((OpenCell) front);
             return true;
         }
