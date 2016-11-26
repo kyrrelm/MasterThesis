@@ -17,16 +17,18 @@ import java.util.ArrayList;
  * Created by Kyrre on 17.10.2016.
  */
 public class World {
-    private ArrayList<Agent> agents;
+    private ArrayList<Scout> scouts;
     private final int sizeX;
     private final int sizeY;
     private Border border;
     private Cell[][] grid;
     private OpenCell nest;
+    private ArrayList<Harvester> harvester;
 
     private void init(){
         this.border = new Border();
-        this.agents = new ArrayList<>();
+        this.scouts = new ArrayList<>();
+        this.harvester = new ArrayList<>();
     }
 
     public World(Map map) {
@@ -63,7 +65,8 @@ public class World {
     }
 
     private WorldState tick(int i){
-        agents.forEach(agent -> agent.interact(i));
+        scouts.forEach(agent -> agent.interact(i));
+        harvester.forEach(harvester -> harvester.interact(i));
         //System.out.println("World:");
         //System.out.println(this);
         return new WorldState(grid);
@@ -86,10 +89,10 @@ public class World {
 
     private void generateAgents(){
         for (int i = 0; i < Settings.NUMBER_OF_SCOUTS; i++) {
-            agents.add(new Scout((OpenCell) grid[nest.getX()][nest.getY()], Agent.Heading.NORTH, this));
+            scouts.add(new Scout((OpenCell) grid[nest.getX()][nest.getY()], Agent.Heading.NORTH, this));
         }
         for (int i = 0; i < Settings.NUMBER_OF_HARVESTERS; i++) {
-            agents.add(new Harvester((OpenCell) grid[nest.getX()][nest.getY()], Agent.Heading.NORTH, this));
+            harvester.add(new Harvester((OpenCell) grid[nest.getX()][nest.getY()], Agent.Heading.NORTH, this));
         }
     }
 
