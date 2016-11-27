@@ -69,28 +69,29 @@ public class Scout extends Agent{
             return true;
         }
 
-
-        if (currentCell.containsColor(PheromoneColor.BROWN) && isNew){
-            if (right instanceof OpenCell){
-                if (((OpenCell) right).containsColor(PheromoneColor.BROWN)){
-                    diffuseBrown(left);
-                    rotateRight();
-                    followBrown();
-                    return true;
-                }
-                else if (front instanceof OpenCell) {
-                    if (((OpenCell) front).containsColor(PheromoneColor.BROWN)) {
+        if (Settings.DIFFUSE_BROWN){
+            if (currentCell.containsColor(PheromoneColor.BROWN) && isNew){
+                if (right instanceof OpenCell){
+                    if (((OpenCell) right).containsColor(PheromoneColor.BROWN)){
                         diffuseBrown(left);
+                        rotateRight();
                         followBrown();
                         return true;
                     }
-                }
-                else {
+                    else if (front instanceof OpenCell) {
+                        if (((OpenCell) front).containsColor(PheromoneColor.BROWN)) {
+                            diffuseBrown(left);
+                            followBrown();
+                            return true;
+                        }
+                    }
+                    else {
+                        currentCell.removeColor(PheromoneColor.BROWN);
+                    }
+                }else {
                     currentCell.removeColor(PheromoneColor.BROWN);
-                }
-            }else {
-                currentCell.removeColor(PheromoneColor.BROWN);
 
+                }
             }
         }
 
@@ -144,7 +145,9 @@ public class Scout extends Agent{
     private boolean lookForFood() {
         if (currentCell.getType() == Type.FOOD){
             if (!currentCell.containsColor(PheromoneColor.BROWN)){
-                diffuseBrown(currentCell, left);
+                if (Settings.DIFFUSE_BROWN){
+                    diffuseBrown(currentCell, left);
+                }
             }
             this.load = currentCell.takeFood(Settings.SCOUT_CAPACITY);
             this.foodAmountAtLastLocation = currentCell.getFoodCount();

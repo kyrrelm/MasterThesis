@@ -15,15 +15,17 @@ public class Settings {
     public static final int HARVESTER_CAPACITY = 20;
 
 
-    public static final int NUMBER_OF_SCOUTS = 4;
-    public static final int NUMBER_OF_HARVESTERS = 1;
+    public static final int NUMBER_OF_SCOUTS = 8;
+    public static final int NUMBER_OF_HARVESTERS = 2;
 
-    public static final int RECRUIT_SIZE = 10000;
+    public static final int RECRUIT_SIZE = 1;
+    public static final boolean CONSTANT_RECRUITMENT = false;
+    public static final boolean DIFFUSE_BROWN = false;
 
     public static final boolean USING_APF_VALUE = true;
+
+
     public static final Map MAP = MapGenerator.APF_KILLER_FOOD;
-
-
     //----------------- Heterogeneous ---------------
     public static final boolean SCOUT_REMOVE_TRAIL = true;
     public static final boolean HARVESTER_REMOVE_TRAIL = true;
