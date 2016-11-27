@@ -39,6 +39,7 @@ public class Harvester extends Agent{
         }
         if (returningToNest){
             if (!returnToNest(senseAndReturnTrail(front,right,left), Settings.HARVESTER_REMOVE_TRAIL)){
+                returningToNest = false;
                 returnToNestWithoutTrail();
                 return true;
             }
@@ -83,6 +84,12 @@ public class Harvester extends Agent{
             trailId = -1;
         }
         return atNest;
+    }
+
+    @Override
+    protected void move(OpenCell toCell) {
+        System.out.println(toCell.getX() + "   "+ toCell.getY());
+        super.move(toCell);
     }
 
     @Override
