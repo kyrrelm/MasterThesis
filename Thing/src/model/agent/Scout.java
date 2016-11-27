@@ -5,6 +5,8 @@ import model.cell.Cell;
 import model.cell.OpenCell;
 import sample.Settings;
 
+import java.util.Set;
+
 import static model.cell.OpenCell.*;
 
 /**
@@ -38,6 +40,9 @@ public class Scout extends Agent{
         }
         if(atHome){
             unload();
+            if (Settings.CONSTANT_RECRUITMENT && foodAmountAtLastLocation > 0){
+                recruitHarvesters();
+            }
             atHome = false;
             if (handleTrail(Settings.SCOUT_REMOVE_TRAIL,true)){
                 return true;

@@ -6,6 +6,8 @@ import model.cell.OpenCell;
 import sample.Settings;
 import sample.Stats;
 
+import java.util.Set;
+
 /**
  * Created by kyrrelm on 22.11.2016.
  */

@@ -19,7 +19,7 @@ public class Settings {
     public static final int NUMBER_OF_HARVESTERS = 2;
 
     public static final int RECRUIT_SIZE = 1;
-    public static final boolean CONSTANT_RECRUITMENT = false;
+    public static final boolean CONSTANT_RECRUITMENT = true;
     public static final boolean DIFFUSE_BROWN = false;
 
     public static final boolean USING_APF_VALUE = true;
