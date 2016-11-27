@@ -15,6 +15,7 @@ public class Scout extends Agent{
     private static int idGenTrail = 0;
     private boolean followingBrown;
     private boolean recruitHarvesters;
+    private boolean isNew;
 
     private static int genIdTrail(){
         return idGenTrail++;
@@ -27,6 +28,7 @@ public class Scout extends Agent{
         this.returnAndColor = false;
         this.followingBrown = false;
         this.recruitHarvesters = false;
+        this.isNew = true;
     }
 
     protected boolean behave() {
@@ -68,13 +70,20 @@ public class Scout extends Agent{
         }
 
 
-        if (currentCell.containsColor(PheromoneColor.BROWN)){
+        if (currentCell.containsColor(PheromoneColor.BROWN) && isNew){
             if (right instanceof OpenCell){
                 if (((OpenCell) right).containsColor(PheromoneColor.BROWN)){
                     diffuseBrown(left);
                     rotateRight();
                     followBrown();
                     return true;
+                }
+                else if (front instanceof OpenCell) {
+                    if (((OpenCell) front).containsColor(PheromoneColor.BROWN)) {
+                        diffuseBrown(left);
+                        followBrown();
+                        return true;
+                    }
                 }
                 else {
                     currentCell.removeColor(PheromoneColor.BROWN);
@@ -112,7 +121,12 @@ public class Scout extends Agent{
                 followingBrown = false;
                 return true;
             }
-            else if (((OpenCell) front).containsColor(PheromoneColor.BROWN)){
+            else if (front instanceof OpenCell && ((OpenCell) front).containsColor(PheromoneColor.BROWN)){
+                move((OpenCell) front);
+                return true;
+            }
+            else if (left instanceof OpenCell && ((OpenCell) left).containsColor(PheromoneColor.BROWN)){
+                rotateLeft();
                 move((OpenCell) front);
                 return true;
             }
@@ -181,6 +195,7 @@ public class Scout extends Agent{
     @Override
     protected void move(OpenCell toCell) {
         super.move(toCell);
+        isNew = !toCell.hasApfValue();
         updateValue(front,right,back,left);
     }
 }

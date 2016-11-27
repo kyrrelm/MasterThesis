@@ -358,6 +358,7 @@ public abstract class Agent {
         returningToNest = true;
         if (canRemoveTrail && foodAmountAtLastLocation == 0){
             currentCell.removeTrail(trailId);
+            currentCell.removeColor(OpenCell.PheromoneColor.BROWN);
         }
         if (existingTrail != null){
             moveToCell(existingTrail);
