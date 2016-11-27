@@ -149,10 +149,8 @@ public class Scout extends Agent{
      */
     private boolean lookForFood() {
         if (currentCell.getType() == Type.FOOD){
-            if (!currentCell.containsColor(PheromoneColor.BROWN)){
-                if (Settings.DIFFUSE_BROWN){
+            if (Settings.DIFFUSE_BROWN && !currentCell.containsColor(PheromoneColor.BROWN)){
                     diffuseBrown(currentCell, left);
-                }
             }
             this.load = currentCell.takeFood(Settings.SCOUT_CAPACITY);
             this.foodAmountAtLastLocation = currentCell.getFoodCount();
