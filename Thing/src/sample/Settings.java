@@ -15,8 +15,8 @@ public class Settings {
     public static final int HARVESTER_CAPACITY = 20;
 
 
-    public static final int NUMBER_OF_SCOUTS = 3;
-    public static final int NUMBER_OF_HARVESTERS = 2;
+    public static final int NUMBER_OF_SCOUTS = 4;
+    public static final int NUMBER_OF_HARVESTERS = 1;
 
     public static final int RECRUIT_SIZE = 10000;
 
@@ -58,6 +58,7 @@ public class Settings {
                 +"\nScout capacity: "+ SCOUT_CAPACITY
                 + "\nNumber of harvesters: "+ NUMBER_OF_HARVESTERS
                 + "\nHarvester capacity: " + HARVESTER_CAPACITY
+                + "\nHarvester recruit size: " + RECRUIT_SIZE
                 + "\nUsing pheromones: "+ !USING_APF_VALUE;
         return output;
     }

@@ -45,9 +45,11 @@ public class Stats {
     }
 
     public String log(){
-        String output = "Food retrieved: "+ Stats.getInstance().getFoodCount()+"\nTime of completion: "+ timeOfCompletion
+        String output = "Food retrieved: "+ Stats.getInstance().getFoodCount()
                 +"\nTotal energy used: "+totalEnergyUsed+"\nAverage energy used: "+(double)totalEnergyUsed/(double) Settings.NUMBER_OF_SCOUTS
-                +"\nFood/Time ratio: "+(double)foodCount/(double)timeOfCompletion+ "\nEnergy/Food ratio: "+ (double)totalEnergyUsed/(double)foodCount;
+                +"\nFood/Time ratio: "+(double)foodCount/(double)timeOfCompletion
+                + "\nEnergy/Food ratio: "+ (double)totalEnergyUsed/(double)foodCount
+                +"\nTime of completion: "+ timeOfCompletion;
         return output;
     }
 
