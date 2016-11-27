@@ -6,18 +6,17 @@ import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.concurrent.WorkerStateEvent;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
-import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import maps.Map;
-import maps.MapGenerator;
 import model.cell.Cell;
 import model.World;
 import model.states.WorldState;
@@ -85,10 +84,13 @@ public class Main extends Application {
 
         startSimulation(simulator);
         Timeline timeline = runPlayback();
-        sliderSetup(root, timeline);
+        sliderAndButtonSetup(root, timeline);
     }
 
-    private void sliderSetup(GridPane grid, Timeline timeline) {
+    private static String buttonOtherText = "Start";
+    private static boolean isPlaying = true;
+
+    private void sliderAndButtonSetup(GridPane grid, Timeline timeline) {
         Slider slider = new Slider();
         slider.setMin(10);
         slider.setMax(500);
@@ -108,6 +110,22 @@ public class Main extends Application {
         buttonGrid.getChildren().addAll(slider, button);
         grid.setRowIndex(buttonGrid,1);
         grid.getChildren().addAll(buttonGrid);
+
+        button.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                String tmp = button.getText();
+                button.setText(buttonOtherText);
+                buttonOtherText = tmp;
+                if (isPlaying){
+                    timeline.pause();
+                }
+                else {
+                    timeline.play();
+                }
+                isPlaying = !isPlaying;
+            }
+        });
 
 
         slider.valueProperty().addListener(new ChangeListener<Number>() {
