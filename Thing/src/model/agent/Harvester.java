@@ -87,12 +87,6 @@ public class Harvester extends Agent{
     }
 
     @Override
-    protected void move(OpenCell toCell) {
-        System.out.println(toCell.getX() + "   "+ toCell.getY());
-        super.move(toCell);
-    }
-
-    @Override
     protected boolean senseAndRemoveBrown(Cell... cells) {
         currentCell.removeColor(OpenCell.PheromoneColor.BROWN);
         boolean returnValue = super.senseAndRemoveBrown(cells);
