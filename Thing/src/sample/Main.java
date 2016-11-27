@@ -9,6 +9,7 @@ import javafx.concurrent.WorkerStateEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
@@ -47,6 +48,7 @@ public class Main extends Application {
         Simulator simulator = initSimulation(map);
 
         GridPane root = new GridPane();
+        GridPane boardGrid = new GridPane();
 
         for(int y = 0; y < height; y++){
             for(int x = 0; x < width; x++){
@@ -68,13 +70,14 @@ public class Main extends Application {
 
 
                 // Iterate the Index using the loops
-                root.setRowIndex(outputCell,height-1-y);
-                root.setColumnIndex(outputCell,x);
-                root.getChildren().add(outputCell);
+                boardGrid.setRowIndex(outputCell,height-1-y);
+                boardGrid.setColumnIndex(outputCell,x);
+                boardGrid.getChildren().add(outputCell);
             }
         }
-
-
+        root.setRowIndex(boardGrid,0);
+        root.setColumnIndex(boardGrid,0);
+        root.getChildren().addAll(boardGrid);
         Scene scene = new Scene(root, 1500, 800);
         primaryStage.setTitle("Thing");
         primaryStage.setScene(scene);
@@ -85,26 +88,33 @@ public class Main extends Application {
         sliderSetup(root, timeline);
     }
 
-    private void sliderSetup(GridPane root, Timeline timeline) {
+    private void sliderSetup(GridPane grid, Timeline timeline) {
         Slider slider = new Slider();
-        slider.setMin(1);
-        slider.setMax(100);
-        slider.setValue(FREQUENCY.toMillis()/10);
-        slider.setShowTickLabels(true);
+        slider.setMin(10);
+        slider.setMax(500);
+        slider.setValue(FREQUENCY.toMillis());
+        slider.setShowTickLabels(false);
         slider.setShowTickMarks(true);
         slider.setMajorTickUnit(50);
         slider.setMinorTickCount(5);
         slider.setBlockIncrement(10);
-        slider.setPrefWidth(300);
-        root.setRowIndex(slider,height);
-        root.setColumnIndex(slider,width);
-        root.getChildren().addAll(slider);
+        slider.setPrefWidth(500);
+        GridPane buttonGrid = new GridPane();
+        Button button = new Button("Pause");
+        buttonGrid.setRowIndex(button,0);
+        buttonGrid.setColumnIndex(button,0);
+        buttonGrid.setRowIndex(slider,0);
+        buttonGrid.setColumnIndex(slider,1);
+        buttonGrid.getChildren().addAll(slider, button);
+        grid.setRowIndex(buttonGrid,1);
+        grid.getChildren().addAll(buttonGrid);
+
 
         slider.valueProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
                 if (!slider.isValueChanging()){
-                    changeTimer(timeline, Duration.millis(newValue.doubleValue()*10));
+                    changeTimer(timeline, Duration.millis(newValue.doubleValue()));
                 }
             }
         });
@@ -113,7 +123,7 @@ public class Main extends Application {
             @Override
             public void changed(ObservableValue<? extends Boolean> obs, Boolean wasChanging, Boolean isNowChanging) {
                 if (! isNowChanging) {
-                    changeTimer(timeline, Duration.millis(slider.getValue()*10));
+                    changeTimer(timeline, Duration.millis(slider.getValue()));
                 }
             }
         });

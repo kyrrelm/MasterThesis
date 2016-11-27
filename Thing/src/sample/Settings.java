@@ -15,10 +15,10 @@ public class Settings {
     public static final int HARVESTER_CAPACITY = 20;
 
 
-    public static final int NUMBER_OF_SCOUTS = 2;
+    public static final int NUMBER_OF_SCOUTS = 3;
     public static final int NUMBER_OF_HARVESTERS = 2;
 
-    public static final int RECRUIT_SIZE = 1;
+    public static final int RECRUIT_SIZE = 10000;
 
     public static final boolean USING_APF_VALUE = true;
     public static final Map MAP = MapGenerator.APF_KILLER_FOOD;
