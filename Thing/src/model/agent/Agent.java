@@ -383,6 +383,13 @@ public abstract class Agent {
             atHome = true;
             return true;
         }
+        if (back.getType() == Cell.Type.NEST){
+            rotateLeft();
+            rotateLeft();
+            move((OpenCell) front);
+            atHome = true;
+            return true;
+        }
         if (right.getType() == Cell.Type.NEST){
             rotateRight();
             move((OpenCell) front);
