@@ -59,8 +59,10 @@ public class OpenCell extends Cell {
         int count = 0;
         for (Agent agent: agents) {
             if (agent.agentType == Agent.AgentType.HARVESTER){
-                if (count++ < max){
-                    agent.recruit(trailId);
+                if (count < max){
+                    if (agent.recruit(trailId)){
+                        count++;
+                    }
                 }
                 else {
                     break;

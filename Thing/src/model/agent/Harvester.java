@@ -29,6 +29,8 @@ public class Harvester extends Agent{
             unload();
             if (handleTrail(false,false)){
                 atHome = false;
+            }else {
+                trailId = -1;
             }
             return true;
         }
@@ -69,6 +71,7 @@ public class Harvester extends Agent{
 
     private void returnToNestWithoutTrail() {
         returningToNestWithoutTrail = true;
+        foodAmountAtLastLocation = 0;
         if(goToNest()){
             returningToNestWithoutTrail = false;
             return;

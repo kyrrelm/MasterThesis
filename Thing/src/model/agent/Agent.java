@@ -148,10 +148,12 @@ public abstract class Agent {
         load = 0;
     }
 
-    public void recruit(int id) {
+    public boolean recruit(int id) {
         if (trailId == -1){
             trailId = id;
+            return true;
         }
+        return false;
     }
 
     protected void sense() {

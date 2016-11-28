@@ -65,7 +65,8 @@ public class Settings {
                 + "\nHARVESTERS:"
                 + "\nNumber of harvesters: "+ NUMBER_OF_HARVESTERS
                 + "\nHarvester capacity: " + HARVESTER_CAPACITY
-                + "\nHarvester recruit size: " + RECRUIT_SIZE;
+                + "\nHarvester recruit size: " + RECRUIT_SIZE
+                + "\nConstant recruitment: " + CONSTANT_RECRUITMENT;
         return output;
     }
 }

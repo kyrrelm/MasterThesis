@@ -35,12 +35,12 @@ public class Scout extends Agent{
 
     protected boolean behave() {
         updateValue(front,right,back,left);
-        if (recruitHarvesters){
-            recruitHarvesters();
-        }
         if(atHome){
             unload();
-            if (Settings.CONSTANT_RECRUITMENT && foodAmountAtLastLocation > 0){
+            if (recruitHarvesters){
+                recruitHarvesters();
+            }
+            else if (Settings.CONSTANT_RECRUITMENT ){
                 recruitHarvesters();
             }
             atHome = false;
@@ -193,7 +193,7 @@ public class Scout extends Agent{
 
     private void recruitHarvesters() {
         recruitHarvesters = false;
-        if (currentCell.getType() == Type.NEST){
+        if (currentCell.getType() == Type.NEST && foodAmountAtLastLocation > 0){
             currentCell.recruitHarvesters(trailId, Settings.RECRUIT_SIZE);
         }
     }
