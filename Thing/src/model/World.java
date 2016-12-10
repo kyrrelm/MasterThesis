@@ -52,11 +52,20 @@ public class World {
 
     public ArrayList<WorldState> runSim(int numberOfTicks){
         ArrayList<WorldState> worldStates = new ArrayList<>();
-        worldStates.add(new WorldState(grid));
+        System.out.println("Starting sim...");
+        if (Settings.RUN_GUI){
+            worldStates.add(new WorldState(grid));
+        }
         for (int i = 0; i < numberOfTicks; i++) {
-            worldStates.add(tick(i));
+            WorldState wState = tick(i);
+            if (Settings.RUN_GUI){
+                worldStates.add(wState);
+            }
             if (Stats.getInstance().isDone()){
                 break;
+            }
+            if (i%100 == 0){
+                System.out.println("Tick "+i+"/"+numberOfTicks);
             }
         }
         Stats.getInstance().print();
@@ -69,6 +78,9 @@ public class World {
         harvester.forEach(harvester -> harvester.interact(i));
         //System.out.println("World:");
         //System.out.println(this);
+        if (!Settings.RUN_GUI){
+            return null;
+        }
         return new WorldState(grid);
     }
 

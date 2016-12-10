@@ -2,6 +2,7 @@ package sample;
 
 import maps.Map;
 import maps.MapGenerator;
+import model.cell.OpenCell;
 import model.cell.OpenCell.PheromoneColor;
 
 /**
@@ -29,7 +30,8 @@ public class Settings {
     public static final boolean SCOUT_CAN_MOVE_LEFT = true;
 
 
-    public static final Map MAP = MapGenerator.APF_KILLER_FOOD;
+    //public static final Map MAP = MapGenerator.APF_KILLER_FOOD;
+    public static final Map MAP = MapGenerator.genObstacleFreeMap("ObstacelFree", 100, 100, new OpenCell(2,2, 100), new OpenCell(18,16, 100));
     //----------------- Heterogeneous ---------------
     public static final boolean SCOUT_REMOVE_TRAIL = true;
     public static final boolean HARVESTER_REMOVE_TRAIL = true;
