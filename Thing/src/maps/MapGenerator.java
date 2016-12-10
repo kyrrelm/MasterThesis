@@ -4,8 +4,6 @@ import sample.Settings;
 import model.cell.Cell;
 import model.cell.OpenCell;
 
-import java.util.Arrays;
-
 /**
  * Created by Kyrre on 25.10.2016.
  */
@@ -481,6 +479,7 @@ public class MapGenerator {
         Cell[][] outputMap = new Cell[map[0].length][map.length];
         OpenCell nest = null;
         int totalFoodCount = 0;
+        int numberOfFoodSources = 0;
         for (int x = 0; x < map[0].length; x++) {
             for (int y = 0; y < map.length; y++) {
                 char value = map[map.length-1-y][x];
@@ -492,6 +491,7 @@ public class MapGenerator {
                     outputMap[x][y] = new Cell(x,y, Cell.Type.OBSTACLE);
                 }
                 else if (Character.isDigit(value)){
+                    numberOfFoodSources++;
                     totalFoodCount += Character.getNumericValue(value)*Settings.FOOD_COEFFICIENT;
                     outputMap[x][y] = new OpenCell(x,y, Character.getNumericValue(value)*Settings.FOOD_COEFFICIENT);
                 }
@@ -500,7 +500,7 @@ public class MapGenerator {
                 }
             }
         }
-        return new Map(name,nest,totalFoodCount,outputMap);
+        return new Map(name,nest,totalFoodCount,numberOfFoodSources,outputMap);
     }
 
 
@@ -518,6 +518,6 @@ public class MapGenerator {
         }
         OpenCell nest = new OpenCell(sizeX/2,sizeY/2, Cell.Type.NEST);
         outputMap[sizeX/2][sizeY/2] = nest;
-        return new Map(name, nest, foodCount, outputMap);
+        return new Map(name, nest, foodCount, foods.length,outputMap);
     }
 }

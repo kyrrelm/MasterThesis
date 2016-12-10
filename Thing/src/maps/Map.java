@@ -14,11 +14,13 @@ public class Map {
     public final OpenCell nest;
     public final String name;
     public final int foodCount;
+    public final int numberOfFoodSources;
 
-    public Map(String name, OpenCell nest, int foodCount, Cell[][] grid) {
+    public Map(String name, OpenCell nest, int foodCount, int numberOfFoodSources, Cell[][] grid) {
         this.name = name;
         this.foodCount = foodCount;
         this.grid = grid;
+        this.numberOfFoodSources = numberOfFoodSources;
         this.sizeX = grid.length;
         this.sizeY = grid[0].length;
         this.nest = nest;
