@@ -8,6 +8,8 @@ import javafx.beans.value.ObservableValue;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.HPos;
+import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -15,6 +17,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import maps.Map;
@@ -100,16 +103,15 @@ public class Main extends Application {
         slider.setMajorTickUnit(50);
         slider.setMinorTickCount(5);
         slider.setBlockIncrement(10);
-        slider.setPrefWidth(500);
-        GridPane buttonGrid = new GridPane();
+        slider.setPrefHeight(400);
+        slider.setPrefWidth(50);
+        slider.setOrientation(Orientation.VERTICAL);
         Button button = new Button("Pause");
-        buttonGrid.setRowIndex(button,0);
-        buttonGrid.setColumnIndex(button,0);
-        buttonGrid.setRowIndex(slider,0);
-        buttonGrid.setColumnIndex(slider,1);
-        buttonGrid.getChildren().addAll(slider, button);
-        grid.setRowIndex(buttonGrid,1);
-        grid.getChildren().addAll(buttonGrid);
+        VBox vbox = new VBox();
+        vbox.setSpacing(5);
+        vbox.getChildren().addAll(button, slider);
+        grid.setColumnIndex(vbox,1);
+        grid.getChildren().addAll(vbox);
 
         button.setOnAction(new EventHandler<ActionEvent>() {
             @Override
