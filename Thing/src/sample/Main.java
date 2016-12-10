@@ -12,6 +12,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
@@ -52,6 +53,7 @@ public class Main extends Application {
             outputCells = new Label[width][height];
             GridPane root = new GridPane();
             GridPane boardGrid = new GridPane();
+            ScrollPane scrollPane = new ScrollPane(boardGrid);
 
             for(int y = 0; y < height; y++){
                 for(int x = 0; x < width; x++){
@@ -70,9 +72,9 @@ public class Main extends Application {
                     boardGrid.getChildren().add(outputCell);
                 }
             }
-            root.setRowIndex(boardGrid,0);
-            root.setColumnIndex(boardGrid,0);
-            root.getChildren().addAll(boardGrid);
+            root.setRowIndex(scrollPane,0);
+            root.setColumnIndex(scrollPane,0);
+            root.getChildren().addAll(scrollPane);
             Scene scene = new Scene(root, 1500, 800);
             primaryStage.setTitle("Thing");
             primaryStage.setScene(scene);
