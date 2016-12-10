@@ -480,6 +480,8 @@ public class MapGenerator {
         OpenCell nest = null;
         int totalFoodCount = 0;
         int numberOfFoodSources = 0;
+        int minFood = Integer.MAX_VALUE;
+        int maxFood = -1;
         for (int x = 0; x < map[0].length; x++) {
             for (int y = 0; y < map.length; y++) {
                 char value = map[map.length-1-y][x];
@@ -492,15 +494,22 @@ public class MapGenerator {
                 }
                 else if (Character.isDigit(value)){
                     numberOfFoodSources++;
-                    totalFoodCount += Character.getNumericValue(value)*Settings.FOOD_COEFFICIENT;
-                    outputMap[x][y] = new OpenCell(x,y, Character.getNumericValue(value)*Settings.FOOD_COEFFICIENT);
+                    int amount = Character.getNumericValue(value)*Settings.FOOD_COEFFICIENT;
+                    totalFoodCount += amount;
+                    if (amount < minFood){
+                        minFood = amount;
+                    }
+                    if (amount > maxFood){
+                        maxFood = amount;
+                    }
+                    outputMap[x][y] = new OpenCell(x,y, amount);
                 }
                 else {
                     outputMap[x][y] = new OpenCell(x,y, Cell.Type.FREE);
                 }
             }
         }
-        return new Map(name,nest,totalFoodCount,numberOfFoodSources,outputMap);
+        return new Map(name,nest,totalFoodCount,numberOfFoodSources,minFood,maxFood,outputMap);
     }
 
 
@@ -512,12 +521,20 @@ public class MapGenerator {
             }
         }
         int foodCount = 0;
+        int minFood = Integer.MAX_VALUE;
+        int maxFood = -1;
         for (OpenCell c: foods) {
             outputMap[c.getX()][c.getY()] = c;
             foodCount += c.getFoodCount();
+            if (c.getFoodCount() < minFood){
+                minFood = c.getFoodCount();
+            }
+            if (c.getFoodCount() > maxFood){
+                maxFood = c.getFoodCount();
+            }
         }
         OpenCell nest = new OpenCell(sizeX/2,sizeY/2, Cell.Type.NEST);
         outputMap[sizeX/2][sizeY/2] = nest;
-        return new Map(name, nest, foodCount, foods.length,outputMap);
+        return new Map(name, nest, foodCount, foods.length, minFood, maxFood,outputMap);
     }
 }

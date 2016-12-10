@@ -37,10 +37,10 @@ public class Settings {
     public static final boolean SHOW_LAST = true;
 
     ////----------------- Map ---------------
-    public static final Map MAP = MapGenerator.APF_KILLER_FOOD;
+    //public static final Map MAP = MapGenerator.APF_KILLER_FOOD;
 
     ////----------------- No obstacle ---------------
-    //public static final Map MAP = MapGenerator.genObstacleFreeMap("NoObs100x100_Food10", 100, 100, new OpenCell(2,2, 100), new OpenCell(18,16, 100));
+    public static final Map MAP = MapGenerator.genObstacleFreeMap("NoObs100x100_Food10", 100, 100, new OpenCell(2,2, 100), new OpenCell(18,16, 100));
 
 
     public static String giveColor(PheromoneColor color) {
@@ -66,10 +66,19 @@ public class Settings {
     }
 
     public static String getLog() {
+
+        String foodRange;
+        if (MAP.maxFood == -1){
+            foodRange = "N/A";
+        }
+        else {
+            foodRange = MAP.minFood + " - " + MAP.maxFood;
+        }
+
         String output =  "Map: "+ MAP.name
                 + "\nTotal food count: " + MAP.foodCount
                 + "\nNumber of food sources: " + MAP.numberOfFoodSources
-                + "\nFood range: " + FOOD_COEFFICIENT + " - " + FOOD_COEFFICIENT*9
+                + "\nFood range: " + foodRange
                 + "\nUsing pheromones: "+ !USING_APF_VALUE
                 + "\nSCOUTS:"
                 + "\nNumber of scouts: " + NUMBER_OF_SCOUTS
