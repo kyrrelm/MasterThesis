@@ -57,6 +57,7 @@ public class Main extends Application {
             GridPane root = new GridPane();
             GridPane boardGrid = new GridPane();
             ScrollPane scrollPane = new ScrollPane(boardGrid);
+            scrollPane.setPannable(true);
 
             for(int y = 0; y < height; y++){
                 for(int x = 0; x < width; x++){

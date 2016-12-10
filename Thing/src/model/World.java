@@ -58,10 +58,13 @@ public class World {
         }
         for (int i = 0; i < numberOfTicks; i++) {
             WorldState wState = tick(i);
-            if (Settings.RUN_GUI){
+            if (Settings.RUN_GUI && !Settings.SHOW_ONLY_FIRST){
                 worldStates.add(wState);
             }
             if (Stats.getInstance().isDone()){
+                if (Settings.SHOW_ONLY_FIRST && Settings.SHOW_LAST){
+                    worldStates.add(wState);
+                }
                 break;
             }
             if (i%100 == 0){

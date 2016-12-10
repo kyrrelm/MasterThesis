@@ -31,14 +31,14 @@ public class Settings {
 
 
     //public static final Map MAP = MapGenerator.APF_KILLER_FOOD;
-    public static final Map MAP = MapGenerator.genObstacleFreeMap("ObstacelFree", 100, 20, new OpenCell(2,2, 100), new OpenCell(18,16, 100));
+    public static final Map MAP = MapGenerator.genObstacleFreeMap("ObstacelFree", 100, 100, new OpenCell(2,2, 100), new OpenCell(18,16, 100));
     //----------------- Heterogeneous ---------------
     public static final boolean SCOUT_REMOVE_TRAIL = true;
     public static final boolean HARVESTER_REMOVE_TRAIL = true;
-
-
     //----------------- System ---------------
     public static boolean RUN_GUI = true;
+    public static final boolean SHOW_ONLY_FIRST = true;
+    public static final boolean SHOW_LAST = false;
 
 
     public static String giveColor(PheromoneColor color) {
