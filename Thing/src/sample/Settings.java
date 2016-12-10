@@ -30,6 +30,7 @@ public class Settings {
     //----------------- Heterogeneous ---------------
     public static final boolean SCOUT_REMOVE_TRAIL = true;
     public static final boolean HARVESTER_REMOVE_TRAIL = true;
+    public static final boolean SCOUT_CAN_MOVE_LEFT = false;
 
 
     public static String giveColor(PheromoneColor color) {
@@ -62,6 +63,7 @@ public class Settings {
                 + "\nNumber of scouts: " + NUMBER_OF_SCOUTS
                 + "\nScout capacity: "+ SCOUT_CAPACITY
                 + "\nDiffuse brown: " + DIFFUSE_BROWN
+                + "\nMove left: " + SCOUT_CAN_MOVE_LEFT
                 + "\nHARVESTERS:"
                 + "\nNumber of harvesters: "+ NUMBER_OF_HARVESTERS
                 + "\nHarvester capacity: " + HARVESTER_CAPACITY
