@@ -43,48 +43,46 @@ public class Main extends Application {
         Map map = Settings.MAP;
         width = map.sizeX;
         height = map.sizeY;
-        outputCells = new Label[width][height];
         Simulator simulator = initSimulation(map);
 
-        GridPane root = new GridPane();
-        GridPane boardGrid = new GridPane();
-
-        for(int y = 0; y < height; y++){
-            for(int x = 0; x < width; x++){
-
-                Label outputCell = new Label("-");
-                outputCell.setPrefHeight(20);
-                outputCell.setPrefWidth(20);
-                outputCell.setAlignment(Pos.CENTER);
-                outputCell.setStyle("-fx-border-color: lightgray;");
-                // Create a new TextField in each Iteration
-//                TextField tf = new TextField();
-//                tf.setPrefHeight(50);
-//                tf.setPrefWidth(50);
-//                tf.setAlignment(Pos.CENTER);
-//                tf.setEditable(false);
-//                tf.setText("---");
-
-                outputCells[x][y] = outputCell;
-
-
-                // Iterate the Index using the loops
-                boardGrid.setRowIndex(outputCell,height-1-y);
-                boardGrid.setColumnIndex(outputCell,x);
-                boardGrid.getChildren().add(outputCell);
-            }
+        if (!Settings.RUN_GUI){
+            simulator.call();
         }
-        root.setRowIndex(boardGrid,0);
-        root.setColumnIndex(boardGrid,0);
-        root.getChildren().addAll(boardGrid);
-        Scene scene = new Scene(root, 1500, 800);
-        primaryStage.setTitle("Thing");
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        else{
+            outputCells = new Label[width][height];
+            GridPane root = new GridPane();
+            GridPane boardGrid = new GridPane();
 
-        startSimulation(simulator);
-        Timeline timeline = runPlayback();
-        sliderAndButtonSetup(root, timeline);
+            for(int y = 0; y < height; y++){
+                for(int x = 0; x < width; x++){
+
+                    Label outputCell = new Label("-");
+                    outputCell.setPrefHeight(20);
+                    outputCell.setPrefWidth(20);
+                    outputCell.setAlignment(Pos.CENTER);
+                    outputCell.setStyle("-fx-border-color: lightgray;");
+                    outputCells[x][y] = outputCell;
+
+
+                    // Iterate the Index using the loops
+                    boardGrid.setRowIndex(outputCell,height-1-y);
+                    boardGrid.setColumnIndex(outputCell,x);
+                    boardGrid.getChildren().add(outputCell);
+                }
+            }
+            root.setRowIndex(boardGrid,0);
+            root.setColumnIndex(boardGrid,0);
+            root.getChildren().addAll(boardGrid);
+            Scene scene = new Scene(root, 1500, 800);
+            primaryStage.setTitle("Thing");
+            primaryStage.setScene(scene);
+            primaryStage.show();
+
+            startSimulation(simulator);
+            Timeline timeline = runPlayback();
+            sliderAndButtonSetup(root, timeline);
+        }
+
     }
 
     private static String buttonOtherText = "Start";

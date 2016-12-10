@@ -4,6 +4,8 @@ import sample.Settings;
 import model.cell.Cell;
 import model.cell.OpenCell;
 
+import java.util.Arrays;
+
 /**
  * Created by Kyrre on 25.10.2016.
  */
@@ -499,5 +501,23 @@ public class MapGenerator {
             }
         }
         return new Map(name,nest,totalFoodCount,outputMap);
+    }
+
+
+    public static Map genObstacleFreeMap(String name, int sizeX, int sizeY, OpenCell... foods){
+        Cell[][] outputMap = new Cell[sizeX][sizeY];
+        for (int x = 0; x < sizeX; x++){
+            for (int y = 0; y < sizeY; y++){
+                outputMap[x][y] = new OpenCell(x,y, Cell.Type.FREE);
+            }
+        }
+        int foodCount = 0;
+        for (OpenCell c: foods) {
+            outputMap[c.getX()][c.getY()] = c;
+            foodCount += c.getFoodCount();
+        }
+        OpenCell nest = new OpenCell(sizeX/2,sizeY/2, Cell.Type.NEST);
+        outputMap[sizeX/2][sizeY/2] = nest;
+        return new Map(name, nest, foodCount, outputMap);
     }
 }

@@ -11,14 +11,14 @@ public class Settings {
 
     public static final int FOOD_COEFFICIENT = 10;
 
-    public static final int SCOUT_CAPACITY = 4;
-    public static final int HARVESTER_CAPACITY = 20;
+    public static final int SCOUT_CAPACITY = 1;
+    public static final int HARVESTER_CAPACITY = 5;
 
 
     public static final int NUMBER_OF_SCOUTS = 8;
     public static final int NUMBER_OF_HARVESTERS = 2;
 
-    public static final boolean DIFFUSE_BROWN = false;
+    public static final boolean DIFFUSE_BROWN = true;
 
     public static final int RECRUIT_SIZE = 1;
     public static final boolean CONSTANT_RECRUITMENT = true;
@@ -26,11 +26,17 @@ public class Settings {
     public static final boolean USING_APF_VALUE = true;
 
 
+    public static final boolean SCOUT_CAN_MOVE_LEFT = true;
+
+
     public static final Map MAP = MapGenerator.APF_KILLER_FOOD;
     //----------------- Heterogeneous ---------------
     public static final boolean SCOUT_REMOVE_TRAIL = true;
     public static final boolean HARVESTER_REMOVE_TRAIL = true;
-    public static final boolean SCOUT_CAN_MOVE_LEFT = false;
+
+
+    //----------------- System ---------------
+    public static boolean RUN_GUI = false;
 
 
     public static String giveColor(PheromoneColor color) {
