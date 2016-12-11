@@ -27,6 +27,7 @@ import model.states.WorldState;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.Stack;
 
 public class Main extends Application {
 
@@ -35,10 +36,10 @@ public class Main extends Application {
     private static int width;
 
     private static int height;
-    private static int playBackIndex = 0;
 
     private static Label[][] outputCells;
     private static LinkedList<WorldState> worldStates = new LinkedList<>();
+    private static Stack<WorldState> replay = new Stack<>();
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -106,18 +107,19 @@ public class Main extends Application {
         slider.setPrefHeight(400);
         slider.setPrefWidth(50);
         slider.setOrientation(Orientation.VERTICAL);
-        Button button = new Button("Pause");
+        Button pause = new Button("Pause");
+        Button back = new Button("Back");
         VBox vbox = new VBox();
         vbox.setSpacing(5);
-        vbox.getChildren().addAll(button, slider);
+        vbox.getChildren().addAll(pause, back, slider);
         grid.setColumnIndex(vbox,1);
         grid.getChildren().addAll(vbox);
 
-        button.setOnAction(new EventHandler<ActionEvent>() {
+        pause.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                String tmp = button.getText();
-                button.setText(buttonOtherText);
+                String tmp = pause.getText();
+                pause.setText(buttonOtherText);
                 buttonOtherText = tmp;
                 if (isPlaying){
                     timeline.pause();
@@ -126,6 +128,13 @@ public class Main extends Application {
                     timeline.play();
                 }
                 isPlaying = !isPlaying;
+            }
+        });
+
+        back.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                worldStates.addFirst(replay.pop());
             }
         });
 
@@ -156,6 +165,7 @@ public class Main extends Application {
                 actionEvent -> {
                     if (!worldStates.isEmpty()){
                         WorldState worldState = worldStates.poll();
+                        replay.add(worldState);
                         for (int x = 0; x < worldState.cellStates.length; x++) {
                             for (int y = 0; y < worldState.cellStates[0].length; y++) {
                                 if (worldState.cellStates[x][y].type == Cell.Type.OBSTACLE){
@@ -174,7 +184,6 @@ public class Main extends Application {
                                 }
                             }
                         }
-                        playBackIndex++;
                     }
                 }
         );
