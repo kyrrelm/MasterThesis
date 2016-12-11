@@ -12,6 +12,7 @@ import sample.Settings;
 import sample.Stats;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 /**
  * Created by Kyrre on 17.10.2016.
@@ -50,8 +51,8 @@ public class World {
         generateAgents();
     }
 
-    public ArrayList<WorldState> runSim(int numberOfTicks){
-        ArrayList<WorldState> worldStates = new ArrayList<>();
+    public LinkedList<WorldState> runSim(int numberOfTicks){
+        LinkedList<WorldState> worldStates = new LinkedList<>();
         System.out.println("Starting sim...");
         WorldState wState = new WorldState(grid);
         if (Settings.RUN_GUI){

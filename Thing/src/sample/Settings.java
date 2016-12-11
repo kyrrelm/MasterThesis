@@ -10,7 +10,7 @@ import model.cell.OpenCell.PheromoneColor;
  */
 public class Settings {
 
-    public static final int  NUMBER_OF_TICKS = 1000;
+    public static final int  NUMBER_OF_TICKS = 10;
 
     public static final int FOOD_COEFFICIENT = 10;
 

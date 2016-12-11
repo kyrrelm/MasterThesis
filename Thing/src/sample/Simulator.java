@@ -5,11 +5,12 @@ import model.World;
 import model.states.WorldState;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 /**
  * Created by kyrrelm on 19.10.2016.
  */
-public class Simulator extends Task<ArrayList<WorldState>> {
+public class Simulator extends Task<LinkedList<WorldState>> {
 
     ArrayList<WorldState> worldStates;
     World world;
@@ -21,7 +22,7 @@ public class Simulator extends Task<ArrayList<WorldState>> {
     }
 
     @Override
-    protected ArrayList<WorldState> call() throws Exception {
+    protected LinkedList<WorldState> call() throws Exception {
         return world.runSim(numberOfTicks);
     }
 }

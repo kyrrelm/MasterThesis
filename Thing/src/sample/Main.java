@@ -26,6 +26,7 @@ import model.World;
 import model.states.WorldState;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class Main extends Application {
 
@@ -37,7 +38,7 @@ public class Main extends Application {
     private static int playBackIndex = 0;
 
     private static Label[][] outputCells;
-    private static ArrayList<WorldState> worldStates = new ArrayList<>();
+    private static LinkedList<WorldState> worldStates = new LinkedList<>();
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -153,8 +154,8 @@ public class Main extends Application {
         KeyFrame mainFrame = new KeyFrame(
                 Duration.ZERO,
                 actionEvent -> {
-                    if (worldStates.size() > playBackIndex){
-                        WorldState worldState = worldStates.get(playBackIndex);
+                    if (!worldStates.isEmpty()){
+                        WorldState worldState = worldStates.poll();
                         for (int x = 0; x < worldState.cellStates.length; x++) {
                             for (int y = 0; y < worldState.cellStates[0].length; y++) {
                                 if (worldState.cellStates[x][y].type == Cell.Type.OBSTACLE){
@@ -203,8 +204,7 @@ public class Main extends Application {
         simulator.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
             @Override
             public void handle(WorkerStateEvent event) {
-                ArrayList<WorldState> newWorldStates = (ArrayList<WorldState>) event.getSource().getValue();
-                worldStates.addAll(newWorldStates);
+                worldStates = (LinkedList<WorldState>) event.getSource().getValue();
 //                int count = 0;
 //                for (WorldState w : worldStates) {
 //                    System.out.println("WorldState "+count+++":");
