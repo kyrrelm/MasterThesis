@@ -53,23 +53,24 @@ public class World {
     public ArrayList<WorldState> runSim(int numberOfTicks){
         ArrayList<WorldState> worldStates = new ArrayList<>();
         System.out.println("Starting sim...");
+        WorldState wState = new WorldState(grid);
         if (Settings.RUN_GUI){
-            worldStates.add(new WorldState(grid));
+            worldStates.add(wState);
         }
         for (int i = 0; i < numberOfTicks; i++) {
-            WorldState wState = tick(i);
+             wState = tick(i);
             if (Settings.RUN_GUI && !Settings.SHOW_ONLY_FIRST){
                 worldStates.add(wState);
             }
             if (Stats.getInstance().isDone()){
-                if (Settings.SHOW_ONLY_FIRST && Settings.SHOW_LAST){
-                    worldStates.add(wState);
-                }
                 break;
             }
             if (i%100 == 0){
                 System.out.println("Tick "+i+"/"+numberOfTicks);
             }
+        }
+        if (Settings.SHOW_ONLY_FIRST && Settings.SHOW_LAST){
+            worldStates.add(wState);
         }
         Stats.getInstance().print();
         Stats.getInstance().save();

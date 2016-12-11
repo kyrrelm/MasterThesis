@@ -29,13 +29,11 @@ import java.util.ArrayList;
 
 public class Main extends Application {
 
-    private static final int SIZE = 30;
-    private static final int  NUMBER_OF_TICKS = 10000;
     private static javafx.util.Duration FREQUENCY = Duration.millis(500);
 
-    private static int width = SIZE*2;
+    private static int width;
 
-    private static int height = SIZE;
+    private static int height;
     private static int playBackIndex = 0;
 
     private static Label[][] outputCells;
@@ -197,7 +195,7 @@ public class Main extends Application {
 
 
     private Simulator initSimulation(Map map) {
-        return new Simulator(new World(map), NUMBER_OF_TICKS);
+        return new Simulator(new World(map), Settings.NUMBER_OF_TICKS);
         //return new Simulator(new World(width, height), NUMBER_OF_TICKS);
     }
 
