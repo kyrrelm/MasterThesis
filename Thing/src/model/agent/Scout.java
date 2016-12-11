@@ -75,7 +75,7 @@ public class Scout extends Agent{
         }
 
         if (Settings.DIFFUSE_BROWN){
-            if (currentCell.containsColor(PheromoneColor.BROWN) && isNew){
+            if (currentCell.containsColor(PheromoneColor.BROWN)){// && isNew){
                 if (right instanceof OpenCell){
                     if (((OpenCell) right).containsColor(PheromoneColor.BROWN)){
                         diffuseBrown(left);
