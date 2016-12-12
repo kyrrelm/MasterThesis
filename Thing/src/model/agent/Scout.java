@@ -83,13 +83,14 @@ public class Scout extends Agent{
                         followBrown();
                         return true;
                     }
+                    /*
                     else if (front instanceof OpenCell) {
                         if (((OpenCell) front).containsColor(PheromoneColor.BROWN)) {
                             diffuseBrown(left);
                             followBrown();
                             return true;
                         }
-                    }
+                    }*/
                     else {
                         currentCell.removeColor(PheromoneColor.BROWN);
                     }
@@ -129,7 +130,7 @@ public class Scout extends Agent{
                 followingBrown = false;
                 return true;
             }
-            else if (front instanceof OpenCell && ((OpenCell) front).containsColor(PheromoneColor.BROWN)){
+            else if (((OpenCell) front).containsColor(PheromoneColor.BROWN)){
                 move((OpenCell) front);
                 return true;
             }
@@ -138,6 +139,11 @@ public class Scout extends Agent{
                 move((OpenCell) front);
                 return true;
             }
+/*            else {
+                //new
+                followingBrown = false;
+                move((OpenCell) front);
+            }*/
         }
         followingBrown = false;
         return false;
