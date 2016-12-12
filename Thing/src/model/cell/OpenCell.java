@@ -2,6 +2,7 @@ package model.cell;
 
 import model.agent.Agent;
 import model.states.CellState;
+import sample.Settings;
 
 import java.util.HashSet;
 
@@ -25,6 +26,7 @@ public class OpenCell extends Cell {
         AGENT;
 
     }
+
     public OpenCell(int x, int y, Type type) {
         super(x, y, type);
         apfValue = -1;
@@ -37,16 +39,15 @@ public class OpenCell extends Cell {
         colors = new HashSet<>();
         trailIds = new HashSet<>();
     }
-
-
     public OpenCell(int x, int y, int foodCount) {
         this(x, y, Type.FOOD);
         this.foodCount = foodCount;
     }
+
+
     public int getApfValue() {
         return apfValue;
     }
-
     public void setApfValue(int apfValue) {
         if (hasApfValue()){
             this.apfValue = Math.min(this.apfValue, apfValue);
@@ -55,26 +56,10 @@ public class OpenCell extends Cell {
             this.apfValue = apfValue;
         }
     }
-    public void recruitHarvesters(int trailId, int max) {
-        int count = 0;
-        for (Agent agent: agents) {
-            if (agent.agentType == Agent.AgentType.HARVESTER){
-                if (count < max){
-                    if (agent.recruit(trailId)){
-                        count++;
-                    }
-                }
-                else {
-                    break;
-                }
-            }
-        }
-    }
 
     public boolean containsAgent(){
         return !agents.isEmpty();
     }
-
     public int getFoodCount() {
         return foodCount;
     }
@@ -104,8 +89,6 @@ public class OpenCell extends Cell {
         return foodCount > 0;
     }
 
-
-
     public int takeFood(int amount){
         int tmp = Math.min(amount, foodCount);
         foodCount = Math.max(foodCount-amount, 0);
@@ -118,6 +101,8 @@ public class OpenCell extends Cell {
     public boolean color(PheromoneColor color){
         return colors.add(color);
     }
+
+
 
     public void colorTrail(int id) {
         this.trailIds.add(id);
@@ -174,5 +159,34 @@ public class OpenCell extends Cell {
             }
         }
         return new CellState(tmp,apfValue,color, agents.size(), agentType);
+    }
+
+    //NEST
+    public void recruitHarvesters(int trailId, int foodAmountAtLastLocation) {
+        if (type != Type.NEST){
+            return;
+        }
+        int count = 0;
+        int max = Settings.RECRUIT_SIZE;
+        if (Settings.DYNAMIC_RECRUITMENT){
+            max = (int) Math.ceil((double)calculateRecruitmentSize(foodAmountAtLastLocation)/2);
+        }
+        for (Agent agent: agents) {
+            if (agent.agentType == Agent.AgentType.HARVESTER){
+                if (count < max){
+                    if (agent.recruit(trailId)){
+                        count++;
+                    }
+                }
+                else {
+                    break;
+                }
+            }
+        }
+    }
+
+
+    private int calculateRecruitmentSize(int foodAmountAtLastLocation){
+        return (int) Math.ceil(((double) foodAmountAtLastLocation/(double) Settings.HARVESTER_CAPACITY));
     }
 }

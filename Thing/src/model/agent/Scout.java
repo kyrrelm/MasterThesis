@@ -40,7 +40,7 @@ public class Scout extends Agent{
             if (recruitHarvesters){
                 recruitHarvesters();
             }
-            else if (Settings.CONSTANT_RECRUITMENT ){
+            else if (Settings.CONSTANT_RECRUITMENT){
                 recruitHarvesters();
             }
             atHome = false;
@@ -201,8 +201,8 @@ public class Scout extends Agent{
 
     private void recruitHarvesters() {
         recruitHarvesters = false;
-        if (currentCell.getType() == Type.NEST && foodAmountAtLastLocation > 0){
-            currentCell.recruitHarvesters(trailId, Settings.RECRUIT_SIZE);
+        if (foodAmountAtLastLocation > 0){
+            currentCell.recruitHarvesters(trailId, foodAmountAtLastLocation);
         }
     }
 
