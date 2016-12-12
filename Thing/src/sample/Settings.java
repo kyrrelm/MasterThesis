@@ -27,10 +27,10 @@ public class Settings {
 
     ////----------------- Heterogeneous ---------------
     public static final boolean DIFFUSE_BROWN = false;
+    public static boolean DYNAMIC_RECRUITMENT = false;
 
-    public static final double HARVESTER_ENERGY_USE = 3;
+    public static final double HARVESTER_ENERGY_USE = 1;
     public static final int RECRUIT_SIZE = 10;
-    public static boolean DYNAMIC_RECRUITMENT = true;
     public static final boolean CONSTANT_RECRUITMENT = true;
 
     public static final boolean SCOUT_REMOVE_TRAIL = true;
@@ -52,13 +52,12 @@ public class Settings {
             new OpenCell(2,2, 100), new OpenCell(4,99, 100), new OpenCell(87,8, 100), new OpenCell(85,79, 100), new OpenCell(50,93, 100),
             new OpenCell(18,16, 100),new OpenCell(15,54, 100),new OpenCell(68,44, 100),new OpenCell(6,87, 100),new OpenCell(80,25, 100));
 
-/*    public static final Map MAP = MapGenerator.genObstacleFreeMap("NoObs100x100_Food10(300)", 100, 100,
-            new OpenCell(2,2, 100), new OpenCell(4,99, 300), new OpenCell(87,8, 300), new OpenCell(85,79, 300), new OpenCell(50,93, 300),
-            new OpenCell(18,16, 100),new OpenCell(15,54, 300),new OpenCell(68,44, 300),new OpenCell(6,87, 300),new OpenCell(80,25, 300));*/
+/*
+    public static final Map MAP = MapGenerator.genObstacleFreeMap("NoObs100x100_Food10(300)", 100, 100,
+            new OpenCell(2,2, 300), new OpenCell(4,99, 300), new OpenCell(87,8, 300), new OpenCell(85,79, 300), new OpenCell(50,93, 300),
+            new OpenCell(18,16, 300),new OpenCell(15,54, 300),new OpenCell(68,44, 300),new OpenCell(6,87, 300),new OpenCell(80,25, 300));
+*/
 
-    /*public static final Map MAP = MapGenerator.genObstacleFreeMap("NoObs100x100_Food10_TEST", 100, 100,
-            new OpenCell(2,2, 100), new OpenCell(4,99, 100), new OpenCell(87,8, 100), new OpenCell(85,79, 100), new OpenCell(50,93, 100),
-            new OpenCell(18,16, 100),new OpenCell(15,54, 100),new OpenCell(68,44, 100),new OpenCell(6,87, 100),new OpenCell(80,25, 100),new OpenCell(95,30, 100));*/
 
 
     public static String giveColor(PheromoneColor color) {
