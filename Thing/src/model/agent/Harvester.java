@@ -31,8 +31,7 @@ public class Harvester extends Agent{
             if (handleTrail(false,false)){
                 atHome = false;
             }else {
-                Nest.getInstance().dismiss(trailId,1);
-                trailId = -1;
+                goIdle();
             }
             return true;
         }
@@ -71,6 +70,11 @@ public class Harvester extends Agent{
         return true;
     }
 
+    private void goIdle() {
+        Nest.getInstance().dismiss(trailId,1);
+        trailId = -1;
+    }
+
     private void returnToNestWithoutTrail() {
         returningToNestWithoutTrail = true;
         foodAmountAtLastLocation = 0;
@@ -89,8 +93,7 @@ public class Harvester extends Agent{
             //trailId = -1;
         }
         if (foodAmountAtLastLocation == 0){
-            Nest.getInstance().dismiss(trailId,1);
-            trailId = -1;
+            goIdle();
         }
         return atNest;
     }
