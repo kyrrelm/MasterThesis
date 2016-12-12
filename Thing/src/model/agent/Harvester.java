@@ -5,6 +5,7 @@ import model.cell.Cell;
 import model.cell.Nest;
 import model.cell.OpenCell;
 import sample.Settings;
+import sample.Stats;
 
 import static model.cell.Cell.*;
 
@@ -149,6 +150,12 @@ public class Harvester extends Agent{
     @Override
     public String toString() {
         return "TrailId: "+trailId;
+    }
+
+    @Override
+    protected void move(OpenCell toCell) {
+        super.move(toCell);
+        Stats.getInstance().consumeEnergy(Settings.HARVESTER_ENERGY_USE);
     }
 }
 

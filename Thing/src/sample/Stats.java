@@ -9,7 +9,7 @@ public class Stats {
     private static Stats ourInstance = new Stats();
     private int foodCount;
     private int timeOfCompletion;
-    private int totalEnergyUsed ;
+    private double totalEnergyUsed ;
     private boolean done;
 
     public static Stats getInstance() {
@@ -46,7 +46,8 @@ public class Stats {
 
     public String log(){
         String output = "Food retrieved: "+ Stats.getInstance().getFoodCount()
-                +"\nTotal energy used: "+totalEnergyUsed+"\nAverage energy used: "+(double)totalEnergyUsed/(double) Settings.NUMBER_OF_SCOUTS
+                +"\nTotal energy used: "+totalEnergyUsed
+                +"\nAverage energy used: "+(double)totalEnergyUsed/((double) (Settings.NUMBER_OF_SCOUTS + Settings.NUMBER_OF_HARVESTERS))
                 +"\nFood/Time ratio: "+(double)foodCount/(double)timeOfCompletion
                 + "\nEnergy/Food ratio: "+ (double)totalEnergyUsed/(double)foodCount
                 +"\nTime of completion: "+ timeOfCompletion;
@@ -57,7 +58,7 @@ public class Stats {
         FileHandler.writeToUniqueFile(output());
     }
 
-    public void consumeEnergy(int energy) {
+    public void consumeEnergy(double energy) {
         this.totalEnergyUsed  += energy;
     }
 

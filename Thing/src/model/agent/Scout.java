@@ -4,6 +4,7 @@ import model.World;
 import model.cell.Cell;
 import model.cell.OpenCell;
 import sample.Settings;
+import sample.Stats;
 
 import java.util.Set;
 
@@ -209,6 +210,7 @@ public class Scout extends Agent{
     @Override
     protected void move(OpenCell toCell) {
         super.move(toCell);
+        Stats.getInstance().consumeEnergy(1);
         isNew = !toCell.hasApfValue();
         updateValue(front,right,back,left);
     }

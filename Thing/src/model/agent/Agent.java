@@ -420,7 +420,6 @@ public abstract class Agent {
         currentCell.removeAgent(this);
         currentCell = toCell;
         currentCell.placeAgent(this);
-        Stats.getInstance().consumeEnergy(1);
         sense();
     }
 }
