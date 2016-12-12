@@ -18,8 +18,8 @@ public class Settings {
     public static final int HARVESTER_CAPACITY = 5;
 
 
-    public static final int NUMBER_OF_SCOUTS = 400;
-    public static final int NUMBER_OF_HARVESTERS = 0;
+    public static final int NUMBER_OF_SCOUTS = 70;
+    public static final int NUMBER_OF_HARVESTERS = 30;
     public static final boolean USING_APF_VALUE = true;
 
 
@@ -29,7 +29,7 @@ public class Settings {
     public static final boolean DIFFUSE_BROWN = true;
 
     public static final int RECRUIT_SIZE = 10;
-    public static boolean DYNAMIC_RECRUITMENT = false;
+    public static boolean DYNAMIC_RECRUITMENT = true;
     public static final boolean CONSTANT_RECRUITMENT = true;
 
     public static final boolean SCOUT_REMOVE_TRAIL = true;
@@ -43,9 +43,13 @@ public class Settings {
     //public static final Map MAP = MapGenerator.APF_KILLER_FOOD;
 
     ////----------------- No obstacle ---------------
+    /*public static final Map MAP = MapGenerator.genObstacleFreeMap("Dynamic", 30, 30,
+            new OpenCell(4,4,20), new OpenCell(8,7, 20), new OpenCell(18,20, 20), new OpenCell(17,9, 20));
+*/
     public static final Map MAP = MapGenerator.genObstacleFreeMap("NoObs100x100_Food10", 100, 100,
             new OpenCell(2,2, 100), new OpenCell(4,99, 100), new OpenCell(87,8, 100), new OpenCell(85,79, 100), new OpenCell(50,93, 100),
             new OpenCell(18,16, 100),new OpenCell(15,54, 100),new OpenCell(68,44, 100),new OpenCell(6,87, 100),new OpenCell(80,25, 100));
+
 
     /*public static final Map MAP = MapGenerator.genObstacleFreeMap("NoObs100x100_Food10_TEST", 100, 100,
             new OpenCell(2,2, 100), new OpenCell(4,99, 100), new OpenCell(87,8, 100), new OpenCell(85,79, 100), new OpenCell(50,93, 100),
@@ -98,6 +102,7 @@ public class Settings {
                 + "\nNumber of harvesters: "+ NUMBER_OF_HARVESTERS
                 + "\nHarvester capacity: " + HARVESTER_CAPACITY
                 + "\nHarvester recruit size: " + RECRUIT_SIZE
+                + "\nDynamic recruitment: " + DYNAMIC_RECRUITMENT
                 + "\nConstant recruitment: " + CONSTANT_RECRUITMENT;
         return output;
     }
