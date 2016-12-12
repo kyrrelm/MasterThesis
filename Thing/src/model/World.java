@@ -106,7 +106,20 @@ public class World {
 
     private void generateAgents(){
         for (int i = 0; i < Settings.NUMBER_OF_SCOUTS; i++) {
-            scouts.add(new Scout((OpenCell) grid[nest.getX()][nest.getY()], Agent.Heading.NORTH, this));
+            Agent.Heading heading;
+            if (i%4 == 0){
+                heading = Agent.Heading.NORTH;
+            }
+            else if (i%4 == 1){
+                heading = Agent.Heading.EAST;
+            }
+            else if (i%4 == 2){
+                heading = Agent.Heading.SOUTH;
+            }
+            else {
+                heading = Agent.Heading.WEST;
+            }
+            scouts.add(new Scout((OpenCell) grid[nest.getX()][nest.getY()], heading, this));
         }
         for (int i = 0; i < Settings.NUMBER_OF_HARVESTERS; i++) {
             harvester.add(new Harvester((OpenCell) grid[nest.getX()][nest.getY()], Agent.Heading.NORTH, this));
