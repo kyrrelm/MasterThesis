@@ -18,12 +18,12 @@ public class Settings {
     public static final int HARVESTER_CAPACITY = 5;
 
 
-    public static final int NUMBER_OF_SCOUTS = 70;
-    public static final int NUMBER_OF_HARVESTERS = 30;
+    public static final int NUMBER_OF_SCOUTS = 100;
+    public static final int NUMBER_OF_HARVESTERS = 0;
     public static final boolean USING_APF_VALUE = true;
 
 
-    public static final boolean SCOUT_CAN_MOVE_LEFT = false;
+    public static final boolean SCOUT_CAN_MOVE_LEFT = true;
 
     ////----------------- Heterogeneous ---------------
     public static final boolean DIFFUSE_BROWN = true;
