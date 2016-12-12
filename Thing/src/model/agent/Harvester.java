@@ -28,6 +28,7 @@ public class Harvester extends Agent{
     protected boolean behave() {
         if(atHome){
             unload();
+            checkIfNeed();
             if (handleTrail(false,false)){
                 atHome = false;
             }else {
@@ -70,8 +71,20 @@ public class Harvester extends Agent{
         return true;
     }
 
+    private void checkIfNeed() {
+        if (foodAmountAtLastLocation == -1 || !Settings.DYNAMIC_RECRUITMENT){
+            return;
+        }
+        int needed = (int) Math.ceil((double) foodAmountAtLastLocation/(double) Settings.HARVESTER_CAPACITY);
+        int inRotation = Nest.getInstance().checkRecruitment(trailId);
+        if (needed < inRotation){
+            goIdle();
+        }
+    }
+
     private void goIdle() {
         Nest.getInstance().dismiss(trailId,1);
+        foodAmountAtLastLocation = - 1;
         trailId = -1;
     }
 
@@ -132,4 +145,10 @@ public class Harvester extends Agent{
         }
         return false;
     }
+
+    @Override
+    public String toString() {
+        return "TrailId: "+trailId;
+    }
 }
+

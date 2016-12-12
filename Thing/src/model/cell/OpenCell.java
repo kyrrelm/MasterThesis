@@ -170,7 +170,7 @@ public class OpenCell extends Cell {
         int count = 0;
         int max = Settings.RECRUIT_SIZE;
         if (Settings.DYNAMIC_RECRUITMENT){
-            max = (int) Math.ceil((double)calculateRecruitmentSize(foodAmountAtLastLocation)/2);
+            max = (int) Math.ceil((double)calculateRecruitmentSize(trailId, foodAmountAtLastLocation));
         }
         for (Agent agent: agents) {
             if (agent.agentType == Agent.AgentType.HARVESTER){
@@ -187,7 +187,8 @@ public class OpenCell extends Cell {
     }
 
 
-    private int calculateRecruitmentSize(int foodAmountAtLastLocation){
-        return (int) Math.ceil(((double) foodAmountAtLastLocation/(double) Settings.HARVESTER_CAPACITY));
+    private int calculateRecruitmentSize(int trailId, int foodAmountAtLastLocation){
+        int needed = (int) Math.ceil(((double) foodAmountAtLastLocation/(double) Settings.HARVESTER_CAPACITY));
+        return needed-Nest.getInstance().checkRecruitment(trailId);
     }
 }
