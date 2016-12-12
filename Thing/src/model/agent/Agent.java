@@ -2,6 +2,7 @@ package model.agent;
 
 import model.World;
 import model.cell.Cell;
+import model.cell.Nest;
 import model.cell.OpenCell;
 import sample.Settings;
 import sample.Stats;
@@ -148,13 +149,6 @@ public abstract class Agent {
         load = 0;
     }
 
-    public boolean recruit(int id) {
-        if (trailId == -1){
-            trailId = id;
-            return true;
-        }
-        return false;
-    }
 
     protected void sense() {
         senseFront();

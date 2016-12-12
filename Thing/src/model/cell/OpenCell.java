@@ -1,6 +1,7 @@
 package model.cell;
 
 import model.agent.Agent;
+import model.agent.Harvester;
 import model.states.CellState;
 import sample.Settings;
 
@@ -174,7 +175,7 @@ public class OpenCell extends Cell {
         for (Agent agent: agents) {
             if (agent.agentType == Agent.AgentType.HARVESTER){
                 if (count < max){
-                    if (agent.recruit(trailId)){
+                    if (((Harvester) agent).recruit(trailId)){
                         count++;
                     }
                 }

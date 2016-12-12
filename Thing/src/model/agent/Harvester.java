@@ -2,6 +2,7 @@ package model.agent;
 
 import model.World;
 import model.cell.Cell;
+import model.cell.Nest;
 import model.cell.OpenCell;
 import sample.Settings;
 
@@ -30,6 +31,7 @@ public class Harvester extends Agent{
             if (handleTrail(false,false)){
                 atHome = false;
             }else {
+                Nest.getInstance().dismiss(trailId,1);
                 trailId = -1;
             }
             return true;
@@ -83,10 +85,23 @@ public class Harvester extends Agent{
     @Override
     protected boolean goToNest() {
         boolean atNest = super.goToNest();
+        if (Settings.DYNAMIC_RECRUITMENT){
+            //trailId = -1;
+        }
         if (foodAmountAtLastLocation == 0){
+            Nest.getInstance().dismiss(trailId,1);
             trailId = -1;
         }
         return atNest;
+    }
+
+    public boolean recruit(int id) {
+        if (trailId == -1){
+            trailId = id;
+            Nest.getInstance().recruit(trailId, 1);
+            return true;
+        }
+        return false;
     }
 
     @Override

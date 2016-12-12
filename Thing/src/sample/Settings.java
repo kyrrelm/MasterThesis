@@ -18,8 +18,8 @@ public class Settings {
     public static final int HARVESTER_CAPACITY = 5;
 
 
-    public static final int NUMBER_OF_SCOUTS = 70;
-    public static final int NUMBER_OF_HARVESTERS = 30;
+    public static final int NUMBER_OF_SCOUTS = 90;
+    public static final int NUMBER_OF_HARVESTERS = 10;
     public static final boolean USING_APF_VALUE = true;
 
 
@@ -29,7 +29,7 @@ public class Settings {
     public static final boolean DIFFUSE_BROWN = false;
 
     public static final int RECRUIT_SIZE = 10;
-    public static boolean DYNAMIC_RECRUITMENT = false;
+    public static boolean DYNAMIC_RECRUITMENT = true;
     public static final boolean CONSTANT_RECRUITMENT = true;
 
     public static final boolean SCOUT_REMOVE_TRAIL = true;
