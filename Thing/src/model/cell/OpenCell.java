@@ -15,9 +15,10 @@ public class OpenCell extends Cell {
     private int foodCount;
     private int apfValue;
     private HashSet<Agent> agents;
-    private Type defaultType;
+    public final Type defaultType;
     private HashSet<PheromoneColor> colors;
     private HashSet<Integer> trailIds;
+    private boolean isVisited;
 
     public enum PheromoneColor {
         DEFAULT,
@@ -39,6 +40,7 @@ public class OpenCell extends Cell {
         foodCount = 0;
         colors = new HashSet<>();
         trailIds = new HashSet<>();
+        isVisited = false;
     }
     public OpenCell(int x, int y, int foodCount) {
         this(x, y, Type.FOOD);
@@ -66,11 +68,16 @@ public class OpenCell extends Cell {
     }
 
     public boolean placeAgent(Agent agent) {
+        isVisited = true;
         return this.agents.add(agent);
     }
 
     public void removeAgent(Agent agent){
         this.agents.remove(agent);
+    }
+
+    public boolean isVisited() {
+        return isVisited;
     }
 
     @Override

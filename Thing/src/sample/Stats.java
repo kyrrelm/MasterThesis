@@ -11,6 +11,7 @@ public class Stats {
     private int timeOfCompletion;
     private double totalEnergyUsed ;
     private boolean done;
+    private String numberVisisted;
 
     public static Stats getInstance() {
         return ourInstance;
@@ -21,6 +22,7 @@ public class Stats {
         this.foodCount = 0;
         this.timeOfCompletion = -1;
         this.totalEnergyUsed = 0;
+        this.numberVisisted = "";
     }
 
     public void depositFood(int quantity, int timestep){
@@ -29,6 +31,10 @@ public class Stats {
             this.done = true;
             this.timeOfCompletion = timestep;
         }
+    }
+
+    public void setNumberVisited(String input){
+        numberVisisted = "\n"+input;
     }
 
     public int getFoodCount() {
@@ -46,6 +52,7 @@ public class Stats {
 
     public String log(){
         String output = "Food retrieved: "+ Stats.getInstance().getFoodCount()
+                +numberVisisted
                 +"\nTotal energy used: "+totalEnergyUsed
                 +"\nAverage energy used: "+(double)totalEnergyUsed/((double) (Settings.NUMBER_OF_SCOUTS + Settings.NUMBER_OF_HARVESTERS))
                 +"\nFood/Time ratio: "+(double)foodCount/(double)timeOfCompletion

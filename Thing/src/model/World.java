@@ -73,6 +73,7 @@ public class World {
         if (Settings.SHOW_ONLY_FIRST && Settings.SHOW_LAST){
             worldStates.add(wState);
         }
+        Stats.getInstance().setNumberVisited(countFoodVisited());
         Stats.getInstance().print();
         Stats.getInstance().save();
         return worldStates;
@@ -87,6 +88,24 @@ public class World {
             return null;
         }
         return new WorldState(grid);
+    }
+
+    private String countFoodVisited(){
+        int foodCount = 0;
+        int visitedCount = 0;
+        for (Cell[] row: grid) {
+            for (Cell c: row) {
+                if (c instanceof OpenCell){
+                    if (((OpenCell) c).defaultType == Cell.Type.FOOD){
+                        foodCount++;
+                        if (((OpenCell) c).isVisited()){
+                            visitedCount++;
+                        }
+                    }
+                }
+            }
+        }
+        return "Food sources visited: "+visitedCount+"/"+foodCount;
     }
 
     private void generateDefaultMap() {

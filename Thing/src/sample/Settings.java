@@ -34,7 +34,7 @@ public class Settings {
     ////----------------- COMMON VARIABLES ---------------
     public static final boolean SCOUT_CAN_MOVE_LEFT = true;
 
-    public static final boolean DIFFUSE_BROWN = true;
+    public static final boolean DIFFUSE_BROWN = false;
 
     public static boolean DYNAMIC_RECRUITMENT = true;
 
@@ -46,7 +46,7 @@ public class Settings {
 
     //----------------- System ---------------
     public static boolean RUN_GUI = false;
-    public static final boolean SHOW_ONLY_FIRST = true;
+    public static final boolean SHOW_ONLY_FIRST = false;
     public static final boolean SHOW_LAST = false;
 
     ////----------------- Map ---------------
@@ -79,6 +79,10 @@ public class Settings {
             new OpenCell(140,180, 100), new OpenCell(300,440, 100), new OpenCell(870,150, 100), new OpenCell(850,790, 100), new OpenCell(500,830, 100),
             new OpenCell(170,900, 100),new OpenCell(150,740, 100),new OpenCell(680,440, 100),new OpenCell(160,570, 100),new OpenCell(550,450, 100));*/
 
+/*    public static final Map MAP = MapGenerator.genObstacleFreeMap("NoObs1000x1000_Food10(1000)", 1000, 1000,
+            new OpenCell(140,180, 1000), new OpenCell(300,440, 1000), new OpenCell(870,150, 1000), new OpenCell(850,790, 1000), new OpenCell(500,830, 1000),
+            new OpenCell(170,900, 1000),new OpenCell(150,740, 1000),new OpenCell(680,440, 1000),new OpenCell(160,570, 1000),new OpenCell(550,450, 1000));*/
+
 
 /*
     public static final Map MAP = MapGenerator.genObstacleFreeMap("NoObs1000x1000_Food100", 1000, 1000,
@@ -109,8 +113,7 @@ public class Settings {
             new OpenCell(286,192, 100), new OpenCell(475,118, 100), new OpenCell(833,868, 100), new OpenCell(731,655, 100), new OpenCell(217,484, 100),
             new OpenCell(243,822, 100),new OpenCell(725,150, 100),new OpenCell(571,703, 100),new OpenCell(435,326, 100),new OpenCell(142,633, 100),
 
-            new OpenCell(242,500, 100), new OpenCell(864,571, 100), new OpenCell(601,108, 100), new OpenCell(900,203, 100), new OpenCell(750,882, 100),
-            new OpenCell(897,506, 100),new OpenCell(576,223, 100),new OpenCell(432,767, 100),new OpenCell(583,395, 100),new OpenCell(871,732, 100));
+            new OpenCell(242,500, 100), new OpenCell(864,571, 100), new OpenCell(601,108, 100), new OpenCell(900,203, 100), new OpenCell(750,882, 100));
 */
 
 
