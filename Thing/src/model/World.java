@@ -71,7 +71,7 @@ public class World {
                 System.out.println("Tick "+i+"/"+numberOfTicks);
             }
         }
-        printRemaindingFood();
+        //printRemaindingFood();
         if (Settings.SHOW_ONLY_FIRST && Settings.SHOW_LAST){
             worldStates.add(wState);
         }
