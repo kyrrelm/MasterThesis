@@ -6,8 +6,6 @@ import model.cell.OpenCell;
 import sample.Settings;
 import sample.Stats;
 
-import java.util.Set;
-
 import static model.cell.OpenCell.*;
 
 /**
@@ -163,7 +161,7 @@ public class Scout extends Agent{
             }
             this.load = currentCell.takeFood(Settings.SCOUT_CAPACITY);
             this.foodAmountAtLastLocation = currentCell.getFoodCount();
-            trailId = currentCell.getFirstTrailId();
+            trailId = currentCell.getFoodSourceId();
             OpenCell existingTrail = senseAndReturnTrail(front,right,back,left);
             if (existingTrail == null){
                 returnAndColor();
@@ -187,6 +185,7 @@ public class Scout extends Agent{
     private void returnAndColor() {
         if (!returnAndColor){
             trailId = genIdTrail();
+            currentCell.setFoodSourceId(trailId);
             currentCell.colorTrail(trailId);
         }
         returnAndColor = true;

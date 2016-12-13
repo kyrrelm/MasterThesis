@@ -20,6 +20,7 @@ public class OpenCell extends Cell {
     private HashSet<PheromoneColor> colors;
     private HashSet<Integer> trailIds;
     private boolean isVisited;
+    private int foodSourceId;
 
     public enum PheromoneColor {
         DEFAULT,
@@ -42,16 +43,18 @@ public class OpenCell extends Cell {
         colors = new HashSet<>();
         trailIds = new HashSet<>();
         isVisited = false;
+        this.foodSourceId = -1;
     }
+
     public OpenCell(int x, int y, int foodCount) {
         this(x, y, Type.FOOD);
         this.foodCount = foodCount;
     }
-
-
     public int getApfValue() {
         return apfValue;
     }
+
+
     public void setApfValue(int apfValue) {
         if (hasApfValue()){
             this.apfValue = Math.min(this.apfValue, apfValue);
@@ -60,7 +63,6 @@ public class OpenCell extends Cell {
             this.apfValue = apfValue;
         }
     }
-
     public boolean containsAgent(){
         return !agents.isEmpty();
     }
@@ -115,12 +117,12 @@ public class OpenCell extends Cell {
         return colors.add(color);
     }
 
-
-
     public void colorTrail(int id) {
         this.trailIds.add(id);
         this.colors.add(PheromoneColor.YELLOW);
     }
+
+
 
     public boolean containsColor(PheromoneColor color) {
         return colors.contains(color);
@@ -130,11 +132,14 @@ public class OpenCell extends Cell {
         return colors.remove(color);
     }
 
-    public int getFirstTrailId() {
-        if (trailIds.isEmpty()){
-            return -1;
+    public void setFoodSourceId(int foodSourceId) {
+        if (defaultType == Type.FOOD){
+            this.foodSourceId = foodSourceId;
         }
-        return (int) trailIds.toArray()[0];
+    }
+
+    public int getFoodSourceId() {
+        return foodSourceId;
     }
 
     public boolean hasTrail(int id){

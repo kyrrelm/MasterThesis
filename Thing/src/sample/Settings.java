@@ -22,7 +22,7 @@ public class Settings {
 
     //----------------------------- SET UP ---------------------------------------
 
-    public static final int  NUMBER_OF_TICKS = 300000;
+    public static final int  NUMBER_OF_TICKS = 200000;
 
 
     public static final int NUMBER_OF_SCOUTS = 50;
