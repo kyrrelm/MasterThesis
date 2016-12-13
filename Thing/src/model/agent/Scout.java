@@ -109,7 +109,7 @@ public class Scout extends Agent{
         }
         if (front instanceof OpenCell){
             //Moves left
-            if (Settings.SCOUT_CAN_MOVE_LEFT){
+            if (Settings.SCOUT_CAN_MOVE_LEFT && front.getType() != Type.FOOD){
                 if (((OpenCell) front).hasApfValue() && left instanceof OpenCell && !((OpenCell) left).hasApfValue()){
                     rotateLeft();
                     move((OpenCell) front);
