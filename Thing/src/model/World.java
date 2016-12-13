@@ -71,6 +71,7 @@ public class World {
                 System.out.println("Tick "+i+"/"+numberOfTicks);
             }
         }
+        printRemaindingFood();
         if (Settings.SHOW_ONLY_FIRST && Settings.SHOW_LAST){
             worldStates.add(wState);
         }
@@ -97,6 +98,20 @@ public class World {
                 if (c instanceof OpenCell){
                     if (((OpenCell) c).defaultType == Cell.Type.FOOD){
                         foodCount++;
+                    }
+                }
+            }
+        }
+        return foodCount;
+    }
+
+    private int printRemaindingFood(){
+        int foodCount = 0;
+        for (Cell[] row: grid) {
+            for (Cell c: row) {
+                if (c instanceof OpenCell){
+                    if (((OpenCell) c).defaultType == Cell.Type.FOOD){
+                        System.out.println("Food at x:"+c.getX()+" , y:"+c.getY()+" amout: "+((OpenCell) c).getFoodCount());
                     }
                 }
             }

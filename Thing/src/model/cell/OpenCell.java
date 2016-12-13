@@ -64,6 +64,7 @@ public class OpenCell extends Cell {
     public boolean containsAgent(){
         return !agents.isEmpty();
     }
+
     public int getFoodCount() {
         return foodCount;
     }
@@ -202,4 +203,5 @@ public class OpenCell extends Cell {
         int needed = (int) Math.ceil(((double) foodAmountAtLastLocation/(double) Settings.HARVESTER_CAPACITY));
         return needed-Nest.getInstance().checkRecruitment(trailId);
     }
+
 }
