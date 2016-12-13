@@ -4,6 +4,7 @@ import model.agent.Agent;
 import model.agent.Harvester;
 import model.states.CellState;
 import sample.Settings;
+import sample.Stats;
 
 import java.util.HashSet;
 
@@ -68,6 +69,9 @@ public class OpenCell extends Cell {
     }
 
     public boolean placeAgent(Agent agent) {
+        if (this.defaultType == Type.FOOD && !isVisited){
+            Stats.getInstance().discoverFood();
+        }
         isVisited = true;
         return this.agents.add(agent);
     }

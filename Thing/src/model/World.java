@@ -54,6 +54,7 @@ public class World {
     public LinkedList<WorldState> runSim(int numberOfTicks){
         LinkedList<WorldState> worldStates = new LinkedList<>();
         System.out.println("Starting sim...");
+        Stats.getInstance().setNumberOfFoodSource(countFoodSources());
         WorldState wState = new WorldState(grid);
         if (Settings.RUN_GUI){
             worldStates.add(wState);
@@ -73,7 +74,6 @@ public class World {
         if (Settings.SHOW_ONLY_FIRST && Settings.SHOW_LAST){
             worldStates.add(wState);
         }
-        Stats.getInstance().setNumberVisited(countFoodVisited());
         Stats.getInstance().print();
         Stats.getInstance().save();
         return worldStates;
@@ -90,22 +90,18 @@ public class World {
         return new WorldState(grid);
     }
 
-    private String countFoodVisited(){
+    private int countFoodSources(){
         int foodCount = 0;
-        int visitedCount = 0;
         for (Cell[] row: grid) {
             for (Cell c: row) {
                 if (c instanceof OpenCell){
                     if (((OpenCell) c).defaultType == Cell.Type.FOOD){
                         foodCount++;
-                        if (((OpenCell) c).isVisited()){
-                            visitedCount++;
-                        }
                     }
                 }
             }
         }
-        return "Food sources visited: "+visitedCount+"/"+foodCount;
+        return foodCount;
     }
 
     private void generateDefaultMap() {
