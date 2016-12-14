@@ -133,11 +133,11 @@ public class Scout extends Agent{
                 move((OpenCell) front);
                 return true;
             }
-            else if (left instanceof OpenCell && ((OpenCell) left).containsColor(PheromoneColor.BROWN)){
+/*            else if (left instanceof OpenCell && ((OpenCell) left).containsColor(PheromoneColor.BROWN)){
                 rotateLeft();
                 move((OpenCell) front);
                 return true;
-            }
+            }*/
 /*            else {
                 //new
                 followingBrown = false;
