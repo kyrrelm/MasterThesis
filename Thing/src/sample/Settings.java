@@ -22,19 +22,19 @@ public class Settings {
 
     //----------------------------- SET UP ---------------------------------------
 
-    public static final int  NUMBER_OF_TICKS = 200000;
+    public static final int  NUMBER_OF_TICKS = 500000;
 
 
-    public static final int NUMBER_OF_SCOUTS = 50;
-    public static final int NUMBER_OF_HARVESTERS = 50;
+    public static final int NUMBER_OF_SCOUTS = 100;
+    public static final int NUMBER_OF_HARVESTERS = 0;
 
     public static final boolean USING_APF_VALUE = true;
 
 
     ////----------------- COMMON VARIABLES ---------------
-    public static final boolean SCOUT_CAN_MOVE_LEFT = true;
+    public static final boolean SCOUT_CAN_MOVE_LEFT = false;
 
-    public static final boolean DIFFUSE_BROWN = false;
+    public static final boolean DIFFUSE_BROWN = true;
 
     public static boolean DYNAMIC_RECRUITMENT = true;
 
@@ -78,6 +78,8 @@ public class Settings {
 /*    public static final Map MAP = MapGenerator.genObstacleFreeMap("NoObs1000x1000_Food10", 1000, 1000,
             new OpenCell(140,180, 100), new OpenCell(300,440, 100), new OpenCell(870,150, 100), new OpenCell(850,790, 100), new OpenCell(500,830, 100),
             new OpenCell(170,900, 100),new OpenCell(150,740, 100),new OpenCell(680,440, 100),new OpenCell(160,570, 100),new OpenCell(550,450, 100));*/
+
+   /* public static final Map MAP = MapGenerator.genObstacleFreeMap("NoObs1000x1000_Food1(1000)", 1000, 1000, new OpenCell(750,750, 1000));*/
 
 /*    public static final Map MAP = MapGenerator.genObstacleFreeMap("NoObs1000x1000_Food10(1000)", 1000, 1000,
             new OpenCell(140,180, 1000), new OpenCell(300,440, 1000), new OpenCell(870,150, 1000), new OpenCell(850,790, 1000), new OpenCell(500,830, 1000),
