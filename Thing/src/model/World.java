@@ -2,6 +2,7 @@ package model;
 
 
 import maps.Map;
+import maps.MapGenerator;
 import model.agent.Agent;
 import model.agent.Harvester;
 import model.agent.Scout;
@@ -41,14 +42,20 @@ public class World {
         generateAgents();
     }
 
-    public World(int width, int height) {
-        init();
-        this.sizeX = width;
-        this.sizeY = height;
-        this.grid = new Cell[sizeX][sizeY];
-        this.nest = new OpenCell(sizeX/2, sizeY/2, Cell.Type.NEST);
-        generateDefaultMap();
-        generateAgents();
+
+    public void runSim10(){
+        Settings.NUMBER_OF_SCOUTS = 100;
+        Settings.NUMBER_OF_HARVESTERS = 0;
+        for (int i = 0; i < 10; i++) {
+            runSim(Settings.NUMBER_OF_TICKS);
+            Settings.NUMBER_OF_SCOUTS -= 10;
+            Settings.NUMBER_OF_HARVESTERS += 10;
+            this.scouts = new ArrayList<>();
+            this.harvester = new ArrayList<>();
+            grid = MapGenerator.genObstacleFreeMap("NoObs100x100_Food1(1000)", 100, 100, new OpenCell(75,75, 1000)).grid;
+            generateAgents();
+            Stats.getInstance().reset();
+        }
     }
 
     public LinkedList<WorldState> runSim(int numberOfTicks){

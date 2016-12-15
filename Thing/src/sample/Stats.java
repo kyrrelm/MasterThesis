@@ -19,12 +19,7 @@ public class Stats {
     }
 
     private Stats() {
-        this.done = false;
-        this.foodCount = 0;
-        this.timeOfCompletion = -1;
-        this.totalEnergyUsed = 0;
-        this.numberOfFoodSources = -1;
-        this.foodFound = 0;
+        init();
     }
 
     public void depositFood(int quantity, int timestep){
@@ -33,6 +28,19 @@ public class Stats {
             this.done = true;
             this.timeOfCompletion = timestep;
         }
+    }
+
+    private void init(){
+        this.done = false;
+        this.foodCount = 0;
+        this.timeOfCompletion = -1;
+        this.totalEnergyUsed = 0;
+        this.numberOfFoodSources = -1;
+        this.foodFound = 0;
+    }
+
+    public void reset(){
+        init();
     }
 
     public void discoverFood(){

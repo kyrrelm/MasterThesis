@@ -23,6 +23,7 @@ public class Simulator extends Task<LinkedList<WorldState>> {
 
     @Override
     protected LinkedList<WorldState> call() throws Exception {
-        return world.runSim(numberOfTicks);
+        //return world.runSim(numberOfTicks);
+        world.runSim10(); return null;
     }
 }

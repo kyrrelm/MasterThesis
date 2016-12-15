@@ -25,14 +25,14 @@ public class Settings {
     public static final int  NUMBER_OF_TICKS = 3000000;
 
 
-    public static final int NUMBER_OF_SCOUTS = 10;
-    public static final int NUMBER_OF_HARVESTERS = 90;
+    public static int NUMBER_OF_SCOUTS = 100;
+    public static int NUMBER_OF_HARVESTERS = 0;
 
     public static final boolean USING_APF_VALUE = true;
 
 
     ////----------------- COMMON VARIABLES ---------------
-    public static final boolean SCOUT_CAN_MOVE_LEFT = false;
+    public static final boolean SCOUT_CAN_MOVE_LEFT = true;
 
     public static final boolean DIFFUSE_BROWN = true;
 
@@ -59,22 +59,22 @@ public class Settings {
 
     //-------------------------------------- 100 x 100 ------------------------------------------------
 
-    /*public static final Map MAP = MapGenerator.genObstacleFreeMap("NoObs100x100_Food1(1000)", 100, 100, new OpenCell(75,75, 1000));*/
+    public static final Map MAP = MapGenerator.genObstacleFreeMap("NoObs100x100_Food1(1000)", 100, 100, new OpenCell(75,75, 1000));
 
 /*    public static final Map MAP = MapGenerator.genObstacleFreeMap("NoObs100x100_Food10", 100, 100,
             new OpenCell(2,2, 100), new OpenCell(4,99, 100), new OpenCell(87,8, 100), new OpenCell(85,79, 100), new OpenCell(50,93, 100),
             new OpenCell(18,16, 100),new OpenCell(15,54, 100),new OpenCell(68,44, 100),new OpenCell(6,87, 100),new OpenCell(80,25, 100));*/
 
-    public static final Map MAP = MapGenerator.genObstacleFreeMap("NoObs100x100_Food10(300)", 100, 100,
+/*    public static final Map MAP = MapGenerator.genObstacleFreeMap("NoObs100x100_Food10(300)", 100, 100,
             new OpenCell(2,2, 300), new OpenCell(4,99, 300), new OpenCell(87,8, 300), new OpenCell(85,79, 300), new OpenCell(50,93, 300),
-            new OpenCell(18,16, 300),new OpenCell(15,54, 300),new OpenCell(68,44, 300),new OpenCell(6,87, 300),new OpenCell(80,25, 300));
+            new OpenCell(18,16, 300),new OpenCell(15,54, 300),new OpenCell(68,44, 300),new OpenCell(6,87, 300),new OpenCell(80,25, 300));*/
 
     //-------------------------------------- 1000 x 1000 ------------------------------------------------
 
 
     /*Random distribution of food, no less then 100 from the edge with a manhattan distance? of min 5 to others */
 
-   /* public static final Map MAP = MapGenerator.genObstacleFreeMap("NoObs1000x1000_Food1(1000)", 1000, 1000, new OpenCell(750,750, 1000));*/
+/*    public static final Map MAP = MapGenerator.genObstacleFreeMap("NoObs1000x1000_Food1(1000)", 1000, 1000, new OpenCell(750,750, 1000));*/
 
 /*    public static final Map MAP = MapGenerator.genObstacleFreeMap("NoObs1000x1000_Food10", 1000, 1000,
     new OpenCell(140,180, 100), new OpenCell(300,440, 100), new OpenCell(870,150, 100), new OpenCell(850,790, 100), new OpenCell(500,830, 100),
@@ -86,7 +86,7 @@ public class Settings {
             new OpenCell(170,900, 1000),new OpenCell(150,740, 1000),new OpenCell(680,440, 1000),new OpenCell(160,570, 1000),new OpenCell(550,450, 1000));*/
 
 
-    /*public static final Map MAP = MapGenerator.genObstacleFreeMap("NoObs1000x1000_Food100", 1000, 1000,
+/*    public static final Map MAP = MapGenerator.genObstacleFreeMap("NoObs1000x1000_Food100", 1000, 1000,
             new OpenCell(140,180, 100), new OpenCell(300,440, 100), new OpenCell(870,150, 100), new OpenCell(850,790, 100), new OpenCell(500,830, 100),
             new OpenCell(170,900, 100),new OpenCell(150,740, 100),new OpenCell(680,440, 100),new OpenCell(160,570, 100),new OpenCell(550,450, 100),
 
@@ -115,8 +115,7 @@ public class Settings {
             new OpenCell(243,822, 100),new OpenCell(725,150, 100),new OpenCell(571,703, 100),new OpenCell(435,326, 100),new OpenCell(142,633, 100),
 
             new OpenCell(242,500, 100), new OpenCell(864,571, 100), new OpenCell(601,108, 100), new OpenCell(900,203, 100), new OpenCell(750,882, 100),
-            new OpenCell(897,506, 100),new OpenCell(576,223, 100),new OpenCell(432,767, 100),new OpenCell(583,395, 100),new OpenCell(871,732, 100));
-*/
+            new OpenCell(897,506, 100),new OpenCell(576,223, 100),new OpenCell(432,767, 100),new OpenCell(583,395, 100),new OpenCell(871,732, 100));*/
 
 /*    public static final Map MAP = MapGenerator.genObstacleFreeMap("NoObs1000x1000_Food100(1000)", 1000, 1000,
             new OpenCell(140,180, 1000), new OpenCell(300,440, 1000), new OpenCell(870,150, 1000), new OpenCell(850,790, 1000), new OpenCell(500,830, 1000),
