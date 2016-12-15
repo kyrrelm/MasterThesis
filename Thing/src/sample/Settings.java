@@ -34,7 +34,7 @@ public class Settings {
     ////----------------- COMMON VARIABLES ---------------
     public static final boolean SCOUT_CAN_MOVE_LEFT = true;
 
-    public static final boolean DIFFUSE_BROWN = true;
+    public static final boolean DIFFUSE_BROWN = false;
 
     public static boolean DYNAMIC_RECRUITMENT = true;
 
@@ -59,7 +59,7 @@ public class Settings {
 
     //-------------------------------------- 100 x 100 ------------------------------------------------
 
-/*    public static final Map MAP = MapGenerator.genObstacleFreeMap("NoObs100x100_Food1(1000)", 100, 100, new OpenCell(75,75, 1000));*/
+   /* public static final Map MAP = MapGenerator.genObstacleFreeMap("NoObs100x100_Food1(1000)", 100, 100, new OpenCell(75,75, 1000));*/
 
 /*    public static final Map MAP = MapGenerator.genObstacleFreeMap("NoObs100x100_Food10", 100, 100,
             new OpenCell(2,2, 100), new OpenCell(4,99, 100), new OpenCell(87,8, 100), new OpenCell(85,79, 100), new OpenCell(50,93, 100),
