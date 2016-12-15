@@ -52,7 +52,13 @@ public class World {
             Settings.NUMBER_OF_HARVESTERS += 10;
             this.scouts = new ArrayList<>();
             this.harvester = new ArrayList<>();
-            grid = MapGenerator.genObstacleFreeMap("NoObs100x100_Food1(1000)", 100, 100, new OpenCell(75,75, 1000)).grid;
+            for (Cell[] row: grid){
+                for (Cell c: row) {
+                    if (c instanceof OpenCell){
+                        ((OpenCell) c).reset();
+                    }
+                }
+            }
             generateAgents();
             Stats.getInstance().reset();
         }

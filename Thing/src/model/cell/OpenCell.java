@@ -13,6 +13,7 @@ import java.util.HashSet;
  */
 public class OpenCell extends Cell {
 
+    private int startingFoodCount;
     private int foodCount;
     private int apfValue;
     private HashSet<Agent> agents;
@@ -24,7 +25,6 @@ public class OpenCell extends Cell {
 
     public enum PheromoneColor {
         DEFAULT,
-
         BROWN,
         YELLOW,
         AGENT;
@@ -39,17 +39,34 @@ public class OpenCell extends Cell {
         }
         agents = new HashSet<>();
         defaultType = this.type;
-        foodCount = 0;
         colors = new HashSet<>();
         trailIds = new HashSet<>();
         isVisited = false;
         this.foodSourceId = -1;
+        this. foodCount = 0;
+        this.startingFoodCount = 0;
     }
 
     public OpenCell(int x, int y, int foodCount) {
         this(x, y, Type.FOOD);
         this.foodCount = foodCount;
+        this.startingFoodCount = foodCount;
     }
+
+    public void reset(){
+        this.type = defaultType;
+        apfValue = -1;
+        if (type == Type.NEST){
+            apfValue = 0;
+        }
+        agents = new HashSet<>();
+        colors = new HashSet<>();
+        trailIds = new HashSet<>();
+        isVisited = false;
+        this.foodSourceId = -1;
+        this.foodCount = this.startingFoodCount;
+    }
+
     public int getApfValue() {
         return apfValue;
     }
