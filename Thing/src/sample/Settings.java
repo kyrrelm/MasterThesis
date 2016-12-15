@@ -128,7 +128,7 @@ public class Settings {
             new OpenCell(701,185, 1000),new OpenCell(606,509, 1000),new OpenCell(543,162, 1000),new OpenCell(610,413, 1000),new OpenCell(792,472, 1000),
 
             new OpenCell(670,520, 1000), new OpenCell(155,143, 1000), new OpenCell(249,265, 1000), new OpenCell(410,289, 1000), new OpenCell(526,197, 1000),
-            new OpenCell(382,456, 100),new OpenCell(773,623, 100),new OpenCell(477,473, 100),new OpenCell(132,799, 100),new OpenCell(124,124, 100),
+            new OpenCell(382,456, 1000),new OpenCell(773,623, 1000),new OpenCell(477,473, 1000),new OpenCell(132,799, 1000),new OpenCell(124,124, 1000),
 
             new OpenCell(707,615, 1000), new OpenCell(370,895, 1000), new OpenCell(555,194, 1000), new OpenCell(421,845, 1000), new OpenCell(837,735, 1000),
             new OpenCell(611,389, 1000),new OpenCell(425,130, 1000),new OpenCell(780,574, 1000),new OpenCell(617,535, 1000),new OpenCell(452,266, 1000),
