@@ -17,8 +17,8 @@ public class Settings {
     public static final boolean HARVESTER_REMOVE_TRAIL = true;
 
     //------------------------ HETEROGENEITY  ------------------------------------
-    public static final int HARVESTER_CAPACITY = 1;
-    public static final double HARVESTER_ENERGY_USE = 1;
+    public static final int HARVESTER_CAPACITY = 5;
+    public static final double HARVESTER_ENERGY_USE = 5;
 
     //----------------------------- SET UP ---------------------------------------
 
@@ -59,7 +59,7 @@ public class Settings {
 
     //-------------------------------------- 100 x 100 ------------------------------------------------
 
-/*    public static final Map MAP = MapGenerator.genObstacleFreeMap("NoObs100x100_Food1(1000)", 100, 100, new OpenCell(75,75, 1000));*/
+    public static final Map MAP = MapGenerator.genObstacleFreeMap("NoObs100x100_Food1(1000)", 100, 100, new OpenCell(75,75, 1000));
 
 /*    public static final Map MAP = MapGenerator.genObstacleFreeMap("NoObs100x100_Food10", 100, 100,
             new OpenCell(2,2, 100), new OpenCell(4,99, 100), new OpenCell(87,8, 100), new OpenCell(85,79, 100), new OpenCell(50,93, 100),
@@ -117,7 +117,7 @@ public class Settings {
             new OpenCell(242,500, 100), new OpenCell(864,571, 100), new OpenCell(601,108, 100), new OpenCell(900,203, 100), new OpenCell(750,882, 100),
             new OpenCell(897,506, 100),new OpenCell(576,223, 100),new OpenCell(432,767, 100),new OpenCell(583,395, 100),new OpenCell(871,732, 100));*/
 
-    public static final Map MAP = MapGenerator.genObstacleFreeMap("NoObs1000x1000_Food100(1000)", 1000, 1000,
+   /* public static final Map MAP = MapGenerator.genObstacleFreeMap("NoObs1000x1000_Food100(1000)", 1000, 1000,
             new OpenCell(140,180, 1000), new OpenCell(300,440, 1000), new OpenCell(870,150, 1000), new OpenCell(850,790, 1000), new OpenCell(500,830, 1000),
             new OpenCell(170,900, 1000),new OpenCell(150,740, 1000),new OpenCell(680,440, 1000),new OpenCell(160,570, 1000),new OpenCell(550,450, 1000),
 
@@ -148,7 +148,7 @@ public class Settings {
             new OpenCell(242,500, 1000), new OpenCell(864,571, 1000), new OpenCell(601,108, 1000), new OpenCell(900,203, 1000), new OpenCell(750,882, 1000),
             new OpenCell(897,506, 1000),new OpenCell(576,223, 1000),new OpenCell(432,767, 1000),new OpenCell(583,395, 1000),new OpenCell(871,732, 1000));
 
-
+*/
     public static String giveColor(PheromoneColor color) {
         switch (color){
             case YELLOW:{
@@ -188,12 +188,12 @@ public class Settings {
                 + "\nUsing pheromones: "+ !USING_APF_VALUE
                 + "\nSCOUTS:"
                 + "\nNumber of scouts: " + NUMBER_OF_SCOUTS
-                + "\nScout capacity: "+ SCOUT_CAPACITY
                 + "\nDiffuse brown: " + DIFFUSE_BROWN
                 + "\nMove left: " + SCOUT_CAN_MOVE_LEFT
                 + "\nHARVESTERS:"
                 + "\nNumber of harvesters: "+ NUMBER_OF_HARVESTERS
                 + "\nHarvester capacity: " + HARVESTER_CAPACITY
+                + "\nHarvester energy: " + HARVESTER_ENERGY_USE
                 + "\nHarvester recruit size: " + RECRUIT_SIZE
                 + "\nDynamic recruitment: " + DYNAMIC_RECRUITMENT
                 + "\nConstant recruitment: " + CONSTANT_RECRUITMENT;
