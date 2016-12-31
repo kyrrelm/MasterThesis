@@ -1,0 +1,270 @@
+
+------------------ Info ------------------
+Map: NoObs1000x1000_Food10(1000)
+Total food count: 10000
+Number of food sources: 10
+Food range: 1000 - 1000
+Using pheromones: false
+SCOUTS:
+Number of scouts: 100
+Diffuse brown: true
+Move left: true
+HARVESTERS:
+Number of harvesters: 0
+Harvester capacity: 5
+Harvester energy: 4.0
+Harvester recruit size: 10
+Dynamic recruitment: true
+Constant recruitment: true
+----------------- Result -----------------
+Food retrieved: 10000
+Food sources found: 10/10
+Total energy used: 1.02127E7
+Average energy used: 102127.0
+Food/Time ratio: 0.09791825783835655
+Energy/Food ratio: 1021.27
+Time of completion: 102126
+------------------------------------------
+
+------------------ Info ------------------
+Map: NoObs1000x1000_Food10(1000)
+Total food count: 10000
+Number of food sources: 10
+Food range: 1000 - 1000
+Using pheromones: false
+SCOUTS:
+Number of scouts: 90
+Diffuse brown: true
+Move left: true
+HARVESTERS:
+Number of harvesters: 10
+Harvester capacity: 5
+Harvester energy: 4.0
+Harvester recruit size: 10
+Dynamic recruitment: true
+Constant recruitment: true
+----------------- Result -----------------
+Food retrieved: 10000
+Food sources found: 10/10
+Total energy used: 9941150.0
+Average energy used: 99411.5
+Food/Time ratio: 0.1275347532202525
+Energy/Food ratio: 994.115
+Time of completion: 78410
+------------------------------------------
+
+------------------ Info ------------------
+Map: NoObs1000x1000_Food10(1000)
+Total food count: 10000
+Number of food sources: 10
+Food range: 1000 - 1000
+Using pheromones: false
+SCOUTS:
+Number of scouts: 80
+Diffuse brown: true
+Move left: true
+HARVESTERS:
+Number of harvesters: 20
+Harvester capacity: 5
+Harvester energy: 4.0
+Harvester recruit size: 10
+Dynamic recruitment: true
+Constant recruitment: true
+----------------- Result -----------------
+Food retrieved: 10000
+Food sources found: 10/10
+Total energy used: 9543400.0
+Average energy used: 95434.0
+Food/Time ratio: 0.1591393742639804
+Energy/Food ratio: 954.34
+Time of completion: 62838
+------------------------------------------
+
+------------------ Info ------------------
+Map: NoObs1000x1000_Food10(1000)
+Total food count: 10000
+Number of food sources: 10
+Food range: 1000 - 1000
+Using pheromones: false
+SCOUTS:
+Number of scouts: 70
+Diffuse brown: true
+Move left: true
+HARVESTERS:
+Number of harvesters: 30
+Harvester capacity: 5
+Harvester energy: 4.0
+Harvester recruit size: 10
+Dynamic recruitment: true
+Constant recruitment: true
+----------------- Result -----------------
+Food retrieved: 10000
+Food sources found: 10/10
+Total energy used: 9201550.0
+Average energy used: 92015.5
+Food/Time ratio: 0.18906450881040612
+Energy/Food ratio: 920.155
+Time of completion: 52892
+------------------------------------------
+
+------------------ Info ------------------
+Map: NoObs1000x1000_Food10(1000)
+Total food count: 10000
+Number of food sources: 10
+Food range: 1000 - 1000
+Using pheromones: false
+SCOUTS:
+Number of scouts: 60
+Diffuse brown: true
+Move left: true
+HARVESTERS:
+Number of harvesters: 40
+Harvester capacity: 5
+Harvester energy: 4.0
+Harvester recruit size: 10
+Dynamic recruitment: true
+Constant recruitment: true
+----------------- Result -----------------
+Food retrieved: 10000
+Food sources found: 10/10
+Total energy used: 9274732.0
+Average energy used: 92747.32
+Food/Time ratio: 0.2065603569362968
+Energy/Food ratio: 927.4732
+Time of completion: 48412
+------------------------------------------
+
+------------------ Info ------------------
+Map: NoObs1000x1000_Food10(1000)
+Total food count: 10000
+Number of food sources: 10
+Food range: 1000 - 1000
+Using pheromones: false
+SCOUTS:
+Number of scouts: 50
+Diffuse brown: true
+Move left: true
+HARVESTERS:
+Number of harvesters: 50
+Harvester capacity: 5
+Harvester energy: 4.0
+Harvester recruit size: 10
+Dynamic recruitment: true
+Constant recruitment: true
+----------------- Result -----------------
+Food retrieved: 10000
+Food sources found: 10/10
+Total energy used: 9165742.0
+Average energy used: 91657.42
+Food/Time ratio: 0.2116581297887652
+Energy/Food ratio: 916.5742
+Time of completion: 47246
+------------------------------------------
+
+------------------ Info ------------------
+Map: NoObs1000x1000_Food10(1000)
+Total food count: 10000
+Number of food sources: 10
+Food range: 1000 - 1000
+Using pheromones: false
+SCOUTS:
+Number of scouts: 40
+Diffuse brown: true
+Move left: true
+HARVESTERS:
+Number of harvesters: 60
+Harvester capacity: 5
+Harvester energy: 4.0
+Harvester recruit size: 10
+Dynamic recruitment: true
+Constant recruitment: true
+----------------- Result -----------------
+Food retrieved: 10000
+Food sources found: 10/10
+Total energy used: 8797240.0
+Average energy used: 87972.4
+Food/Time ratio: 0.21510927551196007
+Energy/Food ratio: 879.724
+Time of completion: 46488
+------------------------------------------
+
+------------------ Info ------------------
+Map: NoObs1000x1000_Food10(1000)
+Total food count: 10000
+Number of food sources: 10
+Food range: 1000 - 1000
+Using pheromones: false
+SCOUTS:
+Number of scouts: 30
+Diffuse brown: true
+Move left: true
+HARVESTERS:
+Number of harvesters: 70
+Harvester capacity: 5
+Harvester energy: 4.0
+Harvester recruit size: 10
+Dynamic recruitment: true
+Constant recruitment: true
+----------------- Result -----------------
+Food retrieved: 10000
+Food sources found: 10/10
+Total energy used: 8519206.0
+Average energy used: 85192.06
+Food/Time ratio: 0.22563176895306858
+Energy/Food ratio: 851.9206
+Time of completion: 44320
+------------------------------------------
+
+------------------ Info ------------------
+Map: NoObs1000x1000_Food10(1000)
+Total food count: 10000
+Number of food sources: 10
+Food range: 1000 - 1000
+Using pheromones: false
+SCOUTS:
+Number of scouts: 20
+Diffuse brown: true
+Move left: true
+HARVESTERS:
+Number of harvesters: 80
+Harvester capacity: 5
+Harvester energy: 4.0
+Harvester recruit size: 10
+Dynamic recruitment: true
+Constant recruitment: true
+----------------- Result -----------------
+Food retrieved: 10000
+Food sources found: 10/10
+Total energy used: 8654940.0
+Average energy used: 86549.4
+Food/Time ratio: 0.17173868242082846
+Energy/Food ratio: 865.494
+Time of completion: 58228
+------------------------------------------
+
+------------------ Info ------------------
+Map: NoObs1000x1000_Food10(1000)
+Total food count: 10000
+Number of food sources: 10
+Food range: 1000 - 1000
+Using pheromones: false
+SCOUTS:
+Number of scouts: 10
+Diffuse brown: true
+Move left: true
+HARVESTERS:
+Number of harvesters: 90
+Harvester capacity: 5
+Harvester energy: 4.0
+Harvester recruit size: 10
+Dynamic recruitment: true
+Constant recruitment: true
+----------------- Result -----------------
+Food retrieved: 10000
+Food sources found: 10/10
+Total energy used: 8312170.0
+Average energy used: 83121.7
+Food/Time ratio: 0.11646324420013043
+Energy/Food ratio: 831.217
+Time of completion: 85864
+------------------------------------------

@@ -15,9 +15,9 @@ import java.util.stream.Stream;
  */
 public class DataTransformer {
 
-    static String path = "savedResults/step3/";
+    static String path = "savedResults/step3/100-100";
 
-    static String value = "Energy/Food ratio:";
+    static String value = "Time of completion:";
 
     public static void main(String[] args) throws IOException {
 
